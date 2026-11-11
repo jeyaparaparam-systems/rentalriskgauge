@@ -1,50 +1,143 @@
 {
+ "asOf": "2026-11-10",
+ "updatedAt": "2026-11-11T04:14:09Z",
+ "note": "Stock markets calmed down today, and the VIX fear index fell to 19.5. Mortgage rates are 7.18% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 53 (Elevated, down 1.1) and the apartment buildings (5+ units) score is 48 (Elevated, up 4.1).",
  "model": "v5.2",
- "asOf": "2026-11-06",
- "updatedAt": "2026-11-07T00:37:14.997Z",
- "note": "Stocks steadied today, and the VIX fear index eased to 25.6 after yesterday's jump. A strong jobs report nudged the 10-year Treasury yield up to 4.86%. Steady hiring supports rental demand for homes and apartments, but higher borrowing costs keep pressure on buyers and building owners.",
+ "licensedData": true,
  "inputs": {
-  "vix": 25.64,
+  "vix": 19.46,
   "mort": 7.18,
   "mortChg": 0.96,
   "unemp": 4.14,
-  "techJobs": -2.24,
+  "t10": 4.98,
+  "vixAvg": 19.27,
+  "hpSJ": -0.98,
+  "p2rSJ": 108.7,
+  "techJobs": -2.4,
   "payroll": 0.77,
-  "lpr": 2.33,
-  "listYoY": 20.3,
-  "priceCut": 31.2,
+  "lpr": 2.52,
+  "listYoY": 25.7,
+  "priceCut": 32.5,
   "hp": -1.93,
   "cr": 0.89,
-  "p2rF": 102.8,
-  "t10": 4.86,
-  "sloos": -15,
+  "p2rF": 102.2,
+  "sloos": 5.0,
   "vacRel": -0.3,
-  "vacRelChg": 0,
+  "vacRelChg": 0.0,
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3,
-  "baa": 1.57,
-  "ndxDD": 14.7,
+  "baa": 1.51,
+  "ndxDD": 10.6,
   "mos": 1.6,
   "cs": 3.37,
-  "p2r": 112.9,
+  "p2r": 112.5,
   "cap": 5.9,
   "vac": 3.8,
-  "vacChg": -1,
-  "rent": 7.7,
-  "vixAvg": 21.69,
-  "hpSJ": -0.98,
-  "p2rSJ": 109.4
+  "vacChg": -1.0,
+  "rent": 7.7
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-06",
-   "date": "Nov 6 close",
-   "detail": "Down from 28.2 the day before. Long-run average: about 19.5. The score uses the recent average (21.7), so one day moves it less.",
+   "iso": "2026-11-10",
+   "date": "Nov 10 close",
+   "detail": "Down from 19.92 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.3), so a one-day jump moves it less.",
    "series": [
+    [
+     "Sep 30",
+     16.34
+    ],
+    [
+     "Oct 1",
+     16.39
+    ],
+    [
+     "Oct 2",
+     15.31
+    ],
+    [
+     "Oct 5",
+     15.52
+    ],
+    [
+     "Oct 6",
+     15.01
+    ],
+    [
+     "Oct 7",
+     15.08
+    ],
+    [
+     "Oct 8",
+     15.41
+    ],
+    [
+     "Oct 9",
+     14.84
+    ],
+    [
+     "Oct 12",
+     15.21
+    ],
+    [
+     "Oct 13",
+     15.27
+    ],
+    [
+     "Oct 14",
+     16.87
+    ],
+    [
+     "Oct 15",
+     16.46
+    ],
+    [
+     "Oct 16",
+     19.99
+    ],
+    [
+     "Oct 19",
+     18.44
+    ],
+    [
+     "Oct 20",
+     17.31
+    ],
+    [
+     "Oct 21",
+     16.68
+    ],
+    [
+     "Oct 22",
+     19.03
+    ],
+    [
+     "Oct 23",
+     19.45
+    ],
+    [
+     "Oct 26",
+     18.39
+    ],
+    [
+     "Oct 27",
+     17.52
+    ],
+    [
+     "Oct 28",
+     16.91
+    ],
     [
      "Oct 29",
      17.2
+    ],
+    [
+     "Oct 30",
+     19.42
+    ],
+    [
+     "Nov 2",
+     21.15
     ],
     [
      "Nov 3",
@@ -61,19 +154,107 @@
     [
      "Nov 6",
      25.64
+    ],
+    [
+     "Nov 9",
+     19.92
+    ],
+    [
+     "Nov 10",
+     19.46
     ]
    ]
   },
   "credit": {
    "iso": "2026-10-01",
    "date": "October 2026",
-   "detail": "Strong companies paid 0.89 points more than the government to borrow in October. Near the low end of the past 20 years."
+   "detail": "High-grade company bonds paid 6.02%, or 0.89 percentage points more than the 10-year Treasury that month. That is near the low end of the past 20 years: lenders are comfortable."
   },
   "mort": {
    "iso": "2026-11-05",
    "date": "Week of Nov 5",
-   "detail": "A year ago: 6.22%. Down three weeks in a row from 7.40% in mid-October.",
+   "detail": "A year ago it was 6.22%. Down from 7.40% in October.",
    "series": [
+    [
+     "May 14",
+     6.36
+    ],
+    [
+     "May 21",
+     6.51
+    ],
+    [
+     "May 28",
+     6.53
+    ],
+    [
+     "Jun 4",
+     6.48
+    ],
+    [
+     "Jun 11",
+     6.52
+    ],
+    [
+     "Jun 18",
+     6.47
+    ],
+    [
+     "Jun 25",
+     6.49
+    ],
+    [
+     "Jul 2",
+     6.43
+    ],
+    [
+     "Jul 9",
+     6.49
+    ],
+    [
+     "Jul 16",
+     6.55
+    ],
+    [
+     "Jul 23",
+     6.58
+    ],
+    [
+     "Jul 30",
+     6.66
+    ],
+    [
+     "Aug 6",
+     6.69
+    ],
+    [
+     "Aug 13",
+     6.67
+    ],
+    [
+     "Aug 20",
+     6.65
+    ],
+    [
+     "Aug 27",
+     6.66
+    ],
+    [
+     "Sep 3",
+     6.71
+    ],
+    [
+     "Sep 10",
+     6.76
+    ],
+    [
+     "Sep 17",
+     6.95
+    ],
+    [
+     "Sep 24",
+     7.03
+    ],
     [
      "Oct 1",
      7.28
@@ -102,20 +283,16 @@
   },
   "unemp": {
    "iso": "2026-09-01",
-   "date": "September 2026 (unemployment, all jobs) · August (tech jobs)",
-   "detail": "San Francisco–Oakland 4.2%, San Jose 4.0% (seasonally adjusted). U.S.: 4.1% in October. Tech jobs down 2.2% from a year ago; all jobs up 0.8%."
+   "date": "September 2026 (unemployment, all jobs) · September (tech jobs)",
+   "detail": "Seasonally adjusted: San Francisco–Oakland area 4.2%, San Jose area 4.0%, weighted by the size of each labor force. The U.S. rate is 4.2%. Tech jobs are down 2.4% from a year ago."
   },
   "supply": {
-   "iso": "2026-09-01",
-   "date": "September 2026",
-   "detail": "Santa Clara County (Realtor.com): 2.3 homes for sale for every one under contract, 20% more listings than a year ago, 31% with a price cut.",
+   "iso": "2026-10-01",
+   "date": "October 2026",
+   "detail": "Santa Clara County, from Realtor.com: about 2.5 active listings for every home under contract, 26% more listings than a year ago, and 32% of listings with a price cut.",
    "series": [
     [
-     "Jan 25",
-     23.1
-    ],
-    [
-     "",
+     "Feb 25",
      50.6
     ],
     [
@@ -132,7 +309,7 @@
     ],
     [
      "",
-     42
+     42.0
     ],
     [
      "Jul 25",
@@ -140,7 +317,7 @@
     ],
     [
      "",
-     24
+     24.0
     ],
     [
      "",
@@ -183,7 +360,7 @@
      5.9
     ],
     [
-     "",
+     "Jul 26",
      4.2
     ],
     [
@@ -191,15 +368,19 @@
      10.3
     ],
     [
-     "Sep 26",
+     "",
      20.3
+    ],
+    [
+     "Oct 26",
+     25.7
     ]
    ]
   },
   "hp": {
    "iso": "2026-04-01",
    "date": "Q2 2026",
-   "detail": "Average of FHFA indexes for San Francisco–San Mateo, Oakland–Berkeley and San Jose. Oakland fell most, about 5% over the year.",
+   "detail": "Average of the FHFA house price indexes for the San Francisco–San Mateo, Oakland–Berkeley and San Jose areas. Prices are lower than a year ago.",
    "series": [
     [
      "Q2 24",
@@ -241,14 +422,94 @@
   },
   "valueF": {
    "iso": "2026-04-01",
-   "date": "Q2 2026 prices · September 2026 rents",
-   "detail": "Home prices (FHFA) compared with rents: about 3% above normal."
+   "date": "Q2 2026 prices · October 2026 rents",
+   "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-06",
-   "date": "Nov 6 close",
-   "detail": "Up from 4.84% the day before, after a strong jobs report.",
+   "iso": "2026-11-10",
+   "date": "Nov 10 close",
+   "detail": "Up from 4.88% the day before.",
    "series": [
+    [
+     "Sep 29",
+     5.26
+    ],
+    [
+     "Sep 30",
+     5.29
+    ],
+    [
+     "Oct 1",
+     5.24
+    ],
+    [
+     "Oct 2",
+     5.28
+    ],
+    [
+     "Oct 5",
+     5.31
+    ],
+    [
+     "Oct 6",
+     5.27
+    ],
+    [
+     "Oct 7",
+     5.28
+    ],
+    [
+     "Oct 8",
+     5.22
+    ],
+    [
+     "Oct 9",
+     5.24
+    ],
+    [
+     "Oct 13",
+     5.21
+    ],
+    [
+     "Oct 14",
+     5.19
+    ],
+    [
+     "Oct 15",
+     5.1
+    ],
+    [
+     "Oct 16",
+     5.09
+    ],
+    [
+     "Oct 19",
+     5.15
+    ],
+    [
+     "Oct 20",
+     5.12
+    ],
+    [
+     "Oct 21",
+     5.13
+    ],
+    [
+     "Oct 22",
+     4.96
+    ],
+    [
+     "Oct 23",
+     5.0
+    ],
+    [
+     "Oct 26",
+     5.0
+    ],
+    [
+     "Oct 27",
+     4.99
+    ],
     [
      "Oct 28",
      5.05
@@ -280,100 +541,104 @@
     [
      "Nov 6",
      4.86
+    ],
+    [
+     "Nov 9",
+     4.88
+    ],
+    [
+     "Nov 10",
+     4.98
     ]
    ]
   },
   "sloos": {
-   "iso": "2026-07-01",
-   "date": "July 2026 survey",
-   "detail": "A net 15% of large banks eased their apartment-loan rules (Federal Reserve survey)."
+   "iso": "2026-10-01",
+   "date": "October 2026 survey",
+   "detail": "In the Federal Reserve's survey of bank loan officers, a net 5% of large banks said they tightened their standards for apartment-building loans."
   },
   "vacRel": {
-   "iso": "2025-07-01",
+   "iso": "2025-01-01",
    "date": "2025 (yearly)",
-   "detail": "California rental vacancy (Census, 2025): 4.8%, about 0.3 points below its 2005–2025 average of 5.1%."
+   "detail": "California rental vacancy from the U.S. Census Bureau was 4.8%, about 0.3 points below its 2005–2025 average of 5.1%. It is statewide and yearly, so it changes slowly."
   },
   "rentCPI": {
    "iso": "2026-09-01",
    "date": "September 2026",
-   "detail": "Rent paid by all tenants in the San Francisco–Oakland area (consumer price index). Covers every lease, so it moves slowly."
+   "detail": "Rent paid by tenants in the San Francisco–Oakland area (consumer price index for rent). It covers all leases, so it moves more slowly than asking rents."
   },
   "pipe": {
    "iso": "2026-09-01",
    "date": "September 2026",
-   "detail": "27,609 homes approved in the San Francisco and San Jose metro areas over the past two years, about 17% below normal."
+   "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-05",
-   "date": "Nov 5 close",
-   "detail": "Riskier (Baa) companies paid 1.57 points more than the 10-year Treasury yield. Near the low end of the past 20 years."
+   "iso": "2026-11-09",
+   "date": "Nov 9 close",
+   "detail": "Baa-rated company bonds paid 1.51 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
-   "iso": "2026-11-05",
-   "date": "Nov 5 close",
-   "detail": "Closed at 26,629.81, 14.7% below its Oct 6 record of 31,224.47."
+   "iso": "2026-11-09",
+   "date": "Nov 9 close",
+   "detail": "The Nasdaq-100 closed at 27,907.63, 10.6% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-07-01",
    "date": "July 2026",
-   "detail": "Santa Clara County single-family homes: 1.6 months of supply (MLS). Condos: 4.1 months. 31% of listings cut their price (Realtor.com, September)."
+   "detail": "Single-family homes in Santa Clara County had 1.6 months of supply (MLS data). Condos are slower, at 4.1 months. 31% of listings have cut their price (Realtor.com, September)."
   },
   "cs": {
    "iso": "2026-08-01",
    "date": "August 2026",
-   "detail": "Case-Shiller San Francisco index (seasonally adjusted). Prices fell for most of 2025 and are rising again.",
+   "detail": "S&P Cotality Case-Shiller San Francisco home price index (seasonally adjusted). Prices are higher than a year ago.",
    "series": [
     [
-     "Jan 25",
-     2.98
+     "Feb 25",
+     3.0
     ],
     [
      "",
-     3.05
+     1.5
     ],
     [
      "",
-     1.55
+     0.1
     ],
     [
      "",
-     0.16
+     -0.8
     ],
     [
      "",
-     -0.74
-    ],
-    [
-     "",
-     -2.05
+     -2.1
     ],
     [
      "Jul 25",
-     -2.01
+     -1.9
     ],
     [
      "",
-     -1.51
+     -1.5
     ],
     [
      "",
-     -0.85
+     -0.8
     ],
     [
      "",
-     0.27
+     0.2
     ],
     [
      "",
-     0.36
+     0.4
     ],
     [
      "",
-     -0.11
+     -0.1
     ],
     [
      "Jan 26",
-     -0.38
+     -0.4
     ],
     [
      "",
@@ -381,49 +646,49 @@
     ],
     [
      "",
-     0.33
+     0.3
     ],
     [
      "",
-     1.34
+     1.4
     ],
     [
      "",
-     2.29
+     2.3
     ],
     [
      "",
-     3.22
+     3.2
     ],
     [
-     "",
-     3.48
+     "Jul 26",
+     3.5
     ],
     [
      "Aug 26",
-     3.37
+     3.4
     ]
    ]
   },
   "value": {
    "iso": "2026-08-01",
    "date": "August 2026",
-   "detail": "Case-Shiller prices compared with San Francisco-area rents: about 13% above normal. Rent covers less of a home's price than usual."
+   "detail": "Case-Shiller San Francisco home prices compared with San Francisco-area rents are about 12% above their 2005–2025 average."
   },
   "cap": {
    "iso": "2026-09-30",
    "date": "Q3 2026",
-   "detail": "Average for San Francisco Bay Area apartment buildings (CoStar), up from 5.5% a year ago. Newer luxury buildings sell at about 4.25–4.65%."
+   "detail": "Average for all San Francisco Bay Area apartment buildings (CoStar), up from 5.5% a year ago. Newer, high-end buildings sell at about 4.25–4.65%, which is below the Treasury yield."
   },
   "vac": {
    "iso": "2026-09-30",
    "date": "Q3 2026",
-   "detail": "San Francisco Bay Area apartments (CoStar). A year ago: 4.8%."
+   "detail": "Apartment vacancy across the San Francisco Bay Area (CoStar). A year ago it was 4.8%."
   },
   "rent": {
    "iso": "2026-09-30",
    "date": "Q3 2026",
-   "detail": "Average asking rent: $2,910 a month across the San Francisco Bay Area (CoStar)."
+   "detail": "Average asking apartment rent across the San Francisco Bay Area is $2,910 a month (CoStar)."
   },
   "ins": {
    "iso": "2026-09-01",
@@ -433,17 +698,42 @@
   "hpSJ": {
    "iso": "2026-04-01",
    "date": "Q2 2026",
-   "detail": "FHFA index for the San Jose–Sunnyvale–Santa Clara area: down about 1% from a year ago."
+   "detail": "FHFA index for the San Jose–Sunnyvale–Santa Clara area: down 1.0% from a year ago."
   },
   "valueSJ": {
    "iso": "2026-04-01",
-   "date": "Q2 2026 prices · September 2026 rents",
-   "detail": "San Jose-area home prices (FHFA) compared with rents: about 9% above normal."
+   "date": "Q2 2026 prices · October 2026 rents",
+   "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 53.7,
- "mfScore": 43.6,
- "pubScore": 51.5,
- "pubMf": 39.9,
- "licensedData": true
+ "score": 52.6,
+ "mfScore": 47.7,
+ "pubScore": 51.1,
+ "pubMf": 42.6,
+ "warn": {
+  "workers": 3221,
+  "notices": 30,
+  "period": "Last 30 days",
+  "date": "Nov 10, 2026",
+  "iso": "2026-11-10",
+  "top": [
+   {
+    "company": "AEG Management Oakland LLC",
+    "workers": 1605
+   },
+   {
+    "company": "eBay Inc.",
+    "workers": 229
+   },
+   {
+    "company": "Netflix, Inc.",
+    "workers": 227
+   },
+   {
+    "company": "Formagrid Inc. dba Airtable",
+    "workers": 190
+   }
+  ],
+  "detail": "3,221 workers are covered by layoff notices filed in the last 30 days."
+ }
 }
