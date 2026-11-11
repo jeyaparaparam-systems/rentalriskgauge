@@ -1,0 +1,55 @@
+name: Daily data update
+
+on:
+  schedule:
+    # 00:45 UTC Tuesday–Saturday = Monday–Friday evening in California
+    # (4:45 PM PST in winter, 5:45 PM PDT in summer), after the 1:00 PM PT market close.
+    - cron: "45 0 * * 2-6"
+  workflow_dispatch: {}        # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check the script
+        run: python -m py_compile scripts/update.py
+
+      - name: Download data and recalculate scores
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          USE_LICENSED_DATA: ${{ vars.USE_LICENSED_DATA || '1' }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+        run: |
+          pip install --quiet openpyxl
+          if [ -z "$FRED_API_KEY" ]; then echo "::warning::FRED_API_KEY secret is not set; most data cannot be downloaded."; fi
+          python scripts/update.py $FORCE
+
+      - name: Save the new data
+        run: |
+          if git diff --quiet -- data; then
+            echo "No changes to save."
+            exit 0
+          fi
+          git config user.name "rentalriskgauge-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "Daily data update $(TZ=America/Los_Angeles date +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            echo "Push failed, retrying in 10 seconds…"; sleep 10
+          done
+          exit 1
