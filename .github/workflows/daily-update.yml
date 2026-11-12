@@ -70,6 +70,21 @@ jobs:
         if: github.event.schedule == '40 4 * * 2-6' || github.event.schedule == '10 15 * * 2-6' || github.event_name == 'workflow_dispatch'
         run: python scripts/update.py --verify
 
+      - name: Quarterly reminder for the hand-entered CoStar cap rate
+        # Morning check only. Opens one issue (GitHub emails you) when data/manual.json is more than about
+        # four months old, and closes it once the new figure is entered. Never fails the run.
+        if: github.event.schedule == '10 15 * * 2-6' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Quarterly: enter the latest CoStar cap rate"
+          existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number' || true)
+          if python scripts/update.py --cap-age; then
+            if [ -n "$existing" ]; then gh issue close "$existing" --comment "Cap rate updated. Thanks." || true; fi
+          elif [ -z "$existing" ]; then
+            gh issue create --title "$title" --body "The CoStar apartment cap rate in data/manual.json is more than four months old. When CoStar's new quarterly San Francisco Bay Area multifamily report is out, edit data/manual.json: set licensed.cap and licensed.signals.cap (iso = last day of the quarter, date such as Q4 2026, and a one-sentence detail). This issue closes itself after the next morning check." || true
+          fi
+
       - name: Alert by opening a GitHub issue (GitHub emails you)
         if: failure()
         env:
