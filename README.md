@@ -4,10 +4,10 @@
 
 Two scores from 0 (low risk) to 100 (high risk). Levels: Low under 35, Moderate 35–45, Elevated 45–65, High 65 and above.
 
-Each score has six **parts** (each 0–100). Final score = 75% × weighted average of the parts + 25% × average of the two highest parts (scoring model v5.2), so one or two severe problems are not hidden by calm readings elsewhere. **Licensed sources are the main data where available** (S&P Cotality Case-Shiller, Moody's Baa, Nasdaq-100, CoStar, MLS months of supply), used for non-commercial purposes while permission requests are pending. Every licensed measure has a free public fallback that is always kept current, and one setting switches the whole site to free data.
+Each score has six **parts** (each 0–100). Final score = 75% × weighted average of the parts + 25% × average of the two highest parts (scoring model v5.3), so one or two severe problems are not hidden by calm readings elsewhere. **Licensed sources are the main data where available** (S&P Cotality Case-Shiller, Moody's Baa, Nasdaq-100, CoStar cap rate), used for non-commercial purposes while permission requests are pending. Every licensed measure has a free public fallback that is always kept current, and one setting switches the whole site to free data.
 
 - **Single-family homes and condos**: mortgage financing (rate and 1-year change) 20%, market & credit stress (VIX 20-day average 50%, Baa spread 25% [fallback: high-grade spread], Nasdaq-100 drawdown 25%) 15%, San Francisco Bay Area jobs (unemployment, tech jobs, all jobs) 25%, homes for sale (months of supply [fallback: listings per pending sale], listings vs a year ago, price cuts) 15%, home prices (50% Case-Shiller San Francisco [fallback: FHFA], 50% FHFA San Jose) 10%, valuation (price-to-rent, same 50/50 split) 15%.
-- **Multifamily apartments (5+ units)**: apartment financing (10-year Treasury yield, bank lending standards, Baa spread) 25%, value cushion (CoStar cap rate minus the 10-year yield, 0 risk at a 3-point gap and 100 at 0.5 points [fallback: price-to-rent]) 15%, jobs 20%, vacancy (CoStar [fallback: California rental vacancy vs its average]) 20%, rent growth (50% CoStar asking rents + 50% BLS rent paid) 10%, new construction (24-month building permits vs their 2005–2025 average pace) 10%.
+- **Multifamily apartments (5+ units)**: apartment financing (10-year Treasury yield, bank lending standards, Baa spread) 25%, value cushion (CoStar cap rate minus the 10-year yield, 0 risk at a 3-point gap and 100 at 0.5 points [fallback: price-to-rent]) 15%, jobs 20%, vacancy (Apartment List vacancy index, San Francisco + San Jose metros [fallback: California rental vacancy vs its average]) 20%, rent growth (50% Apartment List rent on new leases + 50% BLS rent paid) 10%, new construction (24-month building permits vs their 2005–2025 average pace) 10%.
 - **Context** (shown, not scored): California WARN layoff notices for the five core counties (last 30 days); insurance price trends; "Today in context" (today vs history since 2005 and distance to the next risk level).
 
 The full methodology is on the site's Methodology page.
@@ -19,7 +19,7 @@ The full methodology is on the site's Methodology page.
 | `index.html` | The whole website (one file). It reads the two data files below. |
 | `data/latest.json` | Today's numbers, details and the short "Today's read" note. |
 | `data/history.json` | One row per daily update (feeds the chart after November 5, 2026). |
-| `data/manual.json` | Hand-entered licensed figures: CoStar cap rate, vacancy and asking rents (quarterly) and MLS months of supply (monthly). |
+| `data/manual.json` | The one hand-entered figure: the CoStar apartment cap rate (quarterly). The workflow opens a reminder issue when it is more than about four months old. |
 | `scripts/update.py` | Downloads the data, recalculates the scores, writes the two data files. |
 | `.github/workflows/daily-update.yml` | Runs the script every market day after the close and saves the result. |
 | `og-image.png` | Picture shown when the site is shared on social media or in messages. |
@@ -36,7 +36,9 @@ History before November 5, 2026 (monthly, since 2000) is built into `index.html`
 
 GitHub Actions runs `scripts/update.py` Monday–Friday evening (4:45 PM PST / 5:45 PM PDT), skips U.S. stock market holidays, and commits the new data. The hosting service (Cloudflare Pages or GitHub Pages) republishes the site automatically.
 
-Licensed sources (non-commercial use, permission pending): Case-Shiller `SFXRSA`, `CSUSHPINSA`; Moody's `BAA10Y`; Nasdaq-100 `NASDAQ100` (all via FRED); CoStar and MLS figures from `data/manual.json`.
+Licensed sources (non-commercial use, permission pending): Case-Shiller `SFXRSA`, `CSUSHPINSA`; Moody's `BAA10Y`; Nasdaq-100 `NASDAQ100` (all via FRED); CoStar cap rate from `data/manual.json`.
+
+Free monthly market data, downloaded automatically: Apartment List Vacancy Index and Rent Estimates (apartmentlist.com/research/category/data-rent-estimates; download links read from that page each run), and Redfin Data Center county market tracker (months of supply, Santa Clara County single-family homes; read on Tuesdays because the file is large).
 
 Free public sources downloaded automatically (credit each source as on the site's Sources page):
 
@@ -58,7 +60,7 @@ Free public sources downloaded automatically (credit each source as on the site'
 
 If a source is down, the previous value is kept (missing measures are re-weighted within their part) and the site shows its "as of" date. Obviously broken numbers are rejected.
 
-**Licensed data switch.** If a data provider declines permission, either delete that provider's values from `data/manual.json` (CoStar, MLS) or set the repository variable / workflow env `USE_LICENSED_DATA=0`, and in `index.html` change `let PREMIUM=true;` to `let PREMIUM=false;`. The page and the scores then use the free public measures only (adding `?data=public` to the address previews this). Also remove that provider's credit line from the Sources page.
+**Licensed data switch.** If a data provider declines permission, either delete that provider's values from `data/manual.json` (CoStar) or set the repository variable / workflow env `USE_LICENSED_DATA=0`, and in `index.html` change `let PREMIUM=true;` to `let PREMIUM=false;`. The page and the scores then use the free public measures only (adding `?data=public` to the address previews this). Also remove that provider's credit line from the Sources page.
 
 ## One-time setup
 
