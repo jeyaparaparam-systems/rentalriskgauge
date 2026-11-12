@@ -25,6 +25,7 @@ Usage:
   python scripts/update.py            # normal run (skips weekends/holidays)
   python scripts/update.py --force    # run even on a non-market day
   python scripts/update.py --check    # recompute scores from current data, no downloads
+  python scripts/update.py --verify   # exit with an error if the saved data is older than it should be
 """
 import csv, io, json, math, os, sys, urllib.request, urllib.parse
 from datetime import datetime, date, timedelta, timezone
@@ -120,10 +121,19 @@ def save(name, obj):
     with open(os.path.join(DATA, name), "w", encoding="utf-8") as f:
         json.dump(obj, f, indent=1, ensure_ascii=False); f.write("\n")
 
-def http(url, timeout=30):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
+def http(url, timeout=30, tries=3):
+    """GET with up to 3 tries (waits 5 s, then 20 s) so a brief outage at a data source doesn't lose the day."""
+    import time
+    last = None
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "replace")
+        except Exception as e:
+            last = e
+            if attempt < tries - 1: time.sleep(5 if attempt == 0 else 20)
+    raise last
 
 def fred(series_id, start):
     """FRED observations as [(date, value)], skipping blanks."""
@@ -142,6 +152,14 @@ def mon_d(d): return f"{d.strftime('%b')} {d.day}"
 def month_label(d): return d.strftime("%B %Y")
 def short_month(d): return d.strftime("%b %y")
 def is_market_day(d): return d.weekday() < 5 and d.isoformat() not in HOLIDAYS
+
+def last_expected_update(now):
+    """The most recent market day whose evening update should already be saved (today after 5:30 PM PT)."""
+    d = now.date()
+    if not (is_market_day(d) and (now.hour, now.minute) >= (17, 30)):
+        d -= timedelta(days=1)
+        while not is_market_day(d): d -= timedelta(days=1)
+    return d
 def sgn(v, n): return f"{'+' if v >= 0 else '−'}{abs(v):.{n}f}"
 
 def yoy_series(obs, n=21):
@@ -473,8 +491,16 @@ def main():
     latest = load("latest.json", {})
     history = load("history.json", [])
     manual = load("manual.json", {})
+    if "--verify" in sys.argv:
+        # Freshness check used by the workflow after each run: fail loudly if the saved data is behind.
+        exp = last_expected_update(now).isoformat(); have = latest.get("asOf", "")
+        if have < exp:
+            print(f"::error::Saved data is from {have or 'nothing'}, but data for {exp} should exist by now."); return 2
+        print(f"Data is current (asOf {have}, expected {exp})."); return 0
     if not check and not force and not is_market_day(today):
         print(f"{today}: market closed – no update."); return 0
+    if not check and not force and latest.get("asOf") == today.isoformat():
+        print(f"{today}: already updated earlier today – nothing to do."); return 0
 
     inputs = dict(latest.get("inputs", {}))
     signals = dict(latest.get("signals", {}))
