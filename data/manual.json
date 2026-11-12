@@ -1,31 +1,12 @@
 {
- "_readme": "Hand-entered licensed figures (model v5.0), used for non-commercial purposes while permission requests are pending. Update after each new CoStar quarterly San Francisco Bay Area multifamily report (cap, vac, vacChg, rent) and each MLS monthly report for Santa Clara County (mos). Delete a value to fall back to the free public measure for that slot.",
+ "_readme": "Hand-entered licensed figure (model v5.3): the CoStar average apartment cap rate for the San Francisco Bay Area, used for non-commercial purposes while a permission request is pending. Update it after each CoStar quarterly multifamily report (cap and signals.cap: iso = last day of the quarter, date = e.g. \"Q4 2026\", detail = one plain sentence). The daily workflow opens a GitHub issue as a reminder when the figure is more than about four months old. Delete the value to fall back to the free price-to-rent measure. Apartment vacancy, rent on new leases (Apartment List) and months of supply (Redfin) are now downloaded automatically.",
  "licensed": {
   "cap": 5.9,
-  "vac": 3.8,
-  "vacChg": -1.0,
-  "rent": 7.7,
-  "mos": 1.6,
   "signals": {
    "cap": {
     "iso": "2026-09-30",
     "date": "Q3 2026",
     "detail": "Average for all San Francisco Bay Area apartment buildings (CoStar), up from 5.5% a year ago. Newer, high-end buildings sell at about 4.25–4.65%, which is below the Treasury yield."
-   },
-   "vac": {
-    "iso": "2026-09-30",
-    "date": "Q3 2026",
-    "detail": "Apartment vacancy across the San Francisco Bay Area (CoStar). A year ago it was 4.8%."
-   },
-   "rent": {
-    "iso": "2026-09-30",
-    "date": "Q3 2026",
-    "detail": "Average asking apartment rent across the San Francisco Bay Area is $2,910 a month (CoStar)."
-   },
-   "supplyP": {
-    "iso": "2026-07-01",
-    "date": "July 2026",
-    "detail": "Single-family homes in Santa Clara County had 1.6 months of supply (MLS data). Condos are slower, at 4.1 months. 31% of listings have cut their price (Realtor.com, September)."
    }
   }
  }
