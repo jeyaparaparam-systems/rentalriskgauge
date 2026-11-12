@@ -696,7 +696,6 @@ body{font-size:14px;line-height:1.5}
 .evlist li .mono{color:var(--muted);font-size:.74rem;margin-right:4px}
 .evlist .note{margin-top:6px;font-size:.78rem}
 
-
 /* merged "What's driving the score" list */
 .drvtable{border-top:1px solid var(--line)}
 .col .drvtable .irow>summary{grid-template-columns:minmax(0,1.8fr) minmax(56px,.8fr) 74px 12px;gap:12px;padding:8px 2px}
@@ -998,6 +997,57 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
   .mq{min-width:0;padding:7px 6px;border-left:0;border-top:1px solid var(--line2)}
   .mq:nth-child(-n+4){border-top:0}.mq:nth-child(4n+1){padding-left:0}
   .mqn{white-space:normal;font-size:.68rem;line-height:1.2;min-height:2.4em}.mq{align-content:start}.mqv{font-size:.88rem}.mqc{display:block;margin-left:0;font-size:.7rem}}
+
+/* score-calculation boxes */
+.calcsteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0}
+.calc{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;background:var(--soft);padding:12px 16px;display:grid;gap:6px;align-content:start}
+.calc h4{font-size:.95rem;margin:0}
+.calc p{margin:0;font-size:.9rem;line-height:1.55}
+.calc .formula-line{font-size:.95rem}
+.calc .example{background:var(--surface);border-radius:8px;padding:6px 10px}
+.formula b:first-child{color:var(--ink)}
+@media (max-width:900px){.calcsteps{grid-template-columns:minmax(0,1fr)}}
+.calc h3{font-size:.95rem;margin:0}
+.blsum{margin:4px 0 8px;padding-left:20px;display:grid;gap:4px;font-size:.95rem}
+
+/* ===== v8: plain-language sections ===== */
+.secintro{margin:4px 0 0;font-size:.9rem;line-height:1.55;color:var(--muted);max-width:90ch}
+.secintro b{color:var(--ink)}
+.secintro-list{margin:4px 0 0;padding-left:20px;font-size:.9rem;color:var(--muted);line-height:1.5}
+.cardhead>div{min-width:0}
+.hero .lede{margin:0 0 6px}
+.hero .lede-list{margin:0 0 8px;padding-left:20px;color:var(--muted);font-size:.9rem;line-height:1.5}
+.hero .eyebrow{display:block;margin-bottom:4px}
+/* watch list */
+.watchlist{display:grid;gap:0;border-top:1px solid var(--line2)}
+.wq{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:6px 18px;padding:10px 0;border-bottom:1px solid var(--line2);align-items:baseline}
+.wqq{font-weight:600;font-size:.95rem}
+.wqa{display:flex;gap:10px;align-items:baseline;font-size:.9rem;line-height:1.5}
+.wtag{flex:none;font-weight:700;font-size:.78rem;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.wt-yes{color:var(--elev)} .wt-mixed{color:var(--mod)} .wt-no{color:var(--low)}
+.watchlist .note{margin-top:8px}
+@media (max-width:700px){.wq{grid-template-columns:minmax(0,1fr)}}
+/* show-details toggles */
+details.more{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--soft);padding:0 14px}
+details.more>summary{cursor:pointer;list-style:none;padding:10px 0;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:8px}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;font-size:.9rem;line-height:1}
+details.more[open]>summary::before{content:"−"}
+details.more[open]{padding-bottom:12px;background:var(--surface)}
+details.more>*:not(summary){margin-top:8px}
+/* indicator descriptions in the how-to table */
+.readtbl .inddesc{display:block;font-weight:400;font-size:.8rem;color:var(--muted);margin-top:3px;line-height:1.45;max-width:38ch}
+.readtbl td:first-child{white-space:normal!important}
+.calcsteps.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:700px){.calcsteps.two{grid-template-columns:minmax(0,1fr)}}
+.srclist{columns:3 200px;column-gap:24px;margin:6px 0 10px}
+.srclist li{break-inside:avoid}
+#privacy p,.legal>p{margin-top:6px}
+
+/* other pages: keep the header short (title and scores only) */
+html[data-page]:not([data-page="dashboard"]) .hero .lede,html[data-page]:not([data-page="dashboard"]) .hero .lede-list,html[data-page]:not([data-page="dashboard"]) .hero .indep{display:none}
+.srclist{display:block}
+
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -1023,10 +1073,15 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
 <section class="hero" data-hero>
   <div class="hero-in">
     <div>
-      <p class="about"><b>For landlords and real estate investors:</b> the market signals that affect rental property, in one place.</p>
-      <h1>Is the San Francisco Bay Area rental market calm or under stress today?</h1>
-      <p class="lede">Two scores from 0 to 100, updated every market day: one for apartment buildings (5+ units), one for single-family homes &amp; condos. They track loan rates, jobs, home prices, rents and vacancy. Lower is calmer.</p>
-      <p class="indep">Shows today's conditions. Not a forecast. <a href="#methodology">How it works</a></p>
+      <span class="eyebrow">San Francisco Bay Area | Rental market monitor</span>
+      <h1>How much pressure is the rental market under?</h1>
+      <p class="lede">The rental market changes with interest rates, jobs, home prices, rents and vacancies. These changes can affect property values, rental income and financing costs.</p>
+      <p class="lede">The Rental Risk Gauge brings these signals together in one place, helping property owners and real estate investors understand current market conditions.</p>
+      <p class="lede"><b>Two scores, updated as new data becomes available:</b></p>
+      <ul class="lede-list"><li>Apartment buildings (5+ units)</li><li>Single-family homes and condos</li></ul>
+      <p class="lede">Lower scores mean calmer market conditions. Higher scores mean more financial pressure.</p>
+      <p class="indep">This is a snapshot of current market conditions, not a prediction of what will happen next. <a href="#methodology">How it works</a></p>
+      <p class="indep">Scores are refreshed on market days as new data becomes available. Each indicator displays its latest available reading.</p>
       <div class="updline" role="status">
         <span><span class="dot" id="sDot"></span><b id="sUpdated">Last updated Nov 6, 2026</b></span>
         <span id="sNext">Next update: Mon, Nov 9</span>
@@ -1051,8 +1106,13 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
 <div class="wrap">
   <div class="view" data-view="dashboard">
 
+  <section class="card watchcard" aria-labelledby="watchTitle">
+    <div class="cardhead"><div><h2 id="watchTitle">What Should Rental Property Owners Watch?</h2><p class="secintro">Five plain questions, answered from today's data.</p></div></div>
+    <div class="watchlist" id="watchList"></div>
+  </section>
+
   <section class="card stripcard" aria-labelledby="stripTitle">
-  <div class="cardhead"><div><h2 id="stripTitle">Today's indicators <span class="h2date" id="stripDate">Nov 6, 2026</span></h2><span class="sub hint">Tap a figure to see what it means.</span></div>
+  <div class="cardhead"><div><h2 id="stripTitle">Today's Market at a Glance <span class="h2date" id="stripDate">Nov 6, 2026</span></h2><p class="secintro">See the important numbers behind today's rental market. Each indicator shows what is happening and whether it is adding to or reducing market pressure.</p><p class="secintro">Select any indicator to understand what it means for property owners.</p></div>
     <span class="keyrow" aria-hidden="true"><i class="bdot" style="background:var(--low)"></i>Low <i class="bdot" style="background:var(--mod)"></i>Moderate <i class="bdot" style="background:var(--elev)"></i>Elevated <i class="bdot" style="background:var(--high)"></i>High</span></div>
   <div class="tickerwrap">
     <button class="tscroll l" type="button" id="tL" aria-label="Scroll indicators left">‹</button>
@@ -1062,10 +1122,43 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
   <div class="tinfo" id="tinfo" aria-live="polite"></div>
   </section>
 
+  <div class="ptabs" role="tablist" aria-label="Property type" id="ptabs">
+    <button type="button" class="ptab" role="tab" id="tab-mf" aria-controls="col-mf" aria-selected="true" tabindex="0" data-tab="mf">
+      <span class="ptname">Apartment buildings (5+ units)</span>
+      <span class="ptmeta"><b class="num" id="jb-mf"></b><span class="ptband" id="tb-band-mf"></span><span class="ptchg" id="tb-chg-mf"></span></span>
+    </button>
+    <button type="button" class="ptab" role="tab" id="tab-sf" aria-controls="col-sf" aria-selected="false" tabindex="-1" data-tab="sf">
+      <span class="ptname">Single-family homes &amp; condos</span>
+      <span class="ptmeta"><b class="num" id="jb-sf"></b><span class="ptband" id="tb-band-sf"></span><span class="ptchg" id="tb-chg-sf"></span></span>
+    </button>
+  </div>
+  <div class="pair tabbed">
+    <section class="col" id="col-mf" role="tabpanel" aria-labelledby="tab-mf" tabindex="0">
+      <header class="colhead" id="colhead-mf"></header>
+      <section class="card">
+        <div class="cardhead"><div><h3>What Is Driving the Risk Score?</h3><p class="secintro">The score is based on six important areas that affect rental property owners. Each area receives a score from 0 to 100:</p><ul class="secintro-list"><li>0 means conditions are relatively calm.</li><li>100 means conditions are under significant stress.</li></ul><p class="secintro">The areas creating the most pressure appear first. Select any row to see what is happening and why it matters.</p></div></div>
+        <div class="itable drvtable" id="rows-mf"></div>
+        <p class="formula" id="drvFormula-mf"></p>
+      </section>
+      <section class="card"><div class="cardhead"><div><h3>What Does This Score Mean for Property Owners?</h3><p class="secintro">The score reflects the overall pressure on the rental market. A higher score means more warning signs are appearing across the market. A lower score means conditions are relatively stable.</p><p class="secintro">It does not mean property prices will necessarily rise or fall. It helps you understand the conditions that may affect your rental property.</p></div><a href="#how-to-read" class="sub">How to read the scores</a></div><article class="blcard" id="bl-mf"></article></section>
+    </section>
+    <section class="col" id="col-sf" role="tabpanel" aria-labelledby="tab-sf" tabindex="0" hidden>
+      <header class="colhead" id="colhead-sf"></header>
+      <section class="card">
+        <div class="cardhead"><div><h3>What Is Driving the Risk Score?</h3><p class="secintro">The score is based on six important areas that affect rental property owners. Each area receives a score from 0 to 100:</p><ul class="secintro-list"><li>0 means conditions are relatively calm.</li><li>100 means conditions are under significant stress.</li></ul><p class="secintro">The areas creating the most pressure appear first. Select any row to see what is happening and why it matters.</p></div></div>
+        <div class="itable drvtable" id="rows-sf"></div>
+        <p class="formula" id="drvFormula-sf"></p>
+      </section>
+      <section class="card"><div class="cardhead"><div><h3>What Does This Score Mean for Property Owners?</h3><p class="secintro">The score reflects the overall pressure on the rental market. A higher score means more warning signs are appearing across the market. A lower score means conditions are relatively stable.</p><p class="secintro">It does not mean property prices will necessarily rise or fall. It helps you understand the conditions that may affect your rental property.</p></div><a href="#how-to-read" class="sub">How to read the scores</a></div><article class="blcard" id="bl-sf"></article></section>
+    </section>
+  </div>
+
+  <section class="card takecard"><div class="takeaway" id="blTake"></div></section>
+
   <div class="dash">
     <section class="card" aria-labelledby="chTitle">
       <div class="cardhead">
-        <div><h2 id="chTitle">Risk score history</h2><span class="sub">Both property types · monthly since 2000, daily since November 2026</span></div>
+        <div><h2 id="chTitle">How Today's Market Compares with the Past</h2><p class="secintro">See how rental market conditions have changed over time. Compare today's scores with previous market cycles, including the dot-com downturn, the 2008 financial crisis and more recent changes in interest rates.</p><p class="secintro">Choose a time period to explore how market conditions have changed.</p></div>
         <div class="ctrlrow">
           <div class="legend" role="group" aria-label="Lines shown">
             <button type="button" class="lg" data-line="sf" aria-pressed="true"><i class="sw sw-sf"></i>Single-family homes &amp; condos <b class="num" id="lg-sf"></b></button>
@@ -1082,61 +1175,28 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
     </section>
     <aside class="sidecol">
       <section class="card today">
-        <div class="cardhead"><h2>Today's read</h2><span class="sub" id="noteDate"></span></div>
+        <div class="cardhead"><div><h2>What Is Happening in the Market Today?</h2><p class="secintro">A quick summary of the current conditions, the biggest factors affecting the score and the changes worth watching.</p></div><span class="sub" id="noteDate"></span></div>
         <p id="note"></p>
       </section>
       <section class="card" id="warnCard">
-        <div class="cardhead"><h2>Layoff alert</h2><span class="tag">Not scored</span></div>
+        <div class="cardhead"><div><h2>Layoff Alert</h2><p class="secintro"><b>Are layoffs increasing in the San Francisco Bay Area?</b> This section tracks reported layoffs across major San Francisco Bay Area counties. A rise in layoff notices may signal weaker employment and could eventually affect rental demand.</p><p class="secintro">This is an early warning indicator, not a prediction of future job losses.</p></div><span class="tag">Not scored</span></div>
         <div id="warnBody"></div>
       </section>
     </aside>
   </div>
 
-  <div class="ptabs" role="tablist" aria-label="Property type" id="ptabs">
-    <button type="button" class="ptab" role="tab" id="tab-mf" aria-controls="col-mf" aria-selected="true" tabindex="0" data-tab="mf">
-      <span class="ptname">Apartment buildings (5+ units)</span>
-      <span class="ptmeta"><b class="num" id="jb-mf"></b><span class="ptband" id="tb-band-mf"></span><span class="ptchg" id="tb-chg-mf"></span></span>
-    </button>
-    <button type="button" class="ptab" role="tab" id="tab-sf" aria-controls="col-sf" aria-selected="false" tabindex="-1" data-tab="sf">
-      <span class="ptname">Single-family homes &amp; condos</span>
-      <span class="ptmeta"><b class="num" id="jb-sf"></b><span class="ptband" id="tb-band-sf"></span><span class="ptchg" id="tb-chg-sf"></span></span>
-    </button>
-  </div>
-  <div class="pair tabbed">
-    <section class="col" id="col-mf" role="tabpanel" aria-labelledby="tab-mf" tabindex="0">
-      <header class="colhead" id="colhead-mf"></header>
-      <section class="card">
-        <div class="cardhead"><div><h3>What's driving the score</h3><span class="sub hint">Each part scores 0 (calm) to 100 (stress). Biggest effect first. Tap a row for details.</span></div></div>
-        <div class="itable drvtable" id="rows-mf"></div>
-        <p class="formula" id="drvFormula-mf"></p>
-      </section>
-      <section class="card"><div class="cardhead"><h3>What it means today</h3><a href="#how-to-read" class="sub">How to read the scores</a></div><article class="blcard" id="bl-mf"></article></section>
-    </section>
-    <section class="col" id="col-sf" role="tabpanel" aria-labelledby="tab-sf" tabindex="0" hidden>
-      <header class="colhead" id="colhead-sf"></header>
-      <section class="card">
-        <div class="cardhead"><div><h3>What's driving the score</h3><span class="sub hint">Each part scores 0 (calm) to 100 (stress). Biggest effect first. Tap a row for details.</span></div></div>
-        <div class="itable drvtable" id="rows-sf"></div>
-        <p class="formula" id="drvFormula-sf"></p>
-      </section>
-      <section class="card"><div class="cardhead"><h3>What it means today</h3><a href="#how-to-read" class="sub">How to read the scores</a></div><article class="blcard" id="bl-sf"></article></section>
-    </section>
-  </div>
-
-  <section class="card takecard"><div class="takeaway" id="blTake"></div></section>
-
   <section class="card promo">
-    <div><h2>Stress test</h2><p class="sub">What if rates jump, tech jobs fall or 2008 happens again? See how both scores would move.</p></div>
+    <div><h2>What If Market Conditions Change?</h2><p class="secintro">What happens if interest rates rise, technology companies cut jobs or lending becomes harder to obtain? Use the Stress Test to explore different market situations and see how they could affect both rental market scores.</p></div>
     <a class="btn primary" href="#stress-test">Open the stress test →</a>
   </section>
 
   <div class="ctxrow">
     <section class="card" id="ctxCard">
-      <div class="cardhead"><div><h2>Compared with the past</h2><span class="sub">How today's scores compare with every month since January 2000, and how close each is to the next risk level</span></div></div>
+      <div class="cardhead"><div><h2>Where Does Today's Market Stand Historically?</h2><p class="secintro">Today's score is compared with monthly readings going back to 2000. See how often similar or lower scores occurred in the past, when the market last reached this level and how close today's score is to the next risk category.</p><p class="secintro">Historical comparisons provide context, not a guarantee of what comes next.</p></div></div>
       <div class="ctxgrid" id="ctx"></div>
     </section>
     <section class="card">
-      <div class="cardhead"><h2>Data freshness</h2></div>
+      <div class="cardhead"><div><h2>How Recent Is the Data?</h2><p class="secintro">Not every market indicator updates at the same time. Interest rates and financial market indicators may change daily. Employment and housing data usually update monthly, while some apartment market data updates quarterly.</p><p class="secintro">We show the latest available reading for each indicator so you can see how current the information is.</p></div></div>
       <table class="kv fresh" id="fresh"></table>
     </section>
   </div>
@@ -1145,15 +1205,17 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
   <div class="view" data-view="stress-test" hidden>
   <section class="howto stresspage">
     <div>
-      <h2 style="margin-bottom:10px">Stress test</h2>
-      <p class="intro">Ask "what if?" Change any number and see how both scores would move. It uses the same rules as the daily scores.</p>
+      <h2 style="margin-bottom:10px">What If Market Conditions Change?</h2>
+      <p class="intro">What happens if interest rates rise, technology companies cut jobs or lending becomes harder to obtain?</p>
+      <p class="intro" style="margin-top:6px">Use the Stress Test to explore different market situations and see how they could affect both rental market scores.</p>
+      <h3 style="margin-top:12px">How to Use the Stress Test</h3>
     </div>
 
     <div class="steps">
-      <div class="step"><span class="stepn">1</span><b>Start from today</b><p>The sliders start at today's numbers. "Today" resets them.</p></div>
-      <div class="step"><span class="stepn">2</span><b>Pick a scenario or move a slider</b><p>A scenario changes several numbers at once. A slider changes one, like mortgage rates at 8%.</p></div>
-      <div class="step"><span class="stepn">3</span><b>Read the results</b><p>Each result shows the new score, its level and the change from today.</p></div>
-      <div class="step"><span class="stepn">4</span><b>Optional: change the weights</b><p>Give a part more or less weight, for example less for financing if your loans are fixed. Saved only in your browser.</p></div>
+      <div class="step"><span class="stepn">1</span><b>Start with today's market</b><p>The test starts with the latest available market readings.</p></div>
+      <div class="step"><span class="stepn">2</span><b>Choose a scenario or change a number</b><p>Try situations such as higher interest rates, job losses, tighter lending or a recovery in the market. You can also adjust individual numbers yourself.</p></div>
+      <div class="step"><span class="stepn">3</span><b>See how the scores change</b><p>Both property-type scores update to show the potential effect of your changes.</p></div>
+      <div class="step"><span class="stepn">4</span><b>Adjust the importance of each factor</b><p>You can change the weights to reflect which factors matter most to your situation. For example, an owner with long-term fixed-rate financing may want to give financing conditions less weight. Your changes are saved only in your browser.</p></div>
     </div>
 
   <section class="card" aria-labelledby="stTitle" id="stCard" data-lens="mf">
@@ -1191,19 +1253,16 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
 
 
     <div>
-      <h3 style="font-size:1.1rem;margin-bottom:10px">The scenarios at a glance</h3>
-      <p class="intro" style="margin-bottom:12px">What each scenario changes and the scores it gives. Anything not listed stays at today's value. Where a scenario says "at least" or "no higher than", today's reading is kept if it's already past that level. Click a scenario name to load it.</p>
+      <h3 style="font-size:1.1rem;margin-bottom:10px">The Scenarios at a Glance</h3>
+      <p class="intro" style="margin-bottom:6px">Explore the assumptions behind each scenario and see which market conditions change.</p>
+      <p class="note" style="margin-bottom:12px">Anything not listed stays at today's value. Where a scenario says "at least" or "no higher than", today's reading is kept if it's already past that level. Click a scenario name to load it.</p>
       <div class="tbl"><table class="sctbl" id="scTable"></table></div>
     </div>
 
     <div class="isnot">
-      <h3>Keep in mind</h3>
-      <ul class="watch">
-        <li><b>Illustrations, not forecasts.</b> Real events rarely move every number this way.</li>
-        <li><b>Each measure has a ceiling.</b> Past its stress level, a slider stops adding risk.</li>
-        <li><b>Your properties may differ.</b> Loan terms, rent control, location and tenants can matter more than any regional number.</li>
-        <li>Information only, not advice. See the <a href="#sources">disclaimer</a>.</li>
-      </ul>
+      <h3>Important to Remember</h3>
+      <p>These scenarios are examples, not predictions. Actual market conditions may develop differently. Your own loan terms, property location, rental income and operating costs also matter.</p>
+      <p class="note">Each indicator has a ceiling: past its stress level, moving a slider further adds no more risk. Information only, not advice. See the <a href="#sources">disclaimer</a>.</p>
     </div>
   </section>
   </div>
@@ -1211,55 +1270,60 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
   <div class="view" data-view="how-to-read" hidden>
   <section class="howto">
     <div>
-      <h2 style="margin-bottom:10px">How to read this</h2>
-      <p class="intro">Each score runs from 0 to 100. <b>Lower is better.</b> A low score means calm conditions for rental owners. A high score means several things are going wrong at once.</p>
-      <p class="intro" style="margin-top:8px">Each score has six parts. The two worst parts count extra, so one serious problem can't hide behind calm readings elsewhere.</p>
+      <h2 style="margin-bottom:10px">Understanding the Rental Risk Score</h2>
+      <p class="intro">The Rental Risk Gauge uses a scale from 0 to 100.</p>
+      <p class="intro" style="margin-top:6px">A lower score means calmer market conditions. A higher score means greater market pressure.</p>
+      <div class="calc" style="margin-top:10px;max-width:80ch"><h3>Score calculation</h3><p class="formula-line"><b>75% of the weighted average across all six areas + 25% of the average of the two highest-risk areas.</b></p><p>This combines overall market conditions with extra emphasis on the areas under the most stress. The two highest-risk areas are already part of the weighted average, so this step deliberately gives them extra weight.</p></div>
     </div>
 
     <div class="bandcards">
-      <div class="bandcard" style="--c:var(--low)"><span class="rng">0–35</span><b>Low</b><p>Calm. Loans are affordable, people have jobs and rentals are in demand.</p></div>
-      <div class="bandcard" style="--c:var(--mod)"><span class="rng">35–45</span><b>Moderate</b><p>Some pressure. One or two things are working against you, but nothing is breaking.</p></div>
-      <div class="bandcard" style="--c:var(--elev)"><span class="rng">45–65</span><b>Elevated</b><p>Caution. Several warning signs at once. In the past this came before slower rent growth or tighter lending.</p></div>
-      <div class="bandcard" style="--c:var(--high)"><span class="rng">65–100</span><b>High</b><p>Stress. Most things point the wrong way. This happened in 2008–09, briefly in early 2002 and, for apartment buildings (5+ units), in 2003–06.</p></div>
+      <div class="bandcard" style="--c:var(--low)"><span class="rng">0 to under 35</span><b>Low</b><p>Conditions are generally favorable. Financing is more manageable, employment is relatively stable and rental demand is holding up.</p></div>
+      <div class="bandcard" style="--c:var(--mod)"><span class="rng">35 to under 45</span><b>Moderate</b><p>Some warning signs are appearing. Certain costs or market conditions may be creating pressure, but the overall picture remains relatively manageable.</p></div>
+      <div class="bandcard" style="--c:var(--elev)"><span class="rng">45 to under 65</span><b>Elevated</b><p>Several areas are showing signs of stress. Owners may face higher financing costs, slower rent growth, weaker demand or other challenges.</p></div>
+      <div class="bandcard" style="--c:var(--high)"><span class="rng">65 to 100</span><b>High</b><p>Market conditions are under significant pressure. Several important factors are working against property owners at the same time.</p></div>
     </div>
 
+    <div>
+    <h3 style="font-size:1.1rem;margin-bottom:8px">What Should You Watch?</h3>
     <ul class="tips">
-      <li><b>Watch the trend</b>A rise of 10 points over a few weeks matters more than any single day.</li>
-      <li><b>High doesn't mean "sell"</b>In past cycles, prices were often lowest when the score was high.</li>
-      <li><b>Look at the parts</b>"What's driving the score" on the dashboard shows which numbers push it up.</li>
+      <li><b>Watch the direction, not just today's number.</b>A score that rises steadily over several weeks may be more concerning than a single-day increase.</li>
+      <li><b>A high score does not automatically mean you should sell.</b>It means more of the conditions that have created problems for property owners in the past are present.</li>
+      <li><b>Look at what is driving the score.</b>Two markets can have the same overall score for very different reasons. Understanding the individual indicators gives you a clearer picture.</li>
     </ul>
+    </div>
 
     <div>
-      <h3 style="font-size:1.1rem;margin-bottom:10px">What each number means</h3>
+      <h3 style="font-size:1.1rem;margin-bottom:6px">Understanding the Numbers Behind the Score</h3>
+      <p class="intro" style="margin-bottom:10px">Every indicator tells us something about the conditions affecting property owners.</p>
       <div class="tbl">
         <table class="readtbl">
-          <thead><tr><th>Measure</th><th><span class="hpill low"><i class="pdot"></i><span class="arr" aria-hidden="true">↓</span>When it's low</span></th><th><span class="hpill high"><i class="pdot"></i><span class="arr" aria-hidden="true">↑</span>When it's high</span></th></tr></thead>
+          <thead><tr><th>Indicator</th><th><span class="hpill low"><i class="pdot"></i><span class="arr" aria-hidden="true">↓</span>When it's low</span></th><th><span class="hpill high"><i class="pdot"></i><span class="arr" aria-hidden="true">↑</span>When it's high</span></th></tr></thead>
           <tbody>
-            <tr style="--i:1" class="grp"><td colspan="3">Both scores</td></tr>
-            <tr style="--i:2"><td>San Francisco Bay Area unemployment</td><td><span class="g">Good</span>Tenants have jobs and pay rent on time.</td><td><span class="w">Warning</span>More late payments, more empty units, slower rent growth.</td></tr>
-            <tr style="--i:2"><td>Tech jobs vs a year ago</td><td><span class="w">Warning</span>Falling: tech companies are cutting jobs, which usually shows up in rents and vacancy a few months later.</td><td><span class="g">Good</span>Rising: tech companies are hiring, which supports rental demand.</td></tr>
-            <tr style="--i:2"><td>All jobs vs a year ago</td><td><span class="w">Warning</span>Below zero: the region is losing jobs overall.</td><td><span class="g">Good</span>Growing 2% or more: broad hiring supports rental demand.</td></tr>
-            <tr style="--i:2"><td>Layoff notices (not scored)</td><td><span class="g">Good</span>Few notices: no sign of large layoffs coming.</td><td><span class="w">Warning</span>Many notices: large layoffs are planned within the next 60 days.</td></tr>
-            <tr style="--i:2"><td>Insurance costs (not scored)</td><td><span class="g">Good</span>Rising slowly: operating costs are steady.</td><td><span class="w">Warning</span>Rising fast: higher costs squeeze rental income.</td></tr>
+            <tr style="--i:1" class="grp"><td colspan="3">Indicators used for both property types</td></tr>
+            <tr style="--i:2"><td>San Francisco Bay Area unemployment<small class="inddesc">Measures how many people are looking for work but cannot find a job. Rising unemployment can make it harder for renters to keep up with payments.</small></td><td><span class="g">Good</span>Tenants have jobs and pay rent on time.</td><td><span class="w">Warning</span>More late payments, more empty units, slower rent growth.</td></tr>
+            <tr style="--i:2"><td>Tech jobs vs a year ago<small class="inddesc">Tracks changes in San Francisco Bay Area technology jobs. Because the local economy has a large technology sector, job losses can affect rental demand.</small></td><td><span class="w">Warning</span>Falling: tech companies are cutting jobs, which usually shows up in rents and vacancy a few months later.</td><td><span class="g">Good</span>Rising: tech companies are hiring, which supports rental demand.</td></tr>
+            <tr style="--i:2"><td>All jobs vs a year ago<small class="inddesc">Looks at whether the region is adding or losing jobs across all industries.</small></td><td><span class="w">Warning</span>Below zero: the region is losing jobs overall.</td><td><span class="g">Good</span>Growing 2% or more: broad hiring supports rental demand.</td></tr>
+            <tr style="--i:2"><td>Layoff notices (not scored)<small class="inddesc">Tracks reported layoffs across major San Francisco Bay Area counties. A rise in notices may be an early warning of weaker employment.</small></td><td><span class="g">Good</span>Few notices: no sign of large layoffs coming.</td><td><span class="w">Warning</span>Many notices: large layoffs are planned within the next 60 days.</td></tr>
+            <tr style="--i:2"><td>Insurance costs (not scored)<small class="inddesc">Shows how insurance costs are changing. Higher insurance premiums can reduce the income property owners keep from their rentals.</small></td><td><span class="g">Good</span>Rising slowly: operating costs are steady.</td><td><span class="w">Warning</span>Rising fast: higher costs squeeze rental income.</td></tr>
             <tr style="--i:3" class="grp"><td colspan="3">Single-family homes &amp; condos</td></tr>
-            <tr style="--i:4"><td>VIX (market fear)</td><td><span class="g">Good</span>Under about 15: investors are calm.</td><td><span class="w">Warning</span>Over about 30: investors are scared. Loans get harder and tech stock pay drops.</td></tr>
-            <tr style="--i:4"><td>Corporate credit spread (Moody's Baa; both scores)</td><td><span class="g">Good</span>Around 1 point or less: lenders are comfortable taking risk.</td><td><span class="w">Warning</span>Over about 2.5 points: lenders are nervous and credit gets harder to find.</td></tr>
-            <tr style="--i:5"><td>30-year mortgage rate</td><td><span class="g">Good</span>Homes are easier to afford, sell and refinance.</td><td><span class="w">Warning</span>Fewer buyers, costlier refinancing, prices can stall.</td></tr>
-            <tr style="--i:6"><td>Months of supply (MLS)</td><td><span class="g">Good</span>Under about 2 months: homes sell fast. Sellers have the upper hand.</td><td><span class="w">Warning</span>Over about 5 months: homes sit unsold. Buyers have leverage and prices may fall.</td></tr>
-            <tr style="--i:6"><td>Listings with price cuts</td><td><span class="g">Good</span>Around 20% or less: sellers are getting their asking price.</td><td><span class="w">Warning</span>Around 50%: many sellers are cutting prices to find buyers, often before prices fall.</td></tr>
-            <tr style="--i:7"><td>Home price change (Case-Shiller)</td><td><span class="w">Warning</span>Below zero: prices are falling and your equity shrinks.</td><td><span class="g">Good</span>Prices are rising and your equity grows.</td></tr>
-            <tr style="--i:7"><td>Price-to-rent (100 = average)</td><td><span class="g">Good</span>Around 100 or below: prices are in line with rents.</td><td><span class="w">Warning</span>110–120 or more: prices have run ahead of rents, leaving values more exposed to a shock.</td></tr>
+            <tr style="--i:4"><td>VIX (market fear)<small class="inddesc">Measures uncertainty in the stock market. Higher volatility can reflect growing financial uncertainty and may affect investor confidence.</small></td><td><span class="g">Good</span>Under about 15: investors are calm.</td><td><span class="w">Warning</span>Over about 30: investors are scared. Loans get harder and tech stock pay drops.</td></tr>
+            <tr style="--i:4"><td>Corporate credit spread (Moody's Baa; both scores)<small class="inddesc">Shows whether businesses are finding it more expensive or difficult to borrow. Tighter credit can affect the wider economy and property financing.</small></td><td><span class="g">Good</span>Around 1 point or less: lenders are comfortable taking risk.</td><td><span class="w">Warning</span>Over about 2.5 points: lenders are nervous and credit gets harder to find.</td></tr>
+            <tr style="--i:5"><td>30-year mortgage rate<small class="inddesc">Higher mortgage rates make buying and refinancing homes more expensive. This can reduce the number of buyers and put pressure on home prices.</small></td><td><span class="g">Good</span>Homes are easier to afford, sell and refinance.</td><td><span class="w">Warning</span>Fewer buyers, costlier refinancing, prices can stall.</td></tr>
+            <tr style="--i:6"><td>Months of supply (MLS)<small class="inddesc">Measures how many homes are available for sale compared with buyer demand. More available homes generally give buyers greater negotiating power.</small></td><td><span class="g">Good</span>Under about 2 months: homes sell fast. Sellers have the upper hand.</td><td><span class="w">Warning</span>Over about 5 months: homes sit unsold. Buyers have leverage and prices may fall.</td></tr>
+            <tr style="--i:6"><td>Listings with price cuts<small class="inddesc">Tracks how many sellers are lowering their asking prices. A rising share can indicate that buyers are becoming more cautious.</small></td><td><span class="g">Good</span>Around 20% or less: sellers are getting their asking price.</td><td><span class="w">Warning</span>Around 50%: many sellers are cutting prices to find buyers, often before prices fall.</td></tr>
+            <tr style="--i:7"><td>Home price change (Case-Shiller)<small class="inddesc">Shows whether home values are rising or falling. Falling prices can reduce property owners' equity.</small></td><td><span class="w">Warning</span>Below zero: prices are falling and your equity shrinks.</td><td><span class="g">Good</span>Prices are rising and your equity grows.</td></tr>
+            <tr style="--i:7"><td>Price-to-rent (100 = average)<small class="inddesc">Compares home prices with rental values. When prices rise much faster than rents, property values may become more exposed to a market slowdown.</small></td><td><span class="g">Good</span>Around 100 or below: prices are in line with rents.</td><td><span class="w">Warning</span>110–120 or more: prices have run ahead of rents, leaving values more exposed to a shock.</td></tr>
             <tr style="--i:8" class="grp"><td colspan="3">Apartment buildings (5+ units)</td></tr>
-            <tr style="--i:9"><td>10-year Treasury yield</td><td><span class="g">Good</span>Apartment loans are cheaper and building values hold up.</td><td><span class="w">Warning</span>Loans cost more and buildings are worth less.</td></tr>
-            <tr style="--i:9"><td>Banks tightening apartment loans</td><td><span class="g">Good</span>Below zero: more banks are easing standards than tightening.</td><td><span class="w">Warning</span>Well above zero: banks are making apartment loans harder to get.</td></tr>
-            <tr style="--i:11"><td>Apartment vacancy (CoStar)</td><td><span class="g">Good</span>Around 3–4%: units fill quickly with no need for move-in deals.</td><td><span class="w">Warning</span>6% or more: units sit empty longer and owners offer free rent.</td></tr>
-            <tr style="--i:10"><td>Cap rate minus 10-year Treasury yield (CoStar)</td><td><span class="w">Warning</span>Under about 1 point: buildings earn little more than safe bonds, so values are exposed if rates rise.</td><td><span class="g">Good</span>2 points or more: a healthy cushion that protects values.</td></tr>
-            <tr style="--i:12"><td>Asking rent, change over a year (CoStar)</td><td><span class="w">Warning</span>Flat or negative: rents are falling and renewals get harder.</td><td><span class="g">Good</span>Rents are rising, so new leases and renewals come easier.</td></tr>
-            <tr style="--i:13"><td>New homes permitted (100 = average pace)</td><td><span class="g">Good</span>Below about 80: less building than usual, so little new competition for tenants.</td><td><span class="w">Warning</span>Above about 130: a building wave that will compete with existing buildings in one to three years.</td></tr>
+            <tr style="--i:9"><td>10-year Treasury yield<small class="inddesc">Looks at interest rates and lending conditions. Higher borrowing costs can make purchasing, refinancing and operating apartment buildings more expensive.</small></td><td><span class="g">Good</span>Apartment loans are cheaper and building values hold up.</td><td><span class="w">Warning</span>Loans cost more and buildings are worth less.</td></tr>
+            <tr style="--i:9"><td>Banks tightening apartment loans<small class="inddesc">Tracks whether banks are making apartment loans harder to get. Tighter lending standards can make refinancing more difficult.</small></td><td><span class="g">Good</span>Below zero: more banks are easing standards than tightening.</td><td><span class="w">Warning</span>Well above zero: banks are making apartment loans harder to get.</td></tr>
+            <tr style="--i:11"><td>Apartment vacancy (CoStar)<small class="inddesc">Measures the percentage of available apartment units that are not occupied. Higher vacancy can mean more competition for tenants and greater pressure on rental income.</small></td><td><span class="g">Good</span>Around 3–4%: units fill quickly with no need for move-in deals.</td><td><span class="w">Warning</span>6% or more: units sit empty longer and owners offer free rent.</td></tr>
+            <tr style="--i:10"><td>Cap rate minus 10-year Treasury yield (CoStar)<small class="inddesc">Compares apartment building cap rates with the 10-year Treasury yield. A smaller gap means less room between property returns and relatively safer investments.</small></td><td><span class="w">Warning</span>Under about 1 point: buildings earn little more than safe bonds, so values are exposed if rates rise.</td><td><span class="g">Good</span>2 points or more: a healthy cushion that protects values.</td></tr>
+            <tr style="--i:12"><td>Asking rent, change over a year (CoStar)<small class="inddesc">Tracks how much apartment rents are changing. Slowing or falling rents can make it harder for owners to maintain rental income.</small></td><td><span class="w">Warning</span>Flat or negative: rents are falling and renewals get harder.</td><td><span class="g">Good</span>Rents are rising, so new leases and renewals come easier.</td></tr>
+            <tr style="--i:13"><td>New homes permitted (100 = average pace)<small class="inddesc">Measures the pace of new housing permits. More construction today may mean more rental competition in the coming years.</small></td><td><span class="g">Good</span>Below about 80: less building than usual, so little new competition for tenants.</td><td><span class="w">Warning</span>Above about 130: a building wave that will compete with existing buildings in one to three years.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:10px">For most measures a low number is good. Home prices, job growth and rent growth work the other way: for those, a low number is the warning sign. The risk score next to each measure already accounts for this, so a low risk score is always good.</p>
+      <p class="note" style="margin-top:10px">Note: The risk score accounts for whether a higher or lower reading is favorable. A lower risk score is always better.</p>
     </div>
   </section>
     </div>
@@ -1268,15 +1332,43 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
   <div class="view" data-view="methodology" hidden>
   <section class="methodview">
     <div class="mblock">
-      <h2>How the scores work</h2>
-      <p>The scores show whether rental owners in the San Francisco Bay Area face normal conditions or extra pressure.</p>
+      <h2>How We Calculate the Rental Risk Score</h2>
+      <p>The score combines several market indicators into one number.</p>
+      <p>We look at six areas of the market, including financing, employment, property values, rents and vacancy.</p>
+      <p>Each indicator is converted to a score from 0 to 100 based on its normal and high-stress levels.</p>
+      <h3>How the Final Score Is Calculated</h3>
+      <p>The final score combines two things:</p>
+      <div class="calcsteps two">
+        <div class="calc"><h4>75% – Weighted average</h4><p>The combined score across all six areas, giving more importance to the factors with higher assigned weights.</p></div>
+        <div class="calc"><h4>25% – Highest-risk areas</h4><p>The average of the two areas showing the greatest stress.</p></div>
+      </div>
+      <p>This approach considers the overall market while giving extra attention to serious warning signs that might otherwise be hidden by healthier conditions elsewhere.</p>
+      <p>If data for an indicator is unavailable, the remaining available indicators are used. Missing information is not automatically treated as good or bad.</p>
+      <details class="more"><summary>Show a worked example</summary>
+      <p><b>1. Indicator score.</b> Each indicator has a calm level (0) and a stress level (100). Example: calm is 3%, stress is 7%. A reading of 5% scores 50.</p>
+      <p><b>2. Area score.</b> Related indicators are averaged by weight. Example: Mortgage financing = 70% today's rate + 30% its change from a year ago.</p>
+      <p><b>3. Final score.</b> <p class="example"><b>Example:</b> weighted average 49; two highest-risk areas 76 and 69 (average 72.5). Score = 0.75 × 49 + 0.25 × 72.5 = 54.9.</p></p>
+      <p><b>Why the extra weight?</b> In 2008, a simple average reached only about 57 while jobs, prices and credit were all collapsing. Giving the two highest-risk areas extra weight keeps one severe problem from being hidden by calm readings elsewhere.</p>
+      <p>Figures shown on the dashboard are rounded. Scores are calculated from the unrounded values.</p>
+      </details>
+      <h3>Risk Categories</h3>
+      <div class="tbl"><table class="bandtbl">
+        <thead><tr><th>Score</th><th>Market condition</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0 to under 35</td><td><span class="pill" style="color:var(--low)">Low</span></td></tr>
+          <tr><td class="mono">35 to under 45</td><td><span class="pill" style="color:var(--mod)">Moderate</span></td></tr>
+          <tr><td class="mono">45 to under 65</td><td><span class="pill" style="color:var(--elev)">Elevated</span></td></tr>
+          <tr><td class="mono">65 to 100</td><td><span class="pill" style="color:var(--high)">High</span></td></tr>
+        </tbody></table></div>
+      <p>The same scoring rules are used for historical comparisons so visitors can compare past and present conditions.</p>
+      <details class="more"><summary>About the data and this model</summary>
       <div class="callout"><p><b>Data.</b> We use five licensed sources where they are more detailed or more local than free data. Four have a free public backup, used whenever the licensed number is missing:</p>
         <ul class="watch">
           <li>Case-Shiller home prices → FHFA home prices</li>
           <li>Moody's Baa credit spread → U.S. Treasury corporate bond spread</li>
           <li>CoStar apartment data → Census rental vacancy, the rent price index (rent paid) and price-to-rent</li>
           <li>MLS months of supply → Realtor.com listings per home under contract</li>
-          <li>Nasdaq-100 → no backup. Without it, the other measures in its part count more.</li>
+          <li>Nasdaq-100 → no backup. Without it, the other indicators in its area carry more weight.</li>
         </ul>
         <p style="margin-top:8px">Licensed data is shown for non-commercial use while we ask the providers for permission. To see the free-data version, add <span class="mono">?data=public</span> to the end of the web address.</p></div>
       <div class="isnot">
@@ -1296,36 +1388,34 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <p>A high score doesn't mean prices will fall, and a low score doesn't mean they will rise. It counts how many of the conditions that hurt owners in the past are present today.</p>
         <h4>Our rules</h4>
         <ul class="watch">
-          <li>Every measure, level and weight is published below.</li>
+          <li>Every indicator, level and weight is published below.</li>
           <li>Every number has a listed source on the <a href="#sources">Sources</a> page.</li>
           <li>The rules are the same every day. If we change them, we update this page and recalculate the history.</li>
           <li>The rules reflect our judgment. We test them against history below, but no one has audited them.</li>
         </ul>
       </div>
-      <h3>From numbers to a score</h3>
-      <p><b>1. Score each measure from 0 to 100.</b> Each one has a calm level (0) and a stress level (100). A reading halfway between scores 50.</p>
-      <p class="example"><b>Example:</b> calm is 3%, stress is 7%. A reading of 5% scores 50.</p>
-      <p><b>2. Group measures into parts.</b> For example, "Mortgage financing" combines today's rate (70%) and its change from a year ago (30%).</p>
-      <p><b>3. Combine the parts.</b> 75% comes from the weighted average of all six parts. 25% comes from the average of the two worst parts, so one serious problem can't hide behind calm readings. In 2008 a plain average reached only about 57 while jobs, prices and credit were all collapsing.</p>
-      <p class="example"><b>Example:</b> weighted average 49, two worst parts 76 and 69: 0.75 × 49 + 0.25 × 72.5 = 54.9.</p>
-      <p>If a number is missing, it is left out and the rest of its part counts more. A missing number never counts as calm or stressed.</p>
-      <h3>Risk levels</h3>
-      <div class="tbl"><table class="bandtbl">
-        <thead><tr><th>Score</th><th>Risk level</th></tr></thead>
-        <tbody>
-          <tr><td class="mono">0–35</td><td><span class="pill" style="color:var(--low)">Low</span></td></tr>
-          <tr><td class="mono">35–45</td><td><span class="pill" style="color:var(--mod)">Moderate</span></td></tr>
-          <tr><td class="mono">45–65</td><td><span class="pill" style="color:var(--elev)">Elevated</span></td></tr>
-          <tr><td class="mono">65–100</td><td><span class="pill" style="color:var(--high)">High</span></td></tr>
-        </tbody></table></div>
-      <p>History uses the same weights, so past and present are comparable.</p>
+      </details>
     </div>
 
-<div class="mblock">
-      <h2>Single-family homes &amp; condos</h2>
-      <p>The single-family score has six parts, built from up to 13 measures. Each measure is scored between its low-risk and high-risk level. The table shows the measures in use today.</p>
+    <div class="mblock">
+      <h2>What Drives the Single-Family Housing Score?</h2>
+      <p>The single-family score looks at six areas that influence home values and housing market conditions.</p>
+      <p>These include mortgage rates, financial market conditions, employment, homes for sale, home prices and the relationship between home prices and rents.</p>
+      <p>Together, they help show whether conditions are becoming more favorable or more difficult for homeowners and real estate investors.</p>
+      <h3>What Could Increase the Risk?</h3>
+      <ul class="watch">
+        <li>Mortgage rates rise significantly.</li>
+        <li>San Francisco Bay Area unemployment increases or technology jobs decline.</li>
+        <li>Credit becomes harder to obtain.</li>
+        <li>More homes sit on the market or sellers reduce asking prices.</li>
+        <li>Home prices begin falling.</li>
+      </ul>
+      <h3>How Often Does the Data Change?</h3>
+      <p>Some indicators change daily or weekly, while employment, housing inventory and home price data generally update monthly.</p>
+      <p>The score changes as new information becomes available.</p>
+      <details class="more"><summary>Show indicators, weights and levels</summary>
       <div id="method-sf"></div>
-      <h3>Why these parts</h3>
+      <h3>How each area is measured</h3>
       <ul class="watch">
         <li><b>Mortgage financing</b> looks at today's rate (70%) and how much it has changed over the past year (30%), because a fast jump hurts more than a slow one.</li>
         <li><b>Market &amp; credit stress</b> combines the VIX, averaged over the past 20 market days so a one-day scare does not swing the score (50%), the Moody's Baa corporate bond spread (25%; the extra interest riskier companies pay to borrow compared with the 10-year Treasury) and how far the Nasdaq-100 is below its high of the past year (25%). Many San Francisco Bay Area workers are paid partly in tech stock, so a deep tech sell-off affects what they can spend on housing. Free fallback: the U.S. Treasury high-grade corporate bond spread, with the VIX and spread re-weighted.</li>
@@ -1334,7 +1424,7 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <li><b>Home prices</b> is the change over the past year, half from the Case-Shiller San Francisco index and half from the FHFA index for San Jose–Sunnyvale–Santa Clara. Case-Shiller's "San Francisco" area doesn't include Santa Clara County, so the San Jose half keeps the South Bay in the score. Free backup for the San Francisco half: the FHFA indexes for San Francisco–San Mateo, Oakland–Berkeley and San Jose.</li>
         <li><b>Valuation (price-to-rent)</b> compares home prices with rents paid in the San Francisco–Oakland area, as a share of the 2005–2025 average (100 = average). Half uses Case-Shiller San Francisco prices, half FHFA San Jose prices. It shows whether prices have run ahead of rents. It was highest in 2005–06, before the last major downturn.</li>
       </ul>
-      <h3>What would push the single-family score higher?</h3>
+      <h3>Levels that would push the score higher</h3>
       <ul class="watch">
         <li><b>Mortgage rates above 7.75%</b>, especially if still a full point higher than a year ago.</li>
         <li><b>San Francisco Bay Area unemployment above 5.5%, or tech jobs down more than 3% from a year earlier.</b></li>
@@ -1342,24 +1432,37 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <li><b>More than 3 months of supply</b> in Santa Clara County, or more than 40% of listings with a price cut.</li>
         <li><b>Home prices falling compared with a year ago</b> for two quarters or more.</li>
       </ul>
-      <h3>How often does this data change?</h3>
-      <p>The VIX, the Baa spread and the Nasdaq-100 change every market day, and mortgage rates are published weekly. Jobs, homes for sale and Case-Shiller prices are monthly (Case-Shiller about two months behind). On most days, only the market-stress and financing parts move.</p>
+      </details>
     </div>
 
     <div class="mblock">
-      <h2>Apartment buildings (5+ units)</h2>
-      <p>The apartment score also has six parts, built from up to 11 measures. It leans more on loan costs, vacancy and rents than the single-family score does.</p>
+      <h2>What Drives the Apartment Building Score?</h2>
+      <p>Apartment buildings face different financial pressures from single-family homes.</p>
+      <p>The apartment score focuses on six areas that directly affect apartment ownership: financing costs, property values, employment, vacancy, rent growth and new construction.</p>
+      <p>Together, these indicators help show whether apartment owners are facing increasing financial pressure.</p>
+      <h3>What Could Increase the Risk?</h3>
+      <ul class="watch">
+        <li>Interest rates rise or banks tighten apartment lending.</li>
+        <li>Rent growth slows or turns negative.</li>
+        <li>Apartment vacancies increase.</li>
+        <li>Building values become less attractive compared with borrowing costs.</li>
+        <li>New housing construction increases competition for tenants.</li>
+        <li>San Francisco Bay Area employment weakens.</li>
+      </ul>
+      <h3>How Often Does the Data Change?</h3>
+      <p>Interest rates and some financial indicators change daily. Employment and construction data generally update monthly. Apartment vacancy, rents and cap rates are updated quarterly.</p>
+      <details class="more"><summary>Show indicators, weights and levels</summary>
       <div id="method-mf"></div>
-      <h3>Why these parts</h3>
+      <h3>How each area is measured</h3>
       <ul class="watch">
         <li><b>Apartment financing</b> combines the 10-year Treasury yield (60%), the share of large banks tightening their standards for apartment loans in the Federal Reserve's loan officer survey (20%), and the Moody's Baa corporate bond spread (20%; free fallback: the U.S. Treasury high-grade spread). Rates tell you what a loan costs; the survey and the spread tell you how willing lenders are to make one.</li>
         <li><b>Value cushion</b> is the average San Francisco Bay Area apartment cap rate from CoStar (a building's yearly income divided by its price) minus the 10-year Treasury yield. It scores 0 at a gap of 3 points or more and 100 at 0.5 points or less. Apartment loans are usually priced about 1.5 to 2 points above the Treasury yield, so once the gap falls below about 1.5 points, borrowing costs more than a building earns. Free fallback: price-to-rent.</li>
-        <li><b>Jobs</b> is the same measure used in the single-family score.</li>
+        <li><b>Jobs</b> is the same area used in the single-family score.</li>
         <li><b>Rental vacancy</b> uses CoStar's San Francisco Bay Area apartment vacancy rate (70%) and its change from a year earlier (30%), published quarterly. Free fallback: the U.S. Census Bureau's yearly California rental vacancy rate, compared with its own 2005–2025 average.</li>
         <li><b>Rent growth</b> blends the change over the past year in average asking apartment rents across the San Francisco Bay Area (CoStar, 50%) with rent paid by all tenants in the San Francisco–Oakland area (consumer price index, 50%). Asking rents show the market for new leases; rent paid shows what owners actually collect. Without CoStar data, rent paid is used on its own. Not every owner can raise rents at market pace: California's AB 1482 and local rules such as San Jose's Apartment Rent Ordinance can limit increases.</li>
         <li><b>New construction</b> compares homes permitted over the past 24 months in the San Francisco and San Jose metro areas with the average 24-month pace since 2005 (100 = average). Permits come before construction, so this shows supply on the way. Permits cover all private housing, not only apartments.</li>
       </ul>
-      <h3>What would push the apartment score higher?</h3>
+      <h3>Levels that would push the score higher</h3>
       <ul class="watch">
         <li><b>The 10-year Treasury yield above 5.25%</b>, or banks broadly tightening standards for apartment loans.</li>
         <li><b>Rent growth slowing below 1%</b> or turning negative.</li>
@@ -1367,34 +1470,51 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <li><b>Building permits above 130</b> (30% faster than the usual pace).</li>
         <li><b>San Francisco Bay Area unemployment above 5.5%, or tech jobs down more than 3%.</b></li>
       </ul>
-      <h3>How often does this data change?</h3>
-      <p>The 10-year Treasury yield and the Baa spread change every market day. Jobs and permits are monthly; CoStar cap rates, vacancy and asking rents and the bank survey are quarterly. On most days only the financing and value-cushion parts move.</p>
+      </details>
     </div>
 
     <div class="mblock">
-      <h2>Shown, but not scored</h2>
+      <h2>Additional Market Signals Worth Watching</h2>
+      <p>Some indicators are useful for understanding the market but are not included in the final score.</p>
       <ul class="watch">
-        <li><b>Layoff alert.</b> Workers in California WARN layoff notices filed for San Francisco, San Mateo, Santa Clara, Alameda and Contra Costa counties over the last 30 days. Large employers must give 60 days' notice before mass layoffs, so this is an early warning. It is not scored because notices vary widely in size and timing.</li>
-        <li><b>Insurance costs.</b> The national price index for home and renters insurance compared with a year ago, shown in the indicator strip. It affects what it costs to run a rental, but it varies too much from one property to another to score fairly.</li>
-        <li><b>Today in context.</b> Today's scores compared with every month since 2000 (the share of months that scored lower, the last time a score was this high, and the highest and lowest readings), plus how many points each score is from the next risk level. This uses the same history shown in the chart.</li>
-        <li><b>Rent-to-income.</b> We looked for a monthly, region-wide measure of rents compared with renters' incomes and did not find a reliable public one. The price-to-rent part covers the related question of whether prices have run ahead of rents.</li>
+        <li><b>Layoff Notices.</b> Tracks reported layoffs across major San Francisco Bay Area counties. A rise in notices may be an early warning of weaker employment.</li>
+        <li><b>Insurance Costs.</b> Shows how insurance costs are changing. Higher insurance premiums can reduce the income property owners keep from their rentals.</li>
+        <li><b>Market History.</b> Shows how today's score compares with previous market conditions, including historical highs and lows.</li>
+        <li><b>Rent-to-Income.</b> A direct regional measure of rent compared with household income would be useful. However, we have not found a sufficiently reliable monthly data source to include it in the score.</li>
       </ul>
     </div>
 
     <div class="mblock">
-      <h2>Limits to keep in mind</h2>
+      <h2>What You Should Keep in Mind</h2>
+      <p>The Rental Risk Gauge brings together several useful market indicators, but no single score can capture every factor affecting a rental property.</p>
       <ul class="watch">
-        <li><b>Some measures are updated by hand.</b> CoStar cap rates, vacancy and asking rents and MLS months of supply come from quarterly and monthly market reports, so they change less often than the daily market measures. Each indicator shows the date of its latest reading.</li>
-        <li><b>Daily measures can jump on one day's news.</b> The VIX is half of the market-stress part, which is 15% of the single-family score, so a one-day spike moves the score by only a few points.</li>
-        <li><b>Job numbers get revised.</b> Unemployment is seasonally adjusted, but the source revises past months, often by a tenth of a point or two.</li>
-        <li><b>The price-cut share is seasonal.</b> It usually rises in late summer and fall.</li>
-        <li><b>This is our own model.</b> The levels and weights are our judgment, not an industry standard.</li>
+        <li>Some data is updated daily, while other information is monthly or quarterly.</li>
+        <li>Employment and economic data can be revised after publication.</li>
+        <li>Housing markets can change seasonally.</li>
+        <li>Market conditions can vary significantly between cities and neighborhoods.</li>
+        <li>Every property has different financing, expenses, tenants and rental conditions.</li>
+        <li>The scoring rules and weights represent our own methodology, not an industry standard.</li>
       </ul>
+      <p>The score is designed to provide a useful market overview, not a complete assessment of an individual property.</p>
     </div>
 
     <div class="mblock">
-      <h2>Looking back to 2000</h2>
-      <p>We rebuilt both scores for every month since January 2000 using today's rules. Case-Shiller and Moody's data go back that far. CoStar, MLS and Nasdaq data don't, so older months use the free backups instead. Measures that didn't exist yet are left out, and the rest of their part counts more: listings start in 2017, the bank loan survey in 2013 and the high-grade bond spread in 2004.</p>
+      <h2>What Previous Market Cycles Can Teach Us</h2>
+      <p>We applied today's scoring methodology to historical data going back to 2000 to see how the Rental Risk Gauge would have behaved during previous market cycles.</p>
+      <p>The historical results include several important periods:</p>
+      <ul class="watch">
+        <li>The dot-com downturn in the early 2000s.</li>
+        <li>The 2008 financial crisis.</li>
+        <li>The relatively stable housing market from 2013 to 2019.</li>
+        <li>The COVID-19 market shock in 2020.</li>
+        <li>The interest-rate increases and housing market slowdown beginning in 2022.</li>
+      </ul>
+      <p>These comparisons help put today's market conditions into perspective.</p>
+      <h3>What the Past Tells Us</h3>
+      <p>Different market downturns affect rental property owners in different ways.</p>
+      <p>Higher interest rates alone do not necessarily mean a serious downturn. Employment, rental demand, vacancy, lending conditions and property values all matter.</p>
+      <p>The purpose of historical analysis is to understand how these factors behaved together, not to predict the next market cycle.</p>
+      <details class="more"><summary>Show the scores in each period</summary>
       <h3>Single-family homes &amp; condos</h3>
       <ul class="watch">
         <li><b>Highest score: 67.5 (High), in April 2009.</b> The score was High from October 2008 to May 2009, when jobs, prices and credit all turned against owners at once.</li>
@@ -1413,22 +1533,31 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <li><b>2024: about 49–63 (Elevated)</b>, with high Treasury yields, slow growth in rent paid and stretched valuations.</li>
       </ul>
       <p>The October 2026 monthly value is about 50, while today's daily score is about 44. Most of the gap comes from the data source: today's score uses CoStar's apartment vacancy (3.8%) and asking rents (+7.7%), which show a tighter market than the statewide vacancy and rent-paid stand-ins used in the history. The 10-year Treasury yield was also higher in October (about 5.1% on average).</p>
-      <h3>What this tells us</h3>
-      <p>High mortgage rates alone don't mean serious trouble. Jobs, credit and supply matter too. The 2008 crisis was the one period in the last two decades when almost every part turned against owners at the same time. The dot-com bust was mainly a jobs shock; falling mortgage rates kept home prices up, but apartment owners felt it for years.</p>
+      </details>
     </div>
 
     <div class="mblock" id="levels">
-      <h2>How the risk levels were set</h2>
-      <p>Both scores use the same four levels: Low under 35, Moderate 35–45, Elevated 45–65 and High 65 and up. We drew the lines where the past shows a real difference. Months under 35 were usually followed by rising prices. Months above 35 were followed by a price drop about a third of the time.</p>
+      <h2>Why These Risk Categories?</h2>
+      <p>The four risk categories are based on how the indicators behaved during previous market cycles.</p>
+      <p>We compared historical scores with what happened to home prices and rental conditions afterward to help establish meaningful ranges.</p>
+      <p>The categories are designed to make it easier to understand the difference between relatively calm conditions and periods of greater financial pressure.</p>
+      <p>They are not official industry ratings or guarantees of future market performance.</p>
+      <details class="more"><summary>Show how many months fell in each category</summary>
       <p>Since 2000, single-family homes &amp; condos were Low in 112 months, Moderate in 79, Elevated in 124 and High in 7 (February 2002 and 2008–09). Apartment buildings (5+ units) were Low in 104 months, Moderate in 36, Elevated in 155 and High in 27 (2003–06, after rents fell in the dot-com bust). Elevated is common because the San Francisco Bay Area has had long stretches of real pressure: 2001–2004, 2006–2011 and again since 2022.</p>
-      <p>The "Compared with the past" card on the dashboard shows where today ranks against every month since 2000.</p>
+      </details>
     </div>
 
     <div class="mblock" id="validation">
-      <h2>Does the score work?</h2>
-      <p>We rebuilt the score for every month since 2000. Then we looked at what actually happened in the 12 months after each reading. This tells you how the score has behaved in the past. It is not a promise about the future.</p>
+      <h2>Testing the Score Against Historical Market Data</h2>
+      <p>A useful market indicator should be tested against what actually happened in the past.</p>
+      <p>We applied the current scoring rules to historical data and compared the resulting scores with changes in home prices and rents over the following 12 months.</p>
+      <h3>What We Found</h3>
+      <p>Historically, lower scores generally appeared during periods of stronger market conditions.</p>
+      <p>Higher scores were more common during periods when property owners faced greater financial pressure.</p>
+      <p>However, the relationship was not perfect. Some periods with elevated scores were followed by rising home prices, while some high-risk readings occurred after prices had already fallen.</p>
+      <details class="more"><summary>Show the test results</summary>
       <h3>Single-family homes &amp; condos: what home prices did next</h3>
-      <p>Case-Shiller San Francisco home prices, 12 months after each month's reading, January 2000 to October 2026.</p>
+      <p>Case-Shiller San Francisco home prices, 12 months after each month's reading. Only months with a full year of later price data are counted (January 2000 to August 2025), so these counts are lower than the level counts in "Why These Risk Categories?" above.</p>
       <div class="tbl"><table>
         <thead><tr><th>Score level that month</th><th class="r">Months</th><th class="r">Average price change over the next year</th><th class="r">How often prices fell</th></tr></thead>
         <tbody>
@@ -1447,28 +1576,35 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
         <li>When the apartment score was Low, rent paid rose about 4.8% over the next year. When it was Elevated, rents rose only about 2.5%, and fell about 1 time in 7.</li>
         <li>In High months (2003–06), rents rose only about 1.6% a year on average.</li>
       </ul>
-      <h3>Does it depend on our weights?</h3>
+      </details>
+      <h3>How Sensitive Is the Score to the Weights?</h3>
+      <p>We also tested how much the scores changed when the importance assigned to individual indicators was adjusted.</p>
+      <p>This helps us understand whether the results depend too heavily on any single weighting decision.</p>
+      <details class="more"><summary>Show the weight test</summary>
       <p>We used AI automation to rerun today's scores 5,000 times, each time changing every weight up or down by as much as half. The single-family score stayed Elevated every time. The apartment score stayed Moderate about 4 times out of 5. It sits just below the Elevated line, so think of it as "Moderate, close to Elevated."</p>
-      <h3>Keep in mind</h3>
-      <ul class="watch">
-        <li><b>We know how the story ended.</b> We built the rules after seeing past downturns, and we used today's corrected data, not the numbers people had at the time. Real-time results would likely be a bit worse.</li>
-        <li><b>Part of the match is built in.</b> Recent price and rent changes are part of the score, and those trends tend to keep going for a while.</li>
-        <li><b>Few big events to learn from.</b> Since 2000 there have been two big downturns (the dot-com bust and 2007–2011), one sudden shock (2020) and one rate-driven slowdown (2022–23).</li>
-        <li><b>Areas don't match exactly.</b> Prices cover San Francisco and San Jose, listings cover Santa Clara County, and jobs cover the San Francisco and San Jose metro areas.</li>
-      </ul>
-      <p><b>Bottom line:</b> the score is good at describing how much pressure the market is under right now. It can't tell you when prices will turn, so it isn't a forecast.</p>
+      </details>
+      <h3>Important Limitations</h3>
+      <p>Historical results do not guarantee future outcomes. There have been relatively few major market downturns since 2000, and historical data is sometimes revised or supplemented with alternative sources.</p>
+      <p>The score is intended to measure current market pressure, not identify the exact timing of a market peak or bottom.</p>
     </div>
-
 
     <p class="note mdisc"><i><b>For informational purposes only.</b> This analysis is intended to help property owners and investors understand market conditions. It is not financial, investment, or legal advice and should not be considered a recommendation to buy, sell, or borrow.</i></p>
   </section>
   </div>
 
-
   <div class="view" data-view="sources" hidden>
 
   <section>
-    <h2 style="margin-bottom:12px">Sources</h2>
+    <h2 style="margin-bottom:12px">Where Does the Information Come From?</h2>
+    <p>The Rental Risk Gauge uses a combination of public economic data and specialized housing market information.</p>
+    <p style="margin-top:8px">Sources include:</p>
+    <ul class="watch srclist">
+      <li>Federal Reserve and FRED</li><li>U.S. Treasury</li><li>Bureau of Labor Statistics</li><li>U.S. Census Bureau</li><li>Federal Housing Finance Agency</li><li>Freddie Mac</li><li>Cboe</li><li>Realtor.com</li><li>S&amp;P Cotality Case-Shiller</li><li>Moody's</li><li>Nasdaq</li><li>CoStar</li><li>Local MLS market reports</li>
+    </ul>
+    <p>Each indicator has an identified source and update frequency.</p>
+    <p style="margin-top:6px">When a specialized data source is unavailable, a public alternative may be used where one is available.</p>
+    <p style="margin-top:6px">We aim to make the data sources and scoring rules transparent so visitors can understand where the numbers come from.</p>
+    <details class="more"><summary>Show every source, series and license note</summary>
     <div class="note srcs" style="max-width:none">
       <span class="callout" style="display:block"><b>Licensed data, non-commercial use.</b> This site is a free, non-commercial, informational project. The licensed sources marked below are used for non-commercial purposes while permission requests with each data provider are pending. They are summarized into scores and short readings; the underlying datasets are not redistributed. If a provider declines, the site switches that measure to its free public alternative listed here. All trademarks belong to their owners, and no data provider sponsors or endorses this site. Series retrieved from FRED, Federal Reserve Bank of St. Louis, are cited with their original owners.</span>
       <span><b>Licensed sources (main data where available)</b></span>
@@ -1494,17 +1630,27 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
       <span>Insurance costs (context): Bureau of Labor Statistics consumer price index for tenants' and household insurance, U.S. city average (<a href="https://fred.stlouisfed.org/series/CUUR0000SEHD" target="_blank" rel="noopener">CUUR0000SEHD</a>), monthly.</span>
       <span>Layoff alert (context): <a href="https://edd.ca.gov/en/jobs_and_training/layoff_services_warn" target="_blank" rel="noopener">California Employment Development Department WARN reports</a>.</span>
     </div>
+    </details>
   </section>
 
   <section id="privacy">
-    <h2>Privacy</h2>
-    <p>This site sets no cookies and uses no analytics, ads or tracking. It doesn't ask for your name or email.</p>
-    <p>Your browser remembers a few display choices on this site only: the property tab you opened last, the indicator you selected, light or dark mode, and any stress-test weights you changed. They stay on your device and are never sent to us. Clearing your browser's data for this site removes them.</p>
-    <p>Fonts load from this site, not from a font service. Like any website, the hosting service receives standard technical data, such as your IP address, to deliver the page.</p>
+    <h2>Your Privacy Matters</h2>
+    <p>The Rental Risk Gauge does not ask for your name or email address.</p>
+    <p>The website does not use advertising, analytics or tracking cookies.</p>
+    <p>Your display preferences and stress-test adjustments are saved locally in your browser and are not sent to us.</p>
+    <p>The hosting provider may receive standard technical information, such as your IP address, when you visit the website.</p>
   </section>
 
   <footer class="legal" id="disclaimer">
-    <h2>Disclaimer</h2>
+    <h2>Important Information</h2>
+    <p>The Rental Risk Gauge is an independent market information tool designed to help property owners and real estate investors understand current San Francisco Bay Area market conditions.</p>
+    <p>It is for general informational and educational purposes only.</p>
+    <p>The scores, historical comparisons and stress-test scenarios are not forecasts, appraisals, credit ratings or investment recommendations.</p>
+    <p>The information does not consider your individual financial circumstances, property condition, loan terms, tax position or investment objectives.</p>
+    <p>Market data may be delayed, revised or incomplete. The scoring methodology, weights and risk categories reflect the author's judgment and have not been independently audited or validated.</p>
+    <p>Real estate investments involve risk. A low score does not mean an investment is safe, and a high score does not automatically mean a property should be sold.</p>
+    <p>Consult qualified professionals before making financial, investment, legal, tax or real estate decisions.</p>
+    <details class="more"><summary>Read the Full Disclaimer</summary>
     <p class="lead"><b>For informational and educational purposes only.</b> Nothing on this website is financial, investment, legal, tax, accounting or real estate advice, and nothing here is a recommendation or solicitation to buy, sell, hold, finance or lease any property, security or other asset.</p>
 
     <h3>Independent indicator, not a forecast</h3>
@@ -1526,6 +1672,7 @@ h1,h2,h3,h4{font-family:var(--f-body);font-weight:700;letter-spacing:-.01em}
     <p>Data, trademarks and index names belong to their respective owners, who do not sponsor or endorse this website. Links to outside sites are provided for convenience only. Rental property owners are responsible for complying with all applicable federal, state and local laws, including fair housing, rent stabilization and just-cause eviction rules in California and its cities. Nothing here describes or interprets those laws.</p>
 
     <p>By using this website, you acknowledge that you have read and agree to this disclaimer.</p>
+        </details>
     <p><b>© 2026 <a href="https://www.linkedin.com/in/raj-rajagopalan/" target="_blank" rel="noopener noreferrer">Raj Rajagopalan</a>. All rights reserved.</b> No part of this website, including its scoring methodology, text and design, may be reproduced or redistributed without written permission.</p>
   </footer>
   </div>
@@ -1749,6 +1896,36 @@ function renderHero(){
   $("stripDate").textContent=fmtDate(DATA.asOf);
 }
 
+/* ---------- "What should rental property owners watch?" five questions answered from today's data ---------- */
+function renderWatch(){const el=$("watchList");if(!el)return;const s=inputsFull(),sg=sigs();
+  const f1=v=>Math.abs(v).toFixed(1),f2=v=>Math.abs(v).toFixed(2),pm=v=>(v>=0?"up ":"down ")+f1(v)+"%";
+  const rows=[];const add=(q,ans,cls,txt)=>rows.push(`<div class="wq"><div class="wqq">${q}</div><div class="wqa"><span class="wtag wt-${cls}">${ans}</span><span>${txt}</span></div></div>`);
+  // 1 borrowing costs
+  if(ok(s.mort)&&ok(s.mortChg)){const up=s.mortChg>0.25,dn=s.mortChg<-0.25;
+    add("Are borrowing costs increasing?",up?"Yes":dn?"No":"Little change",up?"yes":dn?"no":"mixed",
+      `The 30-year mortgage rate is ${s.mort.toFixed(2)}%, ${up||dn?`${s.mortChg>0?"up":"down"} ${f2(s.mortChg)} points from a year ago`:"about the same as a year ago"}.${ok(s.t10)?` The 10-year Treasury yield, which sets most apartment loan rates, is ${s.t10.toFixed(2)}%.`:""}`);}
+  // 2 vacancies
+  {const v=ok(s.vacChg)?s.vacChg:(ok(s.vacRelChg)?s.vacRelChg:null),lvl=ok(s.vac)?s.vac:null;
+   if(v!=null){const up=v>0.2,dn=v<-0.2;add("Are apartment vacancies rising?",up?"Yes":dn?"No":"Little change",up?"yes":dn?"no":"mixed",
+     `${lvl!=null?`Apartment vacancy is ${lvl.toFixed(1)}%, `:"Rental vacancy is "}${up||dn?`${v>0?"up":"down"} ${f1(v)} points from a year ago`:"about the same as a year ago"}.`);}}
+  // 3 rent growth
+  {const a=ok(s.rent)?s.rent:null,b=ok(s.rentCPI)?s.rentCPI:null;
+   if(a!=null||b!=null){const vals=[a,b].filter(x=>x!=null),slow=vals.every(x=>x<2),fast=vals.every(x=>x>=3);
+     add("Is rent growth slowing?",slow?"Yes":fast?"No":"Mixed",slow?"yes":fast?"no":"mixed",
+       `${a!=null?`Asking rents for new leases are ${pm(a)} from a year ago`:""}${a!=null&&b!=null?", while ":""}${b!=null?`rent paid by all tenants is ${pm(b)}`:""}.`);}}
+  // 4 jobs
+  if(ok(s.techJobs)||ok(s.payroll)){const t=s.techJobs,p=s.payroll;const yes=ok(p)&&p<0,tech=ok(t)&&t<0;
+    add("Are San Francisco Bay Area employers cutting jobs?",yes?"Yes":tech?"In tech, yes":"No",yes?"yes":tech?"mixed":"no",
+      `${ok(t)?`Tech jobs are ${pm(t)} from a year ago`:""}${ok(t)&&ok(p)?" and ":""}${ok(p)?`total jobs are ${pm(p)}`:""}.${ok(s.unemp)?` Unemployment is ${s.unemp.toFixed(1)}%.`:""}`);}
+  // 5 values exposed
+  {const pr=ok(s.p2r)?s.p2r:(ok(s.p2rF)?s.p2rF:null),cu=ok(s.cap)&&ok(s.t10)?s.cap-s.t10:null;
+   if(pr!=null||cu!=null){const hiP=pr!=null&&pr>=110,thin=cu!=null&&cu<1.5,okP=pr==null||pr<103,okC=cu==null||cu>=2.5;
+     const ans=hiP&&thin?"Yes":hiP||thin?"Somewhat":okP&&okC?"No":"Somewhat";
+     add("Are property values becoming more exposed?",ans,ans==="Yes"?"yes":ans==="No"?"no":"mixed",
+       `${pr!=null?`Home prices are about ${Math.abs(pr-100).toFixed(0)}% ${pr>=100?"above":"below"} their usual level compared with rents`:""}${pr!=null&&cu!=null?". ":""}${cu!=null?`Apartment buildings earn ${cu.toFixed(2)} points more than the 10-year Treasury yield, ${thin?"a thin cushion":cu<2.5?"a modest cushion":"a healthy cushion"}`:""}.`);}}
+  el.innerHTML=rows.join("")+`<p class="note">Answers describe today's data only. They are not predictions or advice.</p>`;
+}
+
 /* ---------- Market strip: key numbers under the header ---------- */
 function renderMkt(){const el=$("mkt");if(!el)return;const s=inputsFull(),sg=sigs(),p=prevEntry();
   const chg=(d,dec,unit)=>{if(!ok(d))return "";const cls=Math.abs(d)<Math.pow(10,-dec)/2?"flat":d>0?"up":"down";return `<span class="mqc ${cls}">${d>0?"▲":d<0?"▼":""} ${Math.abs(d).toFixed(dec)}${unit||""}</span>`;};
@@ -1835,7 +2012,7 @@ let rzT;window.addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout((
 function renderDrivers(){
   const s=inputsFull();
   ["sf","mf"].forEach(lens=>{const L=LENSES[lens], bd=breakdown(lens,s,L.W0), tot=Object.values(L.W0).reduce((a,b)=>a+b,0);
-  $("drvFormula-"+lens).innerHTML=`Score = 75% of the weighted average (${bd.avg.toFixed(1)}) + 25% of the two highest parts (${bd.topAvg.toFixed(1)}) = <b class="num">${bd.score.toFixed(1)}</b>`;});
+  $("drvFormula-"+lens).innerHTML=`<b>Score calculation:</b> 75% × weighted average of all six areas (${bd.avg.toFixed(1)}) + 25% × average of the two highest-risk areas (${bd.topAvg.toFixed(1)}) = <b class="num">${bd.score.toFixed(1)}</b><br><span class="note">Figures are rounded for display. The score is calculated from the unrounded values.</span>`;});
 }
 
 /* ---------- Tape ---------- */
@@ -1869,7 +2046,7 @@ const tLabel=(tk,c)=>(c&&Array.isArray(tk.c)&&TLABEL[c])||tk.label;
 /* Which parts of which score use a measure, with that part's share of the score. */
 function usedIn(c,s){const out=[];["sf","mf"].forEach(l=>{const W=LENSES[l].W0,tot=Object.values(W).reduce((a,b)=>a+b,0);
   Object.keys(W).forEach(k=>{const pr=partsFor(k,s),hit=pr.find(([m])=>m===c);if(!hit)return;const ws=pr.reduce((a,[,w])=>a+w,0);
-    const share=hit[1]/ws;out.push(`${LENSES[l].short} score: ${share>=0.99?"the":Math.round(share*100)+"% of the"} ${P[k].name} part (${Math.round(W[k]/tot*100)}% weight)`);});});
+    const share=hit[1]/ws;out.push(`${LENSES[l].short} score: ${share>=0.99?"the":Math.round(share*100)+"% of the"} ${P[k].name} area, which is ${Math.round(W[k]/tot*100)}% of the score`);});});
   return out.length?out.join("; "):"Not used in the score with the current data";}
 function renderTicker(){
   const s=inputsFull(), sg=sigs();
@@ -1921,42 +2098,42 @@ const TINFO={
   low:"Under 15: investors are calm. Banks lend freely and tech pay holds up.",
   high:"Over 30: investors are scared. Banks lend less, and falling tech stocks cut many local paychecks.",
   good:"low",typical:"Usually about 19. It went above 80 in 2008 and 2020.",
-  scores:"Single-family homes & condos score: half of the Market & credit stress part",
+  scores:"Single-family homes & condos score: half of the Market & credit stress area",
   now:s=>`At ${s.vix.toFixed(1)}, investors are ${s.vix<15?"calm":s.vix<20?"about as calm as usual":s.vix<30?"a little nervous":"scared"}.`},
  ndx:{title:"Tech stocks: how far the Nasdaq-100 is below its high",
   what:"How far big tech stocks are below their best close of the past year. Many local workers get part of their pay in tech stock.",
   low:"Near the high: stock pay keeps its value, so tenants and buyers can keep spending.",
   high:"20–25% or more below: stock pay is worth less, and people spend less on housing.",
   good:"low",typical:"Fell about 35% in 2022 and more than 50% in 2008.",
-  scores:"Single-family homes & condos score: a quarter of the Market & credit stress part",
+  scores:"Single-family homes & condos score: a quarter of the Market & credit stress area",
   now:s=>`Tech stocks are ${s.ndxDD.toFixed(1)}% below their 1-year high. ${s.ndxDD<5?"That's close to the top.":s.ndxDD<10?"That's a normal dip.":s.ndxDD<20?"That's a real drop, but not a crash.":"That's a big drop."}`},
  baa:{title:"Credit spread: how careful lenders are",
   what:"How much more interest riskier companies pay to borrow than the U.S. government (Moody's Baa bonds compared with the 10-year Treasury yield).",
   low:"Under about 2 points: lenders are relaxed and loans are easy to get.",
   high:"Over about 3 points: lenders are worried, and loans get harder to get for everyone.",
   good:"low",typical:"Reached about 6 points in late 2008.",
-  scores:"Both scores: part of Market & credit stress (single-family homes & condos) and Apartment financing (apartment buildings)",
+  scores:"Both scores: the Market & credit stress area (single-family homes & condos) and the Apartment financing area (apartment buildings)",
   now:s=>`At ${s.baa.toFixed(2)} points, lenders are ${s.baa<2?"relaxed and money is easy to borrow":s.baa<3?"a little careful":"worried and holding back"}.`},
  cr:{title:"Credit spread: how careful lenders are",
   what:"How much more interest strong companies pay to borrow than the U.S. government (U.S. Treasury corporate bond yields).",
   low:"Around 1 point: lenders are relaxed.",
   high:"Over about 2.5 points: lenders are worried and loans get harder to get.",
   good:"low",typical:"Jumped in 2008 and, for a short time, in 2020.",
-  scores:"Both scores: a quarter of Market & credit stress (single-family homes & condos) and 20% of Apartment financing (apartment buildings)",
+  scores:"Both scores: a quarter of Market & credit stress area (single-family homes & condos) and 20% of the Apartment financing area (apartment buildings)",
   now:s=>`At ${s.cr.toFixed(2)} points, lenders are ${s.cr<1.3?"relaxed and money is easy to borrow":s.cr<2.2?"a little careful":"worried and holding back"}.`},
  mort:{title:"30-year mortgage rate",
   what:"The average rate on a 30-year fixed home loan, updated weekly by Freddie Mac.",
   low:"About 5.5% or lower: payments are easier, more buyers qualify and refinancing costs less.",
   high:"About 7.5% or higher: payments are high, fewer buyers qualify and prices can stop rising.",
   good:"low",typical:"Under 3% in 2021. Near 7.8% at the 2023 peak.",
-  scores:"Single-family homes & condos score: the Mortgage financing part (20%)",
+  scores:"Single-family homes & condos score: the Mortgage financing area (20%)",
   now:s=>`At ${s.mort.toFixed(2)}%, the rate is ${Math.abs(s.mortChg).toFixed(2)} points ${s.mortChg>=0?"higher":"lower"} than a year ago. Borrowing is ${s.mort>=7?"expensive":s.mort>=6?"fairly expensive":"fairly affordable"}.`},
  t10:{title:"10-year Treasury yield",
   what:"The interest rate on a 10-year U.S. government bond. Most apartment loans are priced from it.",
   low:"About 3.5% or lower: apartment loans are cheaper and building values hold up.",
   high:"About 5% or higher: apartment loans cost more and building values come under pressure.",
   good:"low",typical:"Under 1% in 2020. Near 5% in 2023.",
-  scores:"Apartment buildings (5+ units) score: 60% of the Apartment financing part",
+  scores:"Apartment buildings (5+ units) score: 60% of the Apartment financing area",
   now:s=>`At ${s.t10.toFixed(2)}%, the yield is ${s.t10>=4.75?"high, so apartment loans are expensive":s.t10>=4?"moderate, so apartment loans are fairly expensive":"low, so apartment loans are affordable"}.`},
  warn:{title:"Layoff notices (California WARN)",
   what:"Workers named in layoff notices filed in the last 30 days for San Francisco, San Mateo, Santa Clara, Alameda and Contra Costa counties. Large employers must file 60 days before big layoffs.",
@@ -1970,38 +2147,38 @@ const TINFO={
   low:"Under 4%: almost everyone who wants a job has one, and rent gets paid on time.",
   high:"Over 6%: more late rent, more empty units and slower rent growth.",
   good:"low",typical:"Under 3% in 2019. Near 11% in 2009 and over 13% in April 2020.",
-  scores:"Both scores: half of the Jobs part",
+  scores:"Both scores: half of the Jobs area",
   now:s=>`At ${s.unemp.toFixed(1)}%, unemployment is ${s.unemp<4?"low":s.unemp<5?"about normal":"high"}.`},
  tech:{title:"Tech jobs compared with a year ago",
   what:"How the number of tech jobs in the San Francisco and San Jose metro areas changed over the past year.",
   low:"Falling: tech companies are cutting jobs. This usually shows up in rents and empty units a few months later.",
   high:"Rising: tech companies are hiring, which helps rents.",
   good:"high",typical:"Usually grows 2–5% a year. Fell in 2001–02, 2009 and 2023–24.",
-  scores:"Both scores: 30% of the Jobs part",
+  scores:"Both scores: 30% of the Jobs area",
   now:s=>`Tech jobs are ${s.techJobs>=0?"up":"down"} ${Math.abs(s.techJobs).toFixed(1)}% from a year ago${s.techJobs<0?". Tech companies are still cutting.":"."}`},
  pay:{title:"All jobs compared with a year ago",
   what:"How the total number of jobs in the San Francisco and San Jose metro areas changed over the past year.",
   low:"Below zero: the region is losing jobs.",
   high:"Up 2% or more: hiring is broad, which helps rental demand.",
   good:"high",typical:"Fell about 4% in 2009 and about 13% in 2020.",
-  scores:"Both scores: 20% of the Jobs part",
+  scores:"Both scores: 20% of the Jobs area",
   now:s=>`Total jobs are ${s.payroll>=0?"up":"down"} ${Math.abs(s.payroll).toFixed(1)}% from a year ago. Job growth is ${s.payroll>=2?"strong":s.payroll>=0.5?"slow":s.payroll>=0?"very slow":"negative"}.`},
  cs:{title:"Home prices compared with a year ago",
   what:"How Case-Shiller San Francisco home prices changed over the past year.",
   low:"Falling: owners lose value, and refinancing or borrowing against a property gets harder.",
   high:"Up 5% or more: owners are gaining value.",
   good:"high",typical:"Fell about 30% from 2006 to 2011.",
-  scores:"Single-family homes & condos score: half of the Home prices part",
+  scores:"Single-family homes & condos score: half of the Home prices area",
   now:s=>`Prices are ${s.cs>=0?"up":"down"} ${Math.abs(s.cs).toFixed(1)}% from a year ago${s.cs>=0&&s.cs<3?", only a little faster than inflation.":"."}`},
  hp:{title:"Home prices compared with a year ago",
   what:"How FHFA home prices for San Francisco–San Mateo, Oakland–Berkeley and San Jose changed over the past year.",
   low:"Falling: owners lose value, and refinancing gets harder.",
   high:"Up 5% or more: owners are gaining value.",
   good:"high",typical:"Fell about 30% from 2006 to 2011.",
-  scores:"Single-family homes & condos score: half of the Home prices part",
+  scores:"Single-family homes & condos score: half of the Home prices area",
   now:s=>`Prices are ${s.hp>=0?"up":"down"} ${Math.abs(s.hp).toFixed(1)}% from a year ago${s.hp>=0&&s.hp<3?", only a little faster than inflation.":"."}`},
  hpSJ:{title:"San Jose home prices compared with a year ago",
-  what:"How FHFA home prices for the San Jose–Sunnyvale–Santa Clara area changed over the past year. Case-Shiller's San Francisco index leaves out Santa Clara County, so this makes up the other half of the Home prices part.",
+  what:"How FHFA home prices for the San Jose–Sunnyvale–Santa Clara area changed over the past year. Case-Shiller's San Francisco index leaves out Santa Clara County, so this makes up the other half of the Home prices area.",
   low:"Falling: South Bay owners lose value, and refinancing gets harder.",
   high:"Up 5% or more: owners are gaining value.",
   good:"high",typical:"Fell about 30% from 2006 to 2011.",
@@ -2019,7 +2196,7 @@ const TINFO={
   low:"About 100 or lower: prices are in line with rents.",
   high:"110–120 or higher: prices are high compared with rents, so values can drop more if rates rise. It was highest in 2005–06.",
   good:"low",typical:"100 = the 2005–2025 average.",
-  scores:"Single-family homes & condos score: half of the Valuation part",
+  scores:"Single-family homes & condos score: half of the Valuation area",
   now:s=>`At ${s.p2r.toFixed(0)}, prices are about ${Math.abs(s.p2r-100).toFixed(0)}% ${s.p2r>=100?"higher":"lower"} than usual compared with rents.`},
  p2rF:{title:"Price-to-rent: are prices high compared with rents?",
   what:"Home prices (FHFA) compared with rents. 100 is the 2005–2025 average.",
@@ -2033,35 +2210,35 @@ const TINFO={
   low:"Under 2 months: homes sell fast and sellers have the edge.",
   high:"Over 5 months: homes sit, buyers can bargain and prices can soften.",
   good:"low",typical:"Santa Clara County is usually under 3 months.",
-  scores:"Single-family homes & condos score: half of the Homes for sale part",
+  scores:"Single-family homes & condos score: half of the Homes for sale area",
   now:s=>`At ${s.mos.toFixed(1)} months, ${s.mos<2?"homes are still selling fast":s.mos<4?"the market is getting more even":"buyers have more choice"}.`},
  lpr:{title:"Homes for sale per home under contract",
   what:"How many homes are for sale for every home under contract in Santa Clara County (Realtor.com). Used when MLS months of supply is missing.",
   low:"Under about 3: homes sell fast.",
   high:"Over about 6: homes sit unsold and buyers can bargain.",
   good:"low",typical:"Rose sharply in 2022–23.",
-  scores:"Single-family homes & condos score: half of the Homes for sale part",
+  scores:"Single-family homes & condos score: half of the Homes for sale area",
   now:s=>`At ${s.lpr.toFixed(1)}, ${s.lpr<3?"homes are still selling fast":s.lpr<5?"the market is getting more even":"buyers have more choice"}.`},
  priceCut:{title:"Listings with a price cut",
   what:"The share of homes for sale in Santa Clara County that have lowered their asking price (Realtor.com).",
   low:"About 20% or less: sellers are getting their price.",
   high:"About 50%: many sellers are cutting to find buyers. This often comes before prices fall.",
   good:"low",typical:"Usually 20–35%. It rises every late summer and fall.",
-  scores:"Single-family homes & condos score: a quarter of the Homes for sale part",
+  scores:"Single-family homes & condos score: a quarter of the Homes for sale area",
   now:s=>`${s.priceCut.toFixed(0)}% of listings have cut their price. That's ${s.priceCut<25?"low":s.priceCut<40?"about normal":"high"}.`},
  cap:{title:"Value cushion: cap rate minus the 10-year Treasury yield",
   what:"A cap rate is a building's yearly income divided by its price. We subtract the 10-year Treasury yield to see how much more a building earns than a safe government bond.",
   low:"Under about 1.5 points: apartment loans (usually 1.5–2 points above the Treasury yield) cost more than buildings earn, so values can drop if rates rise.",
   high:"3 points or more: buildings earn well above loan costs, which protects values.",
   good:"high",typical:"About 3 points in the late 2010s. Near zero in 2022–23.",
-  scores:"Apartment buildings (5+ units) score: the Value cushion part (15%)",
+  scores:"Apartment buildings (5+ units) score: the Value cushion area (15%)",
   now:s=>{const g=s.cap-s.t10;return `Buildings earn about ${s.cap.toFixed(1)}% a year, ${g.toFixed(2)} points more than the 10-year Treasury yield. That's a ${g<1.5?"thin":g<2.5?"modest":"healthy"} cushion.${g<1.6?" A typical apartment loan now costs about as much as a building earns, or more.":""}`;}},
  vac:{title:"Apartment vacancy",
   what:"The share of apartments sitting empty across the San Francisco Bay Area (CoStar).",
   low:"About 3–4%: units fill fast and owners rarely need move-in deals.",
   high:"6% or more: units sit empty longer and owners offer free rent, which cuts income.",
   good:"low",typical:"Usually 4–5%.",
-  scores:"Apartment buildings (5+ units) score: 70% of the Rental vacancy part",
+  scores:"Apartment buildings (5+ units) score: 70% of the Rental vacancy area",
   now:s=>`At ${s.vac.toFixed(1)}%, ${Math.abs(s.vacChg).toFixed(1)} points ${s.vacChg<=0?"lower":"higher"} than a year ago, ${s.vac<4.5?"most units are full":"more units are sitting empty"}.`},
  vacRel:{title:"Rental vacancy compared with normal",
   what:"California's rental vacancy rate (Census, once a year) compared with its 2005–2025 average. Used when CoStar data is missing.",
@@ -2075,28 +2252,28 @@ const TINFO={
   low:"Flat or falling: new leases bring in less, and owners may need to offer deals.",
   high:"Up 4% or more: new leases bring in more. Raises for current tenants are capped by AB 1482 (5% plus inflation, 10% at most).",
   good:"high",typical:"Fell sharply in San Francisco in 2020–21. Rose strongly in 2025–26.",
-  scores:"Apartment buildings (5+ units) score: half of the Rent growth part",
+  scores:"Apartment buildings (5+ units) score: half of the Rent growth area",
   now:s=>`Asking rents are ${s.rent>=0?"up":"down"} ${Math.abs(s.rent).toFixed(1)}% from a year ago${s.rent>=6?", a strong rise.":"."}`},
  rentCPI:{title:"Rent paid compared with a year ago",
   what:"How rent paid by all tenants in the San Francisco–Oakland area changed over the past year (consumer price index). It covers every lease, not just new ones, so it moves slowly.",
   low:"Flat or falling: owners' income isn't keeping up with costs.",
   high:"Up 4% or more: rental income is growing.",
   good:"high",typical:"Usually 2–6% a year. Slightly negative in 2021.",
-  scores:"Apartment buildings (5+ units) score: half of the Rent growth part",
+  scores:"Apartment buildings (5+ units) score: half of the Rent growth area",
   now:s=>`Rent paid is ${s.rentCPI>=0?"up":"down"} ${Math.abs(s.rentCPI).toFixed(1)}% from a year ago${s.rentCPI>=5?", a strong rise.":s.rentCPI<2?", a slow pace.":"."}`},
  sloos:{title:"Banks tightening apartment loans",
   what:"The share of large banks making apartment loans harder to get, minus the share making them easier (Federal Reserve survey, every three months).",
   low:"Below zero: more banks are making loans easier to get.",
   high:"Well above zero: loans are harder to get, especially to refinance.",
   good:"low",typical:"Over 70% were tightening in 2008–09.",
-  scores:"Apartment buildings (5+ units) score: 20% of the Apartment financing part",
+  scores:"Apartment buildings (5+ units) score: 20% of the Apartment financing area",
   now:s=>`${s.sloos<0?`More banks are easing than tightening (net ${Math.abs(s.sloos).toFixed(0)}%)`:s.sloos>0?`More banks are tightening than easing (net ${s.sloos.toFixed(0)}%)`:"Banks are keeping their rules the same"} for apartment loans.`},
  pipe:{title:"New homes approved compared with normal",
   what:"Homes approved for building in the San Francisco and San Jose metro areas over the past two years. 100 is the average pace since 2005.",
   low:"Below about 80: few new buildings will compete for tenants.",
   high:"Above about 130: a building wave is coming, which can slow rent growth when it opens.",
   good:"low",typical:"Highest in 2016–18.",
-  scores:"Apartment buildings (5+ units) score: the New construction part (10%)",
+  scores:"Apartment buildings (5+ units) score: the New construction area (10%)",
   now:s=>`At ${s.permIdx.toFixed(0)}, building is about ${Math.abs(100-s.permIdx).toFixed(0)}% ${s.permIdx<100?"slower":"faster"} than usual.`},
  ins:{title:"Home and renters insurance prices",
   what:"How U.S. prices for home and renters insurance changed over the past year (consumer price index).",
@@ -2207,9 +2384,9 @@ function renderRows(){
     const stale=pl.sig.some(x=>sg[x]&&sg[x].iso&&daysSince(sg[x].iso)>(MAXAGE[x]||120));
     const sp=pl.sig.map(x=>sg[x]&&sg[x].series&&SPK[x]?spark(sg[x].series,SPK[x]):"").join("");
     return `<details class="irow" id="${id}"${open.includes(id)?" open":""}><summary>
-      <span class="iname">${esc(pl.name)}${pl.shared?'<span class="tag">Both scores</span>':""}<small>${esc(C[main].name)} <b class="num">${C[main].val(s)}</b> · weight ${Math.round(r.w/tot*100)}%${r.top?" · counts extra":""}</small></span>
+      <span class="iname">${esc(pl.name)}${pl.shared?'<span class="tag">Both scores</span>':""}<small>${esc(C[main].name)} <b class="num">${C[main].val(s)}</b> · weight ${Math.round(r.w/tot*100)}%${r.top?" · extra emphasis":""}</small></span>
       <span class="dbar" role="img" aria-label="${esc(pl.name)} ${Math.round(sc)} out of 100"><i style="width:${sc.toFixed(1)}%;background:var(${b[2]})"></i></span>
-      <span class="dv"><b style="color:var(${b[2]})">${Math.round(sc)}</b><span class="muted">/100</span><small>adds ${r.pts.toFixed(1)} pts</small></span>
+      <span class="dv"><b style="color:var(${b[2]})">${Math.round(sc)}</b><span class="muted">/100</span><small>adds ${r.pts.toFixed(1)} points</small></span>
       <span class="chev" aria-hidden="true">›</span></summary>
       <div class="idetail"><div><p class="why">${esc(pl.why)}</p>${pl.sig.filter(x=>sg[x]&&sg[x].detail).map(x=>`<p class="why" style="margin-top:8px"><b>${esc(SIGLABEL[x]||x)}:</b> ${esc(sg[x].detail)}</p>`).join("")}
         <p class="asoflab">Latest data</p><ul class="asof">${pl.sig.filter(x=>sg[x]&&sg[x].date).map(x=>{const old=sg[x].iso&&daysSince(sg[x].iso)>(MAXAGE[x]||120);
@@ -2375,31 +2552,27 @@ function renderBottomLine(){
   const worst=[sum.sf,sum.mf].reduce((a,b)=>b.live>a.live?b:a);
   const rateConcern=["fin","mfin"].includes(sum.sf.main)||["fin","mfin"].includes(sum.mf.main);
   const jobsConcern=sum.sf.main==="jobs"||sum.mf.main==="jobs";
-  const mainName=worst.main?CONCERN[worst.main][0]:null, wName=worst===sum.sf?"single-family homes & condos":"apartment buildings (5+ units)";
-  let t1;
-  switch(worst.b[1]){
-    case "Low": t1="Both markets look calm, with no major warning signs."; break;
-    case "Moderate": t1="Neither market is under serious stress"+(mainName?`, but ${mainName} ${/s$/.test(mainName.split(" ").pop())?"are":"is"} worth watching.`:"."); break;
-    case "Elevated": t1=`Conditions for ${wName} show several warning signs${mainName?`, mainly ${mainName}`:""}.`; break;
-    default: t1="Both markets show broad stress.";
-  }
+  /* one line per property type, apartments first, then one line on what history shows */
+  const line=k=>{const x=sum[k],nm=k==="mf"?"Apartment buildings (5+ units)":"Single-family homes & condos",lvl=x.b[1].toLowerCase();
+    if(!x.main) return `<li><b>${nm}:</b> ${esc(lvl)} risk, with no major warning signs.</li>`;
+    return `<li><b>${nm}:</b> ${esc(lvl)} risk, mainly because of ${esc(CONCERN[x.main][0])}.</li>`;};
   const t2=rateConcern?"In past periods of expensive loans, owners with steady rent and modest debt came through best."
     :jobsConcern?"In past job slowdowns, keeping units full and rent coming in mattered most."
-    :worst.b[1]==="Low"?"Calm times like this have usually meant easier loans and steady demand."
+    :worst.b[1]==="Low"?"Calm periods like this have usually meant easier loans and steady demand."
     :"In past periods like this, owners with steady rent and modest debt came through best.";
-  $("blTake").innerHTML=`<h3>Bottom line</h3><p>${esc(t1)} ${esc(t2)}</p><p class="note">General information only, not a recommendation to buy, sell or borrow. Talk to a qualified professional about your own situation.</p>`;
+  $("blTake").innerHTML=`<h3>Bottom line</h3><ul class="blsum">${line("mf")}${line("sf")}</ul><p>${esc(t2)}</p><p class="note">General information only, not a recommendation to buy, sell or borrow. Talk to a qualified professional about your own situation.</p>`;
 }
 
 /* ---------- Methodology tables (built from the same rules the scores use) ---------- */
 function renderMethod(){
   ["sf","mf"].forEach(k=>{const el=$("method-"+k); if(!el) return; const L=LENSES[k], tot=Object.values(L.W0).reduce((a,b)=>a+b,0);
-    el.innerHTML=`<div class="tbl"><table><thead><tr><th>Part (weight)</th><th>Measure</th><th class="r">Low risk (0)</th><th class="r">High risk (100)</th></tr></thead><tbody>${
+    el.innerHTML=`<div class="tbl"><table><thead><tr><th>Area (weight)</th><th>Indicator</th><th class="r">Low risk (0)</th><th class="r">High risk (100)</th></tr></thead><tbody>${
       Object.keys(L.W0).map(p=>P[p].parts.map(([c,w],i)=>`<tr>${i===0?`<td rowspan="${P[p].parts.length}"><b>${esc(P[p].name)}</b> <span class="mono">${Math.round(L.W0[p]/tot*100)}%</span></td>`:""}<td>${esc(C[c].name)}${P[p].parts.length>1?` <span class="muted">(${Math.round(w*100)}%)</span>`:""}</td><td class="r mono">${esc(C[c].calm)}</td><td class="r mono">${esc(C[c].stress)}</td></tr>`).join("")).join("")}</tbody></table></div>`;});
 }
 
 /* ---------- Wiring ---------- */
 let built=false;
-function renderAll(){resolveParts(inputsFull()); if(!touched) state=inputsFull(); renderHero(); renderMkt(); renderBottomLine(); renderTicker(); renderSide(); renderDrivers(); renderRows(); histChart(); renderMethod();
+function renderAll(){resolveParts(inputsFull()); if(!touched) state=inputsFull(); renderHero(); renderMkt(); renderWatch(); renderBottomLine(); renderTicker(); renderSide(); renderDrivers(); renderRows(); histChart(); renderMethod();
   if(!built){buildCtrls();built=true;}else{syncCtrls();updateSim();} presetUI(); renderScTable(); requestAnimationFrame(tickArrows); setTimeout(tickArrows,400);}
 /* Property tabs: apartments first */
 function selectTab(k,focus){["mf","sf"].forEach(x=>{const on=x===k,t=$("tab-"+x);t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;$("col-"+x).hidden=!on;});if(focus)$("tab-"+k).focus();try{localStorage.setItem("rrg-tab",k);}catch(e){}}
@@ -2442,6 +2615,7 @@ const VIEWS=["dashboard","how-to-read","stress-test","methodology","sources"];
 function route(){
   const h=location.hash.replace("#",""), v=VIEWS.includes(h)?h:"dashboard";
   document.querySelectorAll("[data-view]").forEach(el=>{el.hidden=el.dataset.view!==v;});
+  document.documentElement.dataset.page=v;
   document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
   window.scrollTo(0,0);
   requestAnimationFrame(()=>{if(v==="dashboard"){histChart();tickArrows();}});
