@@ -31,10 +31,10 @@ History before November 5, 2026 (monthly, since 2000) is built into `index.html`
 
 ## Daily updates
 
-**Fail-safe setup.** The workflow runs at about 4:45 PM PST and again at about 6:20 PM and 8:40 PM PST as backups (a backup does nothing if today's data is already saved). Each run retries every download up to 3 times and retries the whole update once after 3 minutes. The last evening run and a 7:10 AM PST morning check confirm the saved data is current. If anything fails, the workflow opens a GitHub issue titled "Daily data update failed" (GitHub emails you about new issues), and closes it automatically after the next good run. The website itself shows "Latest available data: [date]. Some market indicators may be delayed." whenever an update is missing, and never shows a next-update date in that case.
+**Fail-safe setup.** The workflow runs at about 3:15 PM PST (4:15 PM PDT), soon after the official VIX close and 10-year Treasury yield are posted, and again at about 4:30 PM and 6:30 PM PST as backups. A run saves nothing until both of today's closing numbers are posted, a backup does nothing if today's data is already saved, and the last run saves whatever is available. Each run retries every download up to 3 times and retries the whole update once after 3 minutes. The last evening run and a 7:10 AM PST morning check confirm the saved data is current. If anything fails, the workflow opens a GitHub issue titled "Daily data update failed" (GitHub emails you about new issues), and closes it automatically after the next good run. The website itself shows "Latest available data: [date]. Some market indicators may be delayed." whenever an update is missing, and never shows a next-update date in that case.
 
 
-GitHub Actions runs `scripts/update.py` Monday–Friday evening (4:45 PM PST / 5:45 PM PDT), skips U.S. stock market holidays, and commits the new data. The hosting service (Cloudflare Pages or GitHub Pages) republishes the site automatically.
+GitHub Actions runs `scripts/update.py` Monday–Friday afternoon (about 3:15 PM PST / 4:15 PM PDT, with backups), skips U.S. stock market holidays, and commits the new data. The hosting service (Cloudflare Pages or GitHub Pages) republishes the site automatically.
 
 Licensed sources (non-commercial use, permission pending): Case-Shiller `SFXRSA`, `CSUSHPINSA`; Moody's `BAA10Y`; Nasdaq-100 `NASDAQ100` (all via FRED); CoStar cap rate from `data/manual.json`.
 

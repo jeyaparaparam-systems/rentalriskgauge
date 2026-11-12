@@ -1898,16 +1898,16 @@ function ptParts(d){const f=new Intl.DateTimeFormat("en-CA",{timeZone:"America/L
 const BOND_HOLIDAYS=["2026-11-11","2027-10-11","2027-11-11","2028-10-09","2028-11-10"];
 function isMarketDay(iso){const d=new Date(iso+"T12:00:00Z").getUTCDay();return d>0&&d<6&&!MKT_HOLIDAYS.includes(iso)&&!BOND_HOLIDAYS.includes(iso);}
 const shiftDay=(iso,n)=>{const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
-/* The latest date that should have data by now: today after about 5:30 PM PT on an update day, otherwise the previous update day. */
+/* The latest date that should have data by now: today after about 5 PM PT on an update day, otherwise the previous update day. */
 function expectedAsOf(){const p=ptParts(new Date());let iso=`${p.year}-${p.month}-${p.day}`;const mins=(+p.hour%24)*60+(+p.minute);
-  if(!(isMarketDay(iso)&&mins>=17*60+30)){do{iso=shiftDay(iso,-1);}while(!isMarketDay(iso));}return iso;}
+  if(!(isMarketDay(iso)&&mins>=17*60)){do{iso=shiftDay(iso,-1);}while(!isMarketDay(iso));}return iso;}
 const isStale=()=>!!DATA.asOf&&DATA.asOf<expectedAsOf();
 function nextUpdate(){
   const p=ptParts(new Date()); let iso=`${p.year}-${p.month}-${p.day}`; const mins=(+p.hour%24)*60+(+p.minute);
-  const doneToday=DATA.asOf>=iso||mins>=17*60+30;
+  const doneToday=DATA.asOf>=iso||mins>=17*60;
   if(!(isMarketDay(iso)&&!doneToday)){do{const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+1);iso=d.toISOString().slice(0,10);}while(!isMarketDay(iso));}
   const d=new Date(iso+"T12:00:00Z"), today=`${p.year}-${p.month}-${p.day}`;
-  return (iso===today?"today":d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}))+", after the market close (about 5 PM PT)";
+  return (iso===today?"today":d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}))+", after the official closing numbers are posted (usually 3:30–4:30 PM PT)";
 }
 function renderHero(){
   const s=inputsFull(), p=prevEntry();
