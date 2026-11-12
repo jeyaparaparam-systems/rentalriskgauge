@@ -1,13 +1,13 @@
 {
- "asOf": "2026-11-11",
- "updatedAt": "2026-11-12T07:46:05Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.18% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 48 (Elevated, unchanged).",
+ "asOf": "2026-11-12",
+ "updatedAt": "2026-11-12T19:58:48Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.9) and the apartment buildings (5+ units) score is 47 (Elevated, down 0.5).",
  "model": "v5.2",
  "licensedData": true,
  "inputs": {
   "vix": 17.49,
-  "mort": 7.18,
-  "mortChg": 0.96,
+  "mort": 7.11,
+  "mortChg": 0.87,
   "unemp": 4.14,
   "t10": 4.98,
   "vixAvg": 19.3,
@@ -33,9 +33,9 @@
   "cs": 3.37,
   "p2r": 112.5,
   "cap": 5.9,
-  "vac": 3.8,
-  "vacChg": -1.0,
-  "rent": 7.7
+  "vac": 3.62,
+  "vacChg": -1.26,
+  "rent": 11.82
  },
  "signals": {
   "vix": {
@@ -171,14 +171,10 @@
    "detail": "High-grade company bonds paid 6.02%, or 0.89 percentage points more than the 10-year Treasury that month. That is near the low end of the past 20 years: lenders are comfortable."
   },
   "mort": {
-   "iso": "2026-11-05",
-   "date": "Week of Nov 5",
-   "detail": "A year ago it was 6.22%. Down from 7.40% in October.",
+   "iso": "2026-11-12",
+   "date": "Week of Nov 12",
+   "detail": "A year ago it was 6.24%. Down from 7.40% in October.",
    "series": [
-    [
-     "May 14",
-     6.36
-    ],
     [
      "May 21",
      6.51
@@ -278,6 +274,10 @@
     [
      "Nov 5",
      7.18
+    ],
+    [
+     "Nov 12",
+     7.11
     ]
    ]
   },
@@ -681,14 +681,14 @@
    "detail": "Average for all San Francisco Bay Area apartment buildings (CoStar), up from 5.5% a year ago. Newer, high-end buildings sell at about 4.25–4.65%, which is below the Treasury yield."
   },
   "vac": {
-   "iso": "2026-09-30",
-   "date": "Q3 2026",
-   "detail": "Apartment vacancy across the San Francisco Bay Area (CoStar). A year ago it was 4.8%."
+   "iso": "2026-10-01",
+   "date": "October 2026",
+   "detail": "Apartment List vacancy index for the San Francisco and San Jose metro areas: 3.6%, down from 4.9% a year ago."
   },
   "rent": {
-   "iso": "2026-09-30",
-   "date": "Q3 2026",
-   "detail": "Average asking apartment rent across the San Francisco Bay Area is $2,910 a month (CoStar)."
+   "iso": "2026-10-01",
+   "date": "October 2026",
+   "detail": "Typical rent on new leases in the San Francisco and San Jose metro areas (Apartment List): $3,124 a month, up 11.8% from a year ago."
   },
   "ins": {
    "iso": "2026-09-01",
@@ -706,16 +706,16 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 52.4,
- "mfScore": 47.7,
- "pubScore": 51.1,
- "pubMf": 42.6,
+ "score": 51.5,
+ "mfScore": 47.2,
+ "pubScore": 50.0,
+ "pubMf": 37.3,
  "warn": {
-  "workers": 3221,
-  "notices": 30,
+  "workers": 3214,
+  "notices": 29,
   "period": "Last 30 days",
-  "date": "Nov 11, 2026",
-  "iso": "2026-11-11",
+  "date": "Nov 12, 2026",
+  "iso": "2026-11-12",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
@@ -734,6 +734,6 @@
     "workers": 190
    }
   ],
-  "detail": "3,221 workers are covered by layoff notices filed in the last 30 days."
+  "detail": "3,214 workers are covered by layoff notices filed in the last 30 days."
  }
 }
