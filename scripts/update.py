@@ -26,7 +26,8 @@ Only the Python standard library is used.
 
 Usage:
   python scripts/update.py            # normal run (skips weekends/holidays)
-  python scripts/update.py --force    # run even on a non-market day
+  python scripts/update.py --force    # run even on a non-market day (also saves even if today's closes are not posted yet)
+  python scripts/update.py --final    # last run of the day: save even if today's closes are not posted yet
   python scripts/update.py --check    # recompute scores from current data, no downloads
   python scripts/update.py --verify   # exit with an error if the saved data is older than it should be
   python scripts/update.py --cap-age  # exit with an error if the hand-entered cap rate is more than 4 months old
@@ -49,6 +50,9 @@ HOLIDAYS = {
     "2028-01-17", "2028-02-21", "2028-04-14", "2028-05-29", "2028-06-19", "2028-07-04",
     "2028-09-04", "2028-11-23", "2028-12-25",
 }
+
+# U.S. bond market closed while stocks trade (no new 10-year Treasury yield that day)
+BOND_HOLIDAYS = {"2026-11-11", "2027-10-11", "2027-11-11", "2028-10-09", "2028-11-10"}
 
 # ---------------------------------------------------------------- scoring (must match the Methodology page)
 def clamp(v): return max(0.0, min(100.0, v))
@@ -158,9 +162,9 @@ def short_month(d): return d.strftime("%b %y")
 def is_market_day(d): return d.weekday() < 5 and d.isoformat() not in HOLIDAYS
 
 def last_expected_update(now):
-    """The most recent market day whose evening update should already be saved (today after 5:30 PM PT)."""
+    """The most recent market day whose update should already be saved (today after 5:00 PM PT)."""
     d = now.date()
-    if not (is_market_day(d) and (now.hour, now.minute) >= (17, 30)):
+    if not (is_market_day(d) and (now.hour, now.minute) >= (17, 0)):
         d -= timedelta(days=1)
         while not is_market_day(d): d -= timedelta(days=1)
     return d
@@ -645,6 +649,14 @@ def main():
             print("::error::Could not download today's VIX or 10-year Treasury yield. Nothing was saved, so the site keeps "
                   "showing the last good update and its date.")
             return 1
+        # The first run is soon after the close. If today's official VIX close or 10-year Treasury yield is not posted yet,
+        # save nothing and let a later run pick it up (the last run of the day saves whatever is available).
+        late = []
+        if signals.get("vix", {}).get("iso") != today.isoformat(): late.append("VIX")
+        if signals.get("t10", {}).get("iso") != today.isoformat() and today.isoformat() not in BOND_HOLIDAYS: late.append("10-year Treasury yield")
+        if late and not (force or "--final" in sys.argv):
+            print(f"{today}: today's {' and '.join(late)} not posted yet – nothing saved; a later run will try again.")
+            return 0
 
     # sanity checks: refuse obviously broken numbers
     limits = {"vix": (5, 150), "mort": (1, 20), "t10": (0, 20), "unemp": (0, 40), "cs": (-60, 60), "listYoY": (-90, 500),
@@ -678,11 +690,11 @@ def main():
     if prev and not USE_LICENSED and _ok(prev.get("pubScore")): prev = {**prev, "score": prev["pubScore"], "mfScore": prev.get("pubMf")}
     latest = {"asOf": stamp, "updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
               "note": write_note(inputs, prev["inputs"] if prev else prev_inputs, sf, mf, prev),
-              "model": "v5.2", "licensedData": USE_LICENSED, "inputs": {k: inputs[k] for k in keep}, "signals": signals,
+              "model": "v5.3", "licensedData": USE_LICENSED, "inputs": {k: inputs[k] for k in keep}, "signals": signals,
               "score": lic["sf"], "mfScore": lic["mf"], "pubScore": pub["sf"], "pubMf": pub["mf"]}
     if warn: latest["warn"] = warn
     history = [h for h in history if h.get("date") != stamp] + [{"date": stamp, "score": lic["sf"], "mfScore": lic["mf"],
-                                                                 "pubScore": pub["sf"], "pubMf": pub["mf"], "model": "v5.2",
+                                                                 "pubScore": pub["sf"], "pubMf": pub["mf"], "model": "v5.3",
                                                                  "inputs": {k: inputs[k] for k in keep}}]
     history.sort(key=lambda h: h["date"])
     save("latest.json", latest); save("history.json", history)
