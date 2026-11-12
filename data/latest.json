@@ -1,16 +1,16 @@
 {
- "asOf": "2026-11-10",
- "updatedAt": "2026-11-11T04:14:09Z",
- "note": "Stock markets calmed down today, and the VIX fear index fell to 19.5. Mortgage rates are 7.18% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 53 (Elevated, down 1.1) and the apartment buildings (5+ units) score is 48 (Elevated, up 4.1).",
+ "asOf": "2026-11-11",
+ "updatedAt": "2026-11-12T05:12:26Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.18% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 48 (Elevated, unchanged).",
  "model": "v5.2",
  "licensedData": true,
  "inputs": {
-  "vix": 19.46,
+  "vix": 17.49,
   "mort": 7.18,
   "mortChg": 0.96,
   "unemp": 4.14,
   "t10": 4.98,
-  "vixAvg": 19.27,
+  "vixAvg": 19.3,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
   "techJobs": -2.4,
@@ -28,7 +28,7 @@
   "permIdx": 83.4,
   "ins": 3,
   "baa": 1.51,
-  "ndxDD": 10.6,
+  "ndxDD": 9.1,
   "mos": 1.6,
   "cs": 3.37,
   "p2r": 112.5,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-10",
-   "date": "Nov 10 close",
-   "detail": "Down from 19.92 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.3), so a one-day jump moves it less.",
+   "iso": "2026-11-11",
+   "date": "Nov 11 close",
+   "detail": "Down from 19.46 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.3), so a one-day jump moves it less.",
    "series": [
-    [
-     "Sep 30",
-     16.34
-    ],
     [
      "Oct 1",
      16.39
@@ -162,6 +158,10 @@
     [
      "Nov 10",
      19.46
+    ],
+    [
+     "Nov 11",
+     17.49
     ]
    ]
   },
@@ -578,9 +578,9 @@
    "detail": "Baa-rated company bonds paid 1.51 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
-   "iso": "2026-11-09",
-   "date": "Nov 9 close",
-   "detail": "The Nasdaq-100 closed at 27,907.63, 10.6% below its 12-month high of 31,224.69 on Oct 6."
+   "iso": "2026-11-11",
+   "date": "Nov 11 close",
+   "detail": "The Nasdaq-100 closed at 28,374.25, 9.1% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-07-01",
@@ -706,7 +706,7 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 52.6,
+ "score": 52.4,
  "mfScore": 47.7,
  "pubScore": 51.1,
  "pubMf": 42.6,
@@ -714,8 +714,8 @@
   "workers": 3221,
   "notices": 30,
   "period": "Last 30 days",
-  "date": "Nov 10, 2026",
-  "iso": "2026-11-10",
+  "date": "Nov 11, 2026",
+  "iso": "2026-11-11",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
