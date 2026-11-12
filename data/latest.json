@@ -1,15 +1,15 @@
 {
  "asOf": "2026-11-12",
- "updatedAt": "2026-11-12T19:58:48Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 4.98%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.9) and the apartment buildings (5+ units) score is 47 (Elevated, down 0.5).",
- "model": "v5.2",
+ "updatedAt": "2026-11-12T23:51:39Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.9) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.8).",
+ "model": "v5.3",
  "licensedData": true,
  "inputs": {
   "vix": 17.49,
   "mort": 7.11,
   "mortChg": 0.87,
   "unemp": 4.14,
-  "t10": 4.98,
+  "t10": 5.1,
   "vixAvg": 19.3,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-10",
-   "date": "Nov 10 close",
-   "detail": "Up from 4.88% the day before.",
+   "iso": "2026-11-12",
+   "date": "Nov 12 close",
+   "detail": "Up from 4.98% the day before.",
    "series": [
-    [
-     "Sep 29",
-     5.26
-    ],
     [
      "Sep 30",
      5.29
@@ -549,6 +545,10 @@
     [
      "Nov 10",
      4.98
+    ],
+    [
+     "Nov 12",
+     5.1
     ]
    ]
   },
@@ -573,8 +573,8 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-09",
-   "date": "Nov 9 close",
+   "iso": "2026-11-10",
+   "date": "Nov 10 close",
    "detail": "Baa-rated company bonds paid 1.51 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
@@ -707,9 +707,9 @@
   }
  },
  "score": 51.5,
- "mfScore": 47.2,
+ "mfScore": 49.5,
  "pubScore": 50.0,
- "pubMf": 37.3,
+ "pubMf": 38.5,
  "warn": {
   "workers": 3214,
   "notices": 29,
