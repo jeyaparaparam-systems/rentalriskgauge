@@ -2,13 +2,13 @@ name: Daily data update
 
 on:
   schedule:
-    # Main run, then two backup runs the same evening (times in UTC, Tuesday–Saturday =
-    # Monday–Friday evening in California). A backup run does nothing if the data is
-    # already saved for today, so it only matters when an earlier run failed or GitHub
-    # skipped it.
-    - cron: "45 0 * * 2-6"   # about 4:45 PM PST / 5:45 PM PDT
-    - cron: "20 2 * * 2-6"   # about 6:20 PM PST / 7:20 PM PDT (backup)
-    - cron: "40 4 * * 2-6"   # about 8:40 PM PST / 9:40 PM PDT (backup)
+    # Main run soon after the official closing numbers are posted, then two backup runs
+    # (times in UTC; GitHub may start a run a few minutes late). A run saves nothing until
+    # today's VIX close and 10-year Treasury yield are posted, and a backup run does nothing
+    # if today's data is already saved. The last run saves whatever is available.
+    - cron: "15 23 * * 1-5"  # about 3:15 PM PST / 4:15 PM PDT (main run)
+    - cron: "30 0 * * 2-6"   # about 4:30 PM PST / 5:30 PM PDT (backup)
+    - cron: "30 2 * * 2-6"   # about 6:30 PM PST / 7:30 PM PDT (last run)
     # Morning freshness check (about 7:10 AM PST, Tuesday–Saturday): opens an alert if
     # the previous evening's data is missing.
     - cron: "10 15 * * 2-6"
@@ -42,11 +42,12 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           USE_LICENSED_DATA: ${{ vars.USE_LICENSED_DATA || '1' }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+          FINAL: ${{ github.event.schedule == '30 2 * * 2-6' && '--final' || '' }}
         run: |
           pip install --quiet openpyxl
           if [ -z "$FRED_API_KEY" ]; then echo "::warning::FRED_API_KEY secret is not set; most data cannot be downloaded."; fi
           # One more full attempt after 3 minutes if the first one fails.
-          python scripts/update.py $FORCE || { echo "First attempt failed; retrying in 3 minutes."; sleep 180; python scripts/update.py $FORCE; }
+          python scripts/update.py $FORCE $FINAL || { echo "First attempt failed; retrying in 3 minutes."; sleep 180; python scripts/update.py $FORCE $FINAL; }
 
       - name: Save the new data
         if: github.event.schedule != '10 15 * * 2-6'
@@ -67,7 +68,7 @@ jobs:
 
       - name: Check the saved data is current
         # Only the last evening run and the morning check need the data to be current.
-        if: github.event.schedule == '40 4 * * 2-6' || github.event.schedule == '10 15 * * 2-6' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '30 2 * * 2-6' || github.event.schedule == '10 15 * * 2-6' || github.event_name == 'workflow_dispatch'
         run: python scripts/update.py --verify
 
       - name: Quarterly reminder for the hand-entered CoStar cap rate
