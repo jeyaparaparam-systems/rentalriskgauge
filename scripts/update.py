@@ -10,9 +10,12 @@ plain-English note, and saves:
   data/latest.json   – today's inputs, signal details and note (read by index.html)
   data/history.json  – one row per update: {date, score, mfScore, inputs}
 
-Model v5.2. Licensed sources are the main data where available (S&P Cotality
-Case-Shiller, Moody's Baa, Nasdaq-100 via the FRED API; CoStar and MLS figures
-entered by hand in data/manual.json), used for non-commercial purposes while
+Model v5.3. Apartment vacancy and rent on new leases come from Apartment List's
+public data page (monthly) and Santa Clara County months of supply from the Redfin
+Data Center (monthly, checked once a week), all downloaded automatically.
+Licensed sources are the main data where available (S&P Cotality Case-Shiller,
+Moody's Baa, Nasdaq-100 via the FRED API; the CoStar apartment cap rate entered by
+hand each quarter in data/manual.json), used for non-commercial purposes while
 permission requests are pending. Every licensed input has a free public fallback
 (U.S. Treasury, Federal Reserve, BLS, Census, FHFA, Cboe, Freddie Mac,
 Realtor.com) that is always downloaded too. Set USE_LICENSED_DATA=0 to make the
@@ -26,6 +29,7 @@ Usage:
   python scripts/update.py --force    # run even on a non-market day
   python scripts/update.py --check    # recompute scores from current data, no downloads
   python scripts/update.py --verify   # exit with an error if the saved data is older than it should be
+  python scripts/update.py --cap-age  # exit with an error if the hand-entered cap rate is more than 4 months old
 """
 import csv, io, json, math, os, sys, urllib.request, urllib.parse
 from datetime import datetime, date, timedelta, timezone
@@ -70,11 +74,11 @@ def _final(parts):
 M = {"vixAvg": ("vixAvg", 12, 35, 0), "mort": ("mort", 5.5, 8, 0), "mortChg": ("mortChg", -0.5, 1.5, 0), "vix": ("vix", 12, 35, 0),
      "baa": ("baa", 1.6, 3.5, 1), "cr": ("cr", 1, 3, 0), "ndx": ("ndxDD", 0, 25, 1),
      "unemp": ("unemp", 3, 7, 0), "tech": ("techJobs", 3, -5, 0), "pay": ("payroll", 2.5, -2, 0),
-     "mos": ("mos", 1, 6, 1), "lpr": ("lpr", 1.46, 8.73, 0), "listYoY": ("listYoY", -20, 60, 0), "priceCut": ("priceCut", 20, 50, 0),
+     "mos": ("mos", 1, 6, 0), "lpr": ("lpr", 1.46, 8.73, 0), "listYoY": ("listYoY", -20, 60, 0), "priceCut": ("priceCut", 20, 50, 0),
      "cs": ("cs", 6, -6, 1), "hp": ("hp", 6, -6, 0), "hpSJ": ("hpSJ", 6, -6, 0), "p2rSJ": ("p2rSJ", 90, 120, 0), "p2r": ("p2r", 90, 120, 1), "p2rF": ("p2rF", 90, 120, 0),
      "t10": ("t10", 3.5, 5.5, 0), "sloos": ("sloos", -20, 50, 0), "cap": ("cap", 3, 0.5, 1),
-     "vac": ("vac", 3, 7, 1), "vacChg": ("vacChg", -1, 1.5, 1), "vacRel": ("vacRel", -1.5, 2, 0), "vacRelChg": ("vacRelChg", -1, 1.5, 0),
-     "rent": ("rent", 6, -4, 1), "rentCPI": ("rentCPI", 5, -1, 0), "pipe": ("permIdx", 60, 150, 0)}
+     "vac": ("vac", 3, 7, 0), "vacChg": ("vacChg", -1, 1.5, 0), "vacRel": ("vacRel", -1.5, 2, 0), "vacRelChg": ("vacRelChg", -1, 1.5, 0),
+     "rent": ("rent", 6, -4, 0), "rentCPI": ("rentCPI", 5, -1, 0), "pipe": ("permIdx", 60, 150, 0)}
 # each part: slots of (measures in order of preference, weight)
 PARTS = {"fin": [(["mort"], .7), (["mortChg"], .3)], "stress": [(["vixAvg", "vix"], .5), (["baa", "cr"], .25), (["ndx"], .25)],
          "jobs": [(["unemp"], .5), (["tech"], .3), (["pay"], .2)], "supply": [(["mos", "lpr"], .5), (["listYoY"], .25), (["priceCut"], .25)],
@@ -418,11 +422,111 @@ def get_case_shiller():
                        "detail": f"Case-Shiller San Francisco home prices compared with San Francisco-area rents are {word} their 2005–2025 average."}})
 
 def get_manual_licensed(manual):
-    """CoStar (cap rate, vacancy, asking rents) and MLS months of supply, entered by hand from published reports."""
+    """CoStar apartment cap rate, entered by hand each quarter from the published report."""
     lic = manual.get("licensed") or {}
-    upd = {k: lic[k] for k in ("cap", "vac", "vacChg", "rent", "mos") if _ok(lic.get(k))}
-    if not upd: raise RuntimeError("no hand-entered licensed figures")
-    return upd, lic.get("signals", {})
+    upd = {k: lic[k] for k in ("cap",) if _ok(lic.get(k))}
+    if not upd: raise RuntimeError("no hand-entered cap rate")
+    return upd, {k: v for k, v in (lic.get("signals") or {}).items() if k == "cap"}
+
+# ---------------------------------------------------------------- free monthly market data (automatic)
+AL_PAGE = "https://www.apartmentlist.com/research/category/data-rent-estimates"
+AL_METROS = ("San Francisco-Oakland-Berkeley, CA", "San Jose-Sunnyvale-Santa Clara, CA")
+BROWSER_UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 RentalRiskGauge/1.0",
+              "Accept": "text/html,application/xhtml+xml,text/csv,*/*"}
+
+def _get(url, headers, timeout=60):
+    import time
+    last = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=timeout) as r:
+                return r.read().decode("utf-8", "replace")
+        except Exception as e:
+            last = e
+            if attempt < 2: time.sleep(5 if attempt == 0 else 20)
+    raise last
+
+def _al_rows(text, metros, overall_only=False):
+    """{metro: {"YYYY-MM": value}} from an Apartment List wide CSV (one column per month)."""
+    out = {}
+    for row in csv.DictReader(io.StringIO(text)):
+        name = row.get("location_name")
+        if name not in metros: continue
+        if overall_only and row.get("bed_size", "overall") != "overall": continue
+        out[name] = {k.replace("_", "-"): float(v) for k, v in row.items()
+                     if k and len(k) == 7 and k[4] == "_" and k[:4].isdigit() and v not in ("", None)}
+        out[name]["_pop"] = float(row.get("population") or 0)
+    missing = [m for m in metros if m not in out]
+    if missing: raise RuntimeError(f"Apartment List file has no row for {missing}")
+    return out
+
+def _weighted(rows, k):
+    """Population-weighted average of the two metros for month k (None if either is missing)."""
+    t = w = 0.0
+    for r in rows.values():
+        if k not in r: return None
+        t += r[k] * r["_pop"]; w += r["_pop"]
+    return t / w if w else None
+
+def get_apartment_list():
+    """Apartment List Vacancy Index and Rent Estimates (all unit sizes), San Francisco and San Jose metros, population-weighted."""
+    import re
+    page = _get(AL_PAGE, BROWSER_UA)
+    links = {}
+    for url in re.findall(r'(?:https:)?//assets\.ctfassets\.net/[^"\'\s\\]+?\.csv', page):
+        name = url.rsplit("/", 1)[-1]
+        url = url if url.startswith("https:") else "https:" + url
+        if name.startswith("Apartment_List_Vacancy_Index_"): links["vac"] = url
+        elif name.startswith("Apartment_List_Rent_Estimates_") and "Summary" not in name: links["rent"] = url
+    if set(links) != {"vac", "rent"}: raise RuntimeError(f"download links not found on the Apartment List page (found {sorted(links)})")
+    vac = _al_rows(_get(links["vac"], BROWSER_UA), AL_METROS)
+    rent = _al_rows(_get(links["rent"], BROWSER_UA), AL_METROS, overall_only=True)
+    months = sorted(k for k in next(iter(vac.values())) if not k.startswith("_"))
+    k = next(m for m in reversed(months) if _weighted(vac, m) is not None and _weighted(rent, m) is not None)
+    y, mo = int(k[:4]), int(k[5:])
+    k0 = f"{y - 1}-{mo:02d}"
+    v1, v0 = _weighted(vac, k) * 100, _weighted(vac, k0) * 100
+    r1, r0 = _weighted(rent, k), _weighted(rent, k0)
+    if not (0.5 <= v1 <= 20 and 500 <= r1 <= 10000 and r0): raise RuntimeError(f"Apartment List values look wrong: vacancy {v1:.2f}%, rent {r1:.0f}")
+    growth = (r1 / r0 - 1) * 100
+    d = date(y, mo, 1); lab = month_label(d)
+    return ({"vac": round(v1, 2), "vacChg": round(v1 - v0, 2), "rent": round(growth, 2)},
+            {"vac": {"iso": d.isoformat(), "date": lab,
+                     "detail": f"Apartment List vacancy index for the San Francisco and San Jose metro areas: {v1:.1f}%, {'down' if v1 <= v0 else 'up'} from {v0:.1f}% a year ago."},
+             "rent": {"iso": d.isoformat(), "date": lab,
+                      "detail": f"Typical rent on new leases in the San Francisco and San Jose metro areas (Apartment List): ${r1:,.0f} a month, {'up' if growth >= 0 else 'down'} {abs(growth):.1f}% from a year ago."}})
+
+REDFIN_COUNTY = "https://redfin-public-data.s3.us-west-2.amazonaws.com/redfin_market_tracker/county_market_tracker.tsv000.gz"
+def get_redfin_mos(latest):
+    """Redfin Data Center: months of supply, single-family homes, Santa Clara County (monthly). The file is large, so it is read
+    once a week (Tuesdays) or whenever the saved figure is not from Redfin yet."""
+    import gzip
+    sig = (latest.get("signals") or {}).get("supplyP") or {}
+    if datetime.now(PT).weekday() != 1 and "Redfin" in sig.get("detail", "") and "--force" not in sys.argv:
+        return {}, {}
+    req = urllib.request.Request(REDFIN_COUNTY, headers=UA)
+    best = None
+    with urllib.request.urlopen(req, timeout=120) as resp, gzip.GzipFile(fileobj=resp) as gz:
+        header = None
+        for raw in gz:
+            if header is None:
+                header = [h.strip().strip('"').lower() for h in raw.decode("utf-8", "replace").rstrip("\r\n").split("\t")]
+                continue
+            if b"Santa Clara County" not in raw: continue
+            row = dict(zip(header, (c.strip().strip('"') for c in raw.decode("utf-8", "replace").rstrip("\r\n").split("\t"))))
+            if row.get("region") != "Santa Clara County, CA": continue
+            if row.get("property_type") != "Single Family Residential": continue
+            if row.get("is_seasonally_adjusted", "f").lower() in ("t", "true"): continue
+            dur = row.get("period_duration") or "30"
+            if not (dur.isdigit() and 28 <= int(dur) <= 31): continue   # monthly rows only
+            try: v = float(row["months_of_supply"]); end = date.fromisoformat(row["period_end"][:10])
+            except (KeyError, ValueError): continue
+            if best is None or end > best[0]: best = (end, v)
+    if best is None: raise RuntimeError("no Santa Clara County single-family row in the Redfin file")
+    end, v = best
+    if not 0.1 <= v <= 36: raise RuntimeError(f"Redfin months of supply looks wrong: {v}")
+    return {"mos": round(v, 2)}, {"supplyP": {"iso": end.replace(day=1).isoformat(), "date": month_label(end),
+        "detail": f"Single-family homes in Santa Clara County had {v:.1f} months of supply (Redfin): at that month's sales pace, the homes for sale would take about {v:.1f} months to sell."}}
 
 CA_VAC_AVG = 5.096   # California rental vacancy, 2005–2025 average
 
@@ -497,6 +601,13 @@ def main():
         if have < exp:
             print(f"::error::Saved data is from {have or 'nothing'}, but data for {exp} should exist by now."); return 2
         print(f"Data is current (asOf {have}, expected {exp})."); return 0
+    if "--cap-age" in sys.argv:
+        # Quarterly reminder: the CoStar cap rate is the only figure still entered by hand.
+        iso = (((manual.get("licensed") or {}).get("signals") or {}).get("cap") or {}).get("iso", "")
+        age = (today - date.fromisoformat(iso)).days if iso else 9999
+        if age > 125:
+            print(f"::error::The hand-entered CoStar cap rate in data/manual.json is for {iso or 'an unknown date'} ({age} days old). Enter the latest quarterly figure."); return 2
+        print(f"Cap rate is for {iso} ({age} days old)."); return 0
     if not check and not force and not is_market_day(today):
         print(f"{today}: market closed – no update."); return 0
     if not check and not force and latest.get("asOf") == today.isoformat():
@@ -515,7 +626,9 @@ def main():
                 ("Rent and vacancy", get_rent_and_vacancy), ("Insurance costs", get_insurance),
                 ("Building permits", lambda: get_permits(manual)),
                 ("Baa spread (licensed)", get_baa), ("Nasdaq-100 (licensed)", get_ndx),
-                ("Case-Shiller (licensed)", get_case_shiller), ("CoStar and MLS (hand-entered)", lambda: get_manual_licensed(manual))]
+                ("Apartment vacancy and rents (Apartment List)", get_apartment_list),
+                ("Months of supply (Redfin)", lambda: get_redfin_mos(latest)),
+                ("Case-Shiller (licensed)", get_case_shiller), ("CoStar cap rate (hand-entered)", lambda: get_manual_licensed(manual))]
         for name, fn in jobs:
             try:
                 res = fn()
