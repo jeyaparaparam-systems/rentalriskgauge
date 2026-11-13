@@ -38,7 +38,7 @@ GitHub Actions runs `scripts/update.py` Monday–Friday afternoon (about 3:15 PM
 
 Licensed sources (non-commercial use, permission pending): Case-Shiller `SFXRSA`, `CSUSHPINSA`; Moody's `BAA10Y`; Nasdaq-100 `NASDAQ100` (all via FRED); CoStar cap rate from `data/manual.json`.
 
-Free monthly market data, downloaded automatically: Apartment List Vacancy Index and Rent Estimates (apartmentlist.com/research/category/data-rent-estimates; download links read from that page each run), and Redfin Data Center county market tracker (months of supply, Santa Clara County single-family homes; read on Tuesdays because the file is large).
+Free monthly market data, downloaded automatically: Apartment List Vacancy Index and Rent Estimates (apartmentlist.com/research/category/data-rent-estimates; download links read from that page each run), and Redfin Data Center housing market tracker by property type (months of supply, Santa Clara County single-family homes; read on Tuesdays because the file is large).
 
 Free public sources downloaded automatically (credit each source as on the site's Sources page):
 
