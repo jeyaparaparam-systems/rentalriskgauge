@@ -24,12 +24,12 @@ concurrency:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # pinned so a new Ubuntu version cannot change the run unexpectedly
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -42,7 +42,9 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           USE_LICENSED_DATA: ${{ vars.USE_LICENSED_DATA || '1' }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
-          FINAL: ${{ github.event.schedule == '30 2 * * 2-6' && '--final' || '' }}
+          # The last evening run and manual runs save whatever is available; later runs still fill in
+          # a VIX close or Treasury yield that was posted late.
+          FINAL: ${{ (github.event.schedule == '30 2 * * 2-6' || github.event_name == 'workflow_dispatch') && '--final' || '' }}
         run: |
           pip install --quiet openpyxl
           if [ -z "$FRED_API_KEY" ]; then echo "::warning::FRED_API_KEY secret is not set; most data cannot be downloaded."; fi
