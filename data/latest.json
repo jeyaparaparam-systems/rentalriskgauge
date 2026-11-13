@@ -1,7 +1,7 @@
 {
  "asOf": "2026-11-13",
- "updatedAt": "2026-11-13T18:46:18Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 18.7. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
+ "updatedAt": "2026-11-13T21:11:21Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 18.7. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.15%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.0).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -9,7 +9,7 @@
   "mort": 7.11,
   "mortChg": 0.87,
   "unemp": 4.14,
-  "t10": 5.1,
+  "t10": 5.15,
   "vixAvg": 19.42,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-12",
-   "date": "Nov 12 close",
-   "detail": "Up from 4.98% the day before.",
+   "iso": "2026-11-13",
+   "date": "Nov 13 close",
+   "detail": "Up from 5.10% the day before.",
    "series": [
-    [
-     "Sep 30",
-     5.29
-    ],
     [
      "Oct 1",
      5.24
@@ -549,6 +545,10 @@
     [
      "Nov 12",
      5.1
+    ],
+    [
+     "Nov 13",
+     5.15
     ]
    ]
   },
@@ -707,9 +707,9 @@
   }
  },
  "score": 51.8,
- "mfScore": 49.5,
+ "mfScore": 50.5,
  "pubScore": 50.3,
- "pubMf": 38.5,
+ "pubMf": 38.9,
  "warn": {
   "workers": 3212,
   "notices": 28,
