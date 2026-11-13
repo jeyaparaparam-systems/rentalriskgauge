@@ -1,16 +1,16 @@
 {
  "asOf": "2026-11-12",
- "updatedAt": "2026-11-13T00:31:18Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.6) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.8).",
+ "updatedAt": "2026-11-13T03:24:28Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 18.7. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.6) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.8).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 17.49,
+  "vix": 18.7,
   "mort": 7.11,
   "mortChg": 0.87,
   "unemp": 4.14,
   "t10": 5.1,
-  "vixAvg": 19.3,
+  "vixAvg": 19.42,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
   "techJobs": -2.4,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-11",
-   "date": "Nov 11 close",
-   "detail": "Down from 19.46 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.3), so a one-day jump moves it less.",
+   "iso": "2026-11-12",
+   "date": "Nov 12 close",
+   "detail": "Up from 17.49 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.4), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 1",
-     16.39
-    ],
     [
      "Oct 2",
      15.31
@@ -162,6 +158,10 @@
     [
      "Nov 11",
      17.49
+    ],
+    [
+     "Nov 12",
+     18.7
     ]
    ]
   },
@@ -708,7 +708,7 @@
  },
  "score": 51.8,
  "mfScore": 49.5,
- "pubScore": 50.2,
+ "pubScore": 50.3,
  "pubMf": 38.5,
  "warn": {
   "workers": 3214,
