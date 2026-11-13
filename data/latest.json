@@ -1,7 +1,7 @@
 {
  "asOf": "2026-11-12",
- "updatedAt": "2026-11-12T23:51:39Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.9) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.8).",
+ "updatedAt": "2026-11-13T00:31:18Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 17.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, down 0.6) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.8).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -26,10 +26,10 @@
   "vacRelChg": 0.0,
   "rentCPI": 2.65,
   "permIdx": 83.4,
-  "ins": 3,
+  "ins": 3.0,
   "baa": 1.51,
   "ndxDD": 9.1,
-  "mos": 1.6,
+  "mos": 1.8,
   "cs": 3.37,
   "p2r": 112.5,
   "cap": 5.9,
@@ -583,9 +583,9 @@
    "detail": "The Nasdaq-100 closed at 28,374.25, 9.1% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
-   "iso": "2026-07-01",
-   "date": "July 2026",
-   "detail": "Single-family homes in Santa Clara County had 1.6 months of supply (MLS data). Condos are slower, at 4.1 months. 31% of listings have cut their price (Realtor.com, September)."
+   "iso": "2026-10-01",
+   "date": "October 2026",
+   "detail": "Single-family homes in Santa Clara County had 1.8 months of supply (Redfin): at that month's sales pace, the homes for sale would take about 1.8 months to sell."
   },
   "cs": {
    "iso": "2026-08-01",
@@ -706,9 +706,9 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 51.5,
+ "score": 51.8,
  "mfScore": 49.5,
- "pubScore": 50.0,
+ "pubScore": 50.2,
  "pubMf": 38.5,
  "warn": {
   "workers": 3214,
