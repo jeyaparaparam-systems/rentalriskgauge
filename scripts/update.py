@@ -26,7 +26,7 @@ Only the Python standard library is used.
 
 Usage:
   python scripts/update.py            # normal run (skips weekends/holidays)
-  python scripts/update.py --force    # run even on a non-market day (also saves even if today's closes are not posted yet)
+  python scripts/update.py --force    # run even on a non-market day
   python scripts/update.py --final    # last run of the day: save even if today's closes are not posted yet
   python scripts/update.py --check    # recompute scores from current data, no downloads
   python scripts/update.py --verify   # exit with an error if the saved data is older than it should be
@@ -391,8 +391,11 @@ def get_sloos():
 
 def get_insurance():
     obs = fred("CUUR0000SEHD", (date.today() - timedelta(days=500)).isoformat())
-    by = dict(obs); d, v = obs[-1]; p = by.get(date(d.year - 1, d.month, 1))
-    if not p: raise RuntimeError("no year-ago value")
+    by = dict(obs)
+    # Use the latest month that also has a value a year earlier (some months were never published, e.g. October 2025).
+    d, v = next(((k, x) for k, x in reversed(obs) if date(k.year - 1, k.month, 1) in by), (None, None))
+    if d is None: raise RuntimeError("no year-ago value")
+    p = by[date(d.year - 1, d.month, 1)]
     return {"ins": round((v / p - 1) * 100, 1)}, {"ins": {"iso": d.isoformat(), "date": month_label(d),
         "detail": "U.S. consumer price index for tenants' and household insurance."}}
 
@@ -500,32 +503,31 @@ def get_apartment_list():
              "rent": {"iso": d.isoformat(), "date": lab,
                       "detail": f"Typical rent on new leases in the San Francisco and San Jose metro areas (Apartment List): ${r1:,.0f} a month, {'up' if growth >= 0 else 'down'} {abs(growth):.1f}% from a year ago."}})
 
-REDFIN_COUNTY = "https://redfin-public-data.s3.us-west-2.amazonaws.com/redfin_market_tracker/county_market_tracker.tsv000.gz"
+REDFIN_CSV = "https://redfin-public-data.s3.us-west-2.amazonaws.com/redfin_data_center/property_types/monthly/counties_in_top_50_metros.csv"
 def get_redfin_mos(latest):
-    """Redfin Data Center: months of supply, single-family homes, Santa Clara County (monthly). The file is large, so it is read
-    once a week (Tuesdays) or whenever the saved figure is not from Redfin yet."""
-    import gzip
+    """Redfin Data Center (housing market tracker by property type, counties in the top 50 metros, about 90 MB):
+    months of supply, single-family homes, Santa Clara County, monthly. Read once a week (Tuesdays), whenever the
+    saved figure is not from Redfin yet, or on a manual run."""
     sig = (latest.get("signals") or {}).get("supplyP") or {}
     if datetime.now(PT).weekday() != 1 and "Redfin" in sig.get("detail", "") and "--force" not in sys.argv:
         return {}, {}
-    req = urllib.request.Request(REDFIN_COUNTY, headers=UA)
-    best = None
-    with urllib.request.urlopen(req, timeout=120) as resp, gzip.GzipFile(fileobj=resp) as gz:
-        header = None
-        for raw in gz:
+    req = urllib.request.Request(REDFIN_CSV, headers=BROWSER_UA)
+    best, header = None, None
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        for raw in resp:
+            line = raw.decode("utf-8", "replace")
             if header is None:
-                header = [h.strip().strip('"').lower() for h in raw.decode("utf-8", "replace").rstrip("\r\n").split("\t")]
+                header = [h.strip().upper() for h in next(csv.reader([line]))]
                 continue
-            if b"Santa Clara County" not in raw: continue
-            row = dict(zip(header, (c.strip().strip('"') for c in raw.decode("utf-8", "replace").rstrip("\r\n").split("\t"))))
-            if row.get("region") != "Santa Clara County, CA": continue
-            if row.get("property_type") != "Single Family Residential": continue
-            if row.get("is_seasonally_adjusted", "f").lower() in ("t", "true"): continue
-            dur = row.get("period_duration") or "30"
-            if not (dur.isdigit() and 28 <= int(dur) <= 31): continue   # monthly rows only
-            try: v = float(row["months_of_supply"]); end = date.fromisoformat(row["period_end"][:10])
+            if "Santa Clara County, CA" not in line or "Single Family Residential" not in line: continue
+            row = dict(zip(header, next(csv.reader([line]))))
+            if row.get("REGION NAME") != "Santa Clara County, CA" or row.get("PROPERTY TYPE") != "Single Family Residential": continue
+            if row.get("IS SEASONALLY ADJUSTED", "false").lower() in ("true", "t"): continue
+            if row.get("FREQUENCY", "Monthly").lower() != "monthly": continue
+            try: v = float(row["MONTHS OF SUPPLY"]); end = date.fromisoformat(row["PERIOD END"][:10])
             except (KeyError, ValueError): continue
             if best is None or end > best[0]: best = (end, v)
+    if header is None or "MONTHS OF SUPPLY" not in header: raise RuntimeError("Redfin file layout changed (no MONTHS OF SUPPLY column)")
     if best is None: raise RuntimeError("no Santa Clara County single-family row in the Redfin file")
     end, v = best
     if not 0.1 <= v <= 36: raise RuntimeError(f"Redfin months of supply looks wrong: {v}")
@@ -592,6 +594,14 @@ def write_note(inp, prev_inp, sf, mf, prev):
         parts.append(f"The single-family homes & condos score is {sf:.0f} ({band(sf)}) and the apartment buildings (5+ units) score is {mf:.0f} ({band(mf)}).")
     return " ".join(parts)
 
+def _closes_pending(signals, today):
+    """Which of today's official closing numbers are not in the data yet (VIX close, 10-year Treasury yield)."""
+    late = []
+    if (signals.get("vix") or {}).get("iso") != today.isoformat(): late.append("VIX")
+    if (signals.get("t10") or {}).get("iso") != today.isoformat() and today.isoformat() not in BOND_HOLIDAYS:
+        late.append("10-year Treasury yield")
+    return late
+
 # ---------------------------------------------------------------- main
 def main():
     force, check = "--force" in sys.argv, "--check" in sys.argv
@@ -614,8 +624,8 @@ def main():
         print(f"Cap rate is for {iso} ({age} days old)."); return 0
     if not check and not force and not is_market_day(today):
         print(f"{today}: market closed – no update."); return 0
-    if not check and not force and latest.get("asOf") == today.isoformat():
-        print(f"{today}: already updated earlier today – nothing to do."); return 0
+    if not check and latest.get("asOf") == today.isoformat() and not _closes_pending(latest.get("signals") or {}, today):
+        print(f"{today}: already updated earlier today with today's closing numbers – nothing to do."); return 0
 
     inputs = dict(latest.get("inputs", {}))
     signals = dict(latest.get("signals", {}))
@@ -651,10 +661,8 @@ def main():
             return 1
         # The first run is soon after the close. If today's official VIX close or 10-year Treasury yield is not posted yet,
         # save nothing and let a later run pick it up (the last run of the day saves whatever is available).
-        late = []
-        if signals.get("vix", {}).get("iso") != today.isoformat(): late.append("VIX")
-        if signals.get("t10", {}).get("iso") != today.isoformat() and today.isoformat() not in BOND_HOLIDAYS: late.append("10-year Treasury yield")
-        if late and not (force or "--final" in sys.argv):
+        late = _closes_pending(signals, today)
+        if late and "--final" not in sys.argv:
             print(f"{today}: today's {' and '.join(late)} not posted yet – nothing saved; a later run will try again.")
             return 0
 
