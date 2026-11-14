@@ -1,16 +1,16 @@
 {
  "asOf": "2026-11-13",
- "updatedAt": "2026-11-13T21:11:21Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 18.7. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.15%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.0).",
+ "updatedAt": "2026-11-14T03:10:39Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 19.3. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.15%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, up 1.0).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 18.7,
+  "vix": 19.3,
   "mort": 7.11,
   "mortChg": 0.87,
   "unemp": 4.14,
   "t10": 5.15,
-  "vixAvg": 19.42,
+  "vixAvg": 19.38,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
   "techJobs": -2.4,
@@ -27,7 +27,7 @@
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3.0,
-  "baa": 1.51,
+  "baa": 1.48,
   "ndxDD": 9.4,
   "mos": 1.8,
   "cs": 3.37,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-12",
-   "date": "Nov 12 close",
-   "detail": "Up from 17.49 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.4), so a one-day jump moves it less.",
+   "iso": "2026-11-13",
+   "date": "Nov 13 close",
+   "detail": "Up from 18.70 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.4), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 2",
-     15.31
-    ],
     [
      "Oct 5",
      15.52
@@ -162,6 +158,10 @@
     [
      "Nov 12",
      18.7
+    ],
+    [
+     "Nov 13",
+     19.3
     ]
    ]
   },
@@ -573,9 +573,9 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-10",
-   "date": "Nov 10 close",
-   "detail": "Baa-rated company bonds paid 1.51 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+   "iso": "2026-11-12",
+   "date": "Nov 12 close",
+   "detail": "Baa-rated company bonds paid 1.48 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
    "iso": "2026-11-12",
