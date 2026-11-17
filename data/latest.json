@@ -1,7 +1,7 @@
 {
- "asOf": "2026-11-16",
- "updatedAt": "2026-11-17T04:38:15Z",
- "note": "Stock markets were more nervous today, and the VIX fear index rose to 22.9. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.12%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, up 0.5) and the apartment buildings (5+ units) score is 50 (Elevated, down 0.6).",
+ "asOf": "2026-11-17",
+ "updatedAt": "2026-11-17T10:56:37Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 22.9. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.12%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -714,8 +714,8 @@
   "workers": 2795,
   "notices": 26,
   "period": "Last 30 days",
-  "date": "Nov 16, 2026",
-  "iso": "2026-11-16",
+  "date": "Nov 17, 2026",
+  "iso": "2026-11-17",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
