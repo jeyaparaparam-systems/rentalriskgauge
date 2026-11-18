@@ -1,16 +1,16 @@
 {
  "asOf": "2026-11-17",
- "updatedAt": "2026-11-17T10:56:37Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 22.9. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.12%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
+ "updatedAt": "2026-11-18T04:15:07Z",
+ "note": "Stock markets were more nervous today, and the VIX fear index rose to 25.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 22.91,
+  "vix": 25.46,
   "mort": 7.11,
   "mortChg": 0.87,
   "unemp": 4.14,
-  "t10": 5.12,
-  "vixAvg": 19.61,
+  "t10": 5.1,
+  "vixAvg": 20.01,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
   "techJobs": -2.4,
@@ -27,7 +27,7 @@
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3.0,
-  "baa": 1.47,
+  "baa": 1.5,
   "ndxDD": 12.9,
   "mos": 1.8,
   "cs": 3.37,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-16",
-   "date": "Nov 16 close",
-   "detail": "Up from 19.30 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (19.6), so a one-day jump moves it less.",
+   "iso": "2026-11-17",
+   "date": "Nov 17 close",
+   "detail": "Up from 22.91 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (20.0), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 6",
-     15.01
-    ],
     [
      "Oct 7",
      15.08
@@ -162,6 +158,10 @@
     [
      "Nov 16",
      22.91
+    ],
+    [
+     "Nov 17",
+     25.46
     ]
    ]
   },
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-16",
-   "date": "Nov 16 close",
-   "detail": "Down from 5.15% the day before.",
+   "iso": "2026-11-17",
+   "date": "Nov 17 close",
+   "detail": "Down from 5.12% the day before.",
    "series": [
-    [
-     "Oct 2",
-     5.28
-    ],
     [
      "Oct 5",
      5.31
@@ -549,6 +545,10 @@
     [
      "Nov 16",
      5.12
+    ],
+    [
+     "Nov 17",
+     5.1
     ]
    ]
   },
@@ -573,9 +573,9 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-13",
-   "date": "Nov 13 close",
-   "detail": "Baa-rated company bonds paid 1.47 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+   "iso": "2026-11-16",
+   "date": "Nov 16 close",
+   "detail": "Baa-rated company bonds paid 1.50 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
    "iso": "2026-11-16",
@@ -706,13 +706,13 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 52.3,
- "mfScore": 49.9,
- "pubScore": 50.3,
- "pubMf": 38.6,
+ "score": 52.4,
+ "mfScore": 49.5,
+ "pubScore": 50.5,
+ "pubMf": 38.5,
  "warn": {
-  "workers": 2795,
-  "notices": 26,
+  "workers": 3144,
+  "notices": 57,
   "period": "Last 30 days",
   "date": "Nov 17, 2026",
   "iso": "2026-11-17",
@@ -730,10 +730,10 @@
     "workers": 181
    },
    {
-    "company": "Davey Tree Surgery Company",
-    "workers": 96
+    "company": "Safeway, Inc.",
+    "workers": 92
    }
   ],
-  "detail": "2,795 workers are covered by layoff notices filed in the last 30 days."
+  "detail": "3,144 workers are covered by layoff notices filed in the last 30 days."
  }
 }
