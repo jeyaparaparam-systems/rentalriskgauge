@@ -1,7 +1,7 @@
 {
- "asOf": "2026-11-17",
- "updatedAt": "2026-11-18T04:15:07Z",
- "note": "Stock markets were more nervous today, and the VIX fear index rose to 25.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
+ "asOf": "2026-11-18",
+ "updatedAt": "2026-11-18T10:27:52Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 25.5. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.10%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 50 (Elevated, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -28,7 +28,7 @@
   "permIdx": 83.4,
   "ins": 3.0,
   "baa": 1.5,
-  "ndxDD": 12.9,
+  "ndxDD": 13.5,
   "mos": 1.8,
   "cs": 3.37,
   "p2r": 112.5,
@@ -578,9 +578,9 @@
    "detail": "Baa-rated company bonds paid 1.50 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
-   "iso": "2026-11-16",
-   "date": "Nov 16 close",
-   "detail": "The Nasdaq-100 closed at 27,197.15, 12.9% below its 12-month high of 31,224.69 on Oct 6."
+   "iso": "2026-11-17",
+   "date": "Nov 17 close",
+   "detail": "The Nasdaq-100 closed at 27,001.78, 13.5% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-10-01",
@@ -714,8 +714,8 @@
   "workers": 3144,
   "notices": 57,
   "period": "Last 30 days",
-  "date": "Nov 17, 2026",
-  "iso": "2026-11-17",
+  "date": "Nov 18, 2026",
+  "iso": "2026-11-18",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
