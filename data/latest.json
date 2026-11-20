@@ -1,16 +1,16 @@
 {
  "asOf": "2026-11-19",
- "updatedAt": "2026-11-19T10:35:22Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 24.6. Mortgage rates are 7.11% and the 10-year Treasury yield closed at 5.07%, so borrowing remains expensive. The single-family homes & condos score is 52 (Elevated, unchanged) and the apartment buildings (5+ units) score is 49 (Elevated, unchanged).",
+ "updatedAt": "2026-11-20T03:58:08Z",
+ "note": "Stock markets were more nervous today, and the VIX fear index rose to 28.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 5.04%, so borrowing remains expensive. The single-family homes & condos score is 54 (Elevated, up 2.0) and the apartment buildings (5+ units) score is 48 (Elevated, down 0.5).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 24.56,
-  "mort": 7.11,
-  "mortChg": 0.87,
+  "vix": 28.44,
+  "mort": 7.28,
+  "mortChg": 1.02,
   "unemp": 4.14,
-  "t10": 5.07,
-  "vixAvg": 20.41,
+  "t10": 5.04,
+  "vixAvg": 20.88,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
   "techJobs": -2.4,
@@ -27,7 +27,7 @@
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3.0,
-  "baa": 1.53,
+  "baa": 1.52,
   "ndxDD": 13.2,
   "mos": 1.8,
   "cs": 3.37,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-18",
-   "date": "Nov 18 close",
-   "detail": "Down from 25.46 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (20.4), so a one-day jump moves it less.",
+   "iso": "2026-11-19",
+   "date": "Nov 19 close",
+   "detail": "Up from 24.56 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (20.9), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 8",
-     15.41
-    ],
     [
      "Oct 9",
      14.84
@@ -162,6 +158,10 @@
     [
      "Nov 18",
      24.56
+    ],
+    [
+     "Nov 19",
+     28.44
     ]
    ]
   },
@@ -171,14 +171,10 @@
    "detail": "High-grade company bonds paid 6.02%, or 0.89 percentage points more than the 10-year Treasury that month. That is near the low end of the past 20 years: lenders are comfortable."
   },
   "mort": {
-   "iso": "2026-11-12",
-   "date": "Week of Nov 12",
-   "detail": "A year ago it was 6.24%. Down from 7.40% in October.",
+   "iso": "2026-11-19",
+   "date": "Week of Nov 19",
+   "detail": "A year ago it was 6.26%. Down from 7.40% in October.",
    "series": [
-    [
-     "May 21",
-     6.51
-    ],
     [
      "May 28",
      6.53
@@ -278,6 +274,10 @@
     [
      "Nov 12",
      7.11
+    ],
+    [
+     "Nov 19",
+     7.28
     ]
    ]
   },
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-18",
-   "date": "Nov 18 close",
-   "detail": "Down from 5.10% the day before.",
+   "iso": "2026-11-19",
+   "date": "Nov 19 close",
+   "detail": "Down from 5.07% the day before.",
    "series": [
-    [
-     "Oct 6",
-     5.27
-    ],
     [
      "Oct 7",
      5.28
@@ -549,6 +545,10 @@
     [
      "Nov 18",
      5.07
+    ],
+    [
+     "Nov 19",
+     5.04
     ]
    ]
   },
@@ -573,9 +573,9 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-17",
-   "date": "Nov 17 close",
-   "detail": "Baa-rated company bonds paid 1.53 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+   "iso": "2026-11-18",
+   "date": "Nov 18 close",
+   "detail": "Baa-rated company bonds paid 1.52 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
    "iso": "2026-11-18",
@@ -706,13 +706,13 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 52.5,
- "mfScore": 48.9,
- "pubScore": 50.6,
- "pubMf": 38.2,
+ "score": 54.5,
+ "mfScore": 48.4,
+ "pubScore": 52.7,
+ "pubMf": 37.9,
  "warn": {
-  "workers": 3138,
-  "notices": 55,
+  "workers": 3262,
+  "notices": 60,
   "period": "Last 30 days",
   "date": "Nov 19, 2026",
   "iso": "2026-11-19",
@@ -734,6 +734,6 @@
     "workers": 92
    }
   ],
-  "detail": "3,138 workers are covered by layoff notices filed in the last 30 days."
+  "detail": "3,262 workers are covered by layoff notices filed in the last 30 days."
  }
 }
