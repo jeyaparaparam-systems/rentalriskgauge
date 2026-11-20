@@ -1,7 +1,7 @@
 {
- "asOf": "2026-11-19",
- "updatedAt": "2026-11-20T03:58:08Z",
- "note": "Stock markets were more nervous today, and the VIX fear index rose to 28.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 5.04%, so borrowing remains expensive. The single-family homes & condos score is 54 (Elevated, up 2.0) and the apartment buildings (5+ units) score is 48 (Elevated, down 0.5).",
+ "asOf": "2026-11-20",
+ "updatedAt": "2026-11-20T10:16:27Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 28.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 5.04%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 48 (Elevated, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -28,7 +28,7 @@
   "permIdx": 83.4,
   "ins": 3.0,
   "baa": 1.52,
-  "ndxDD": 13.2,
+  "ndxDD": 15.1,
   "mos": 1.8,
   "cs": 3.37,
   "p2r": 112.5,
@@ -578,9 +578,9 @@
    "detail": "Baa-rated company bonds paid 1.52 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
-   "iso": "2026-11-18",
-   "date": "Nov 18 close",
-   "detail": "The Nasdaq-100 closed at 27,116.26, 13.2% below its 12-month high of 31,224.69 on Oct 6."
+   "iso": "2026-11-19",
+   "date": "Nov 19 close",
+   "detail": "The Nasdaq-100 closed at 26,517.05, 15.1% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-10-01",
@@ -706,16 +706,16 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 54.5,
+ "score": 54.7,
  "mfScore": 48.4,
  "pubScore": 52.7,
  "pubMf": 37.9,
  "warn": {
-  "workers": 3262,
-  "notices": 60,
+  "workers": 3170,
+  "notices": 59,
   "period": "Last 30 days",
-  "date": "Nov 19, 2026",
-  "iso": "2026-11-19",
+  "date": "Nov 20, 2026",
+  "iso": "2026-11-20",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
@@ -730,10 +730,10 @@
     "workers": 181
    },
    {
-    "company": "Safeway, Inc.",
-    "workers": 92
+    "company": "Weil, Gotshal & Manges LLP",
+    "workers": 85
    }
   ],
-  "detail": "3,262 workers are covered by layoff notices filed in the last 30 days."
+  "detail": "3,170 workers are covered by layoff notices filed in the last 30 days."
  }
 }
