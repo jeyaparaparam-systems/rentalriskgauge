@@ -1,20 +1,20 @@
 {
  "asOf": "2026-11-20",
- "updatedAt": "2026-11-20T10:16:27Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 28.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 5.04%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 48 (Elevated, unchanged).",
+ "updatedAt": "2026-11-21T03:56:47Z",
+ "note": "Stock markets were more nervous today, and the VIX fear index rose to 35.9. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 4.92%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 46 (Elevated, down 2.4).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 28.44,
+  "vix": 35.89,
   "mort": 7.28,
   "mortChg": 1.02,
   "unemp": 4.14,
-  "t10": 5.04,
-  "vixAvg": 20.88,
+  "t10": 4.92,
+  "vixAvg": 21.7,
   "hpSJ": -0.98,
   "p2rSJ": 108.7,
-  "techJobs": -2.4,
-  "payroll": 0.77,
+  "techJobs": -2.73,
+  "payroll": 1.18,
   "lpr": 2.52,
   "listYoY": 25.7,
   "priceCut": 32.5,
@@ -27,7 +27,7 @@
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3.0,
-  "baa": 1.52,
+  "baa": 1.56,
   "ndxDD": 15.1,
   "mos": 1.8,
   "cs": 3.37,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-19",
-   "date": "Nov 19 close",
-   "detail": "Up from 24.56 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (20.9), so a one-day jump moves it less.",
+   "iso": "2026-11-20",
+   "date": "Nov 20 close",
+   "detail": "Up from 28.44 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (21.7), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 9",
-     14.84
-    ],
     [
      "Oct 12",
      15.21
@@ -162,6 +158,10 @@
     [
      "Nov 19",
      28.44
+    ],
+    [
+     "Nov 20",
+     35.89
     ]
    ]
   },
@@ -283,8 +283,8 @@
   },
   "unemp": {
    "iso": "2026-09-01",
-   "date": "September 2026 (unemployment, all jobs) · September (tech jobs)",
-   "detail": "Seasonally adjusted: San Francisco–Oakland area 4.2%, San Jose area 4.0%, weighted by the size of each labor force. The U.S. rate is 4.2%. Tech jobs are down 2.4% from a year ago."
+   "date": "September 2026 (unemployment, all jobs) · October (tech jobs)",
+   "detail": "Seasonally adjusted: San Francisco–Oakland area 4.2%, San Jose area 4.0%, weighted by the size of each labor force. The U.S. rate is 4.2%. Tech jobs are down 2.7% from a year ago."
   },
   "supply": {
    "iso": "2026-10-01",
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-19",
-   "date": "Nov 19 close",
-   "detail": "Down from 5.07% the day before.",
+   "iso": "2026-11-20",
+   "date": "Nov 20 close",
+   "detail": "Down from 5.04% the day before.",
    "series": [
-    [
-     "Oct 7",
-     5.28
-    ],
     [
      "Oct 8",
      5.22
@@ -549,6 +545,10 @@
     [
      "Nov 19",
      5.04
+    ],
+    [
+     "Nov 20",
+     4.92
     ]
    ]
   },
@@ -573,9 +573,9 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-18",
-   "date": "Nov 18 close",
-   "detail": "Baa-rated company bonds paid 1.52 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+   "iso": "2026-11-19",
+   "date": "Nov 19 close",
+   "detail": "Baa-rated company bonds paid 1.56 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
    "iso": "2026-11-19",
@@ -706,10 +706,10 @@
    "detail": "San Jose-area home prices compared with rents: about 9% above normal."
   }
  },
- "score": 54.7,
- "mfScore": 48.4,
- "pubScore": 52.7,
- "pubMf": 37.9,
+ "score": 54.8,
+ "mfScore": 46.0,
+ "pubScore": 52.8,
+ "pubMf": 36.6,
  "warn": {
   "workers": 3170,
   "notices": 59,
