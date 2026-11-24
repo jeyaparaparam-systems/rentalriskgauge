@@ -449,5 +449,46 @@
    "vacChg": -1.26,
    "rent": 11.82
   }
+ },
+ {
+  "date": "2026-11-23",
+  "score": 55.0,
+  "mfScore": 46.1,
+  "pubScore": 53.0,
+  "pubMf": 36.6,
+  "model": "v5.3",
+  "inputs": {
+   "vix": 26.62,
+   "mort": 7.28,
+   "mortChg": 1.02,
+   "unemp": 4.14,
+   "t10": 4.92,
+   "vixAvg": 22.11,
+   "hpSJ": -0.98,
+   "p2rSJ": 108.7,
+   "techJobs": -2.73,
+   "payroll": 1.18,
+   "lpr": 2.52,
+   "listYoY": 25.7,
+   "priceCut": 32.5,
+   "hp": -1.93,
+   "cr": 0.89,
+   "p2rF": 102.2,
+   "sloos": 5.0,
+   "vacRel": -0.3,
+   "vacRelChg": 0.0,
+   "rentCPI": 2.65,
+   "permIdx": 83.4,
+   "ins": 3.0,
+   "baa": 1.61,
+   "ndxDD": 15.1,
+   "mos": 1.8,
+   "cs": 3.37,
+   "p2r": 112.5,
+   "cap": 5.9,
+   "vac": 3.62,
+   "vacChg": -1.26,
+   "rent": 11.82
+  }
  }
 ]
