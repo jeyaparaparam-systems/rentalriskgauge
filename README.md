@@ -80,7 +80,7 @@ python scripts/update.py --check     # recompute today's scores from the saved d
 
 ---
 
-© 2026 Raj Rajagopalan. All rights reserved. For informational purposes only; not financial, investment or legal advice. Data belongs to its respective providers.
+© 2026 Paraparam Labs LLC. All rights reserved. For informational purposes only; not financial, investment or legal advice. Data belongs to its respective providers.
 
 ## Before launch checklist
 
