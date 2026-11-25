@@ -1,37 +1,37 @@
 {
  "asOf": "2026-11-24",
- "updatedAt": "2026-11-24T12:46:51Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 26.6. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 4.92%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 46 (Elevated, unchanged).",
+ "updatedAt": "2026-11-25T05:25:20Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 26.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 4.91%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 46 (Elevated, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 26.62,
+  "vix": 26.36,
   "mort": 7.28,
   "mortChg": 1.02,
   "unemp": 4.14,
-  "t10": 4.92,
-  "vixAvg": 22.11,
-  "hpSJ": -0.98,
-  "p2rSJ": 108.7,
+  "t10": 4.91,
+  "vixAvg": 22.55,
+  "hpSJ": -2.15,
+  "p2rSJ": 106.1,
   "techJobs": -2.73,
   "payroll": 1.18,
   "lpr": 2.52,
   "listYoY": 25.7,
   "priceCut": 32.5,
-  "hp": -1.93,
+  "hp": -2.83,
   "cr": 0.89,
-  "p2rF": 102.2,
+  "p2rF": 100.8,
   "sloos": 5.0,
   "vacRel": -0.3,
   "vacRelChg": 0.0,
   "rentCPI": 2.65,
   "permIdx": 83.4,
   "ins": 3.0,
-  "baa": 1.61,
-  "ndxDD": 15.1,
+  "baa": 1.59,
+  "ndxDD": 16.0,
   "mos": 1.8,
-  "cs": 3.37,
-  "p2r": 112.5,
+  "cs": 3.71,
+  "p2r": 113.2,
   "cap": 5.9,
   "vac": 3.62,
   "vacChg": -1.26,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-23",
-   "date": "Nov 23 close",
-   "detail": "Down from 35.89 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (22.1), so a one-day jump moves it less.",
+   "iso": "2026-11-24",
+   "date": "Nov 24 close",
+   "detail": "Down from 26.62 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (22.6), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 13",
-     15.27
-    ],
     [
      "Oct 14",
      16.87
@@ -162,6 +158,10 @@
     [
      "Nov 23",
      26.62
+    ],
+    [
+     "Nov 24",
+     26.36
     ]
    ]
   },
@@ -378,62 +378,58 @@
    ]
   },
   "hp": {
-   "iso": "2026-04-01",
-   "date": "Q2 2026",
+   "iso": "2026-07-01",
+   "date": "Q3 2026",
    "detail": "Average of the FHFA house price indexes for the San Francisco–San Mateo, Oakland–Berkeley and San Jose areas. Prices are lower than a year ago.",
    "series": [
     [
-     "Q2 24",
-     3.91
+     "Q3 24",
+     3.19
     ],
     [
      "",
-     3.4
+     2.24
     ],
     [
      "",
-     2.15
-    ],
-    [
-     "",
-     1.97
+     1.71
     ],
     [
      "Q2 25",
-     0.47
+     -0.6
     ],
     [
      "",
-     -1.1
+     -0.55
     ],
     [
      "",
-     0.62
+     0.36
     ],
     [
      "",
-     0.03
+     0.35
     ],
     [
      "Q2 26",
-     -1.93
+     -0.74
+    ],
+    [
+     "Q3 26",
+     -2.83
     ]
    ]
   },
   "valueF": {
-   "iso": "2026-04-01",
-   "date": "Q2 2026 prices · October 2026 rents",
-   "detail": "Home prices compared with San Francisco-area rents are about 2% above their 2005–2025 average."
+   "iso": "2026-07-01",
+   "date": "Q3 2026 prices · October 2026 rents",
+   "detail": "Home prices compared with San Francisco-area rents are close to their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-23",
-   "date": "Nov 23 close",
-   "detail": "About the same as the day before.",
+   "iso": "2026-11-24",
+   "date": "Nov 24 close",
+   "detail": "Down from 4.92% the day before.",
    "series": [
-    [
-     "Oct 9",
-     5.24
-    ],
     [
      "Oct 13",
      5.21
@@ -549,6 +545,10 @@
     [
      "Nov 23",
      4.92
+    ],
+    [
+     "Nov 24",
+     4.91
     ]
    ]
   },
@@ -573,14 +573,14 @@
    "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-20",
-   "date": "Nov 20 close",
-   "detail": "Baa-rated company bonds paid 1.61 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+   "iso": "2026-11-23",
+   "date": "Nov 23 close",
+   "detail": "Baa-rated company bonds paid 1.59 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
   },
   "ndx": {
-   "iso": "2026-11-19",
-   "date": "Nov 19 close",
-   "detail": "The Nasdaq-100 closed at 26,517.05, 15.1% below its 12-month high of 31,224.69 on Oct 6."
+   "iso": "2026-11-24",
+   "date": "Nov 24 close",
+   "detail": "The Nasdaq-100 closed at 26,214.17, 16.0% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-10-01",
@@ -588,8 +588,8 @@
    "detail": "Single-family homes in Santa Clara County had 1.8 months of supply (Redfin): at that month's sales pace, the homes for sale would take about 1.8 months to sell."
   },
   "cs": {
-   "iso": "2026-08-01",
-   "date": "August 2026",
+   "iso": "2026-09-01",
+   "date": "September 2026",
    "detail": "S&P Cotality Case-Shiller San Francisco home price index (seasonally adjusted). Prices are higher than a year ago.",
    "series": [
     [
@@ -598,11 +598,11 @@
     ],
     [
      "",
-     1.5
+     1.6
     ],
     [
      "",
-     0.1
+     0.2
     ],
     [
      "",
@@ -622,7 +622,7 @@
     ],
     [
      "",
-     -0.8
+     -0.9
     ],
     [
      "",
@@ -642,7 +642,7 @@
     ],
     [
      "",
-     -0.3
+     -0.4
     ],
     [
      "",
@@ -665,15 +665,19 @@
      3.5
     ],
     [
-     "Aug 26",
+     "",
      3.4
+    ],
+    [
+     "Sep 26",
+     3.7
     ]
    ]
   },
   "value": {
-   "iso": "2026-08-01",
-   "date": "August 2026",
-   "detail": "Case-Shiller San Francisco home prices compared with San Francisco-area rents are about 12% above their 2005–2025 average."
+   "iso": "2026-09-01",
+   "date": "September 2026",
+   "detail": "Case-Shiller San Francisco home prices compared with San Francisco-area rents are about 13% above their 2005–2025 average."
   },
   "cap": {
    "iso": "2026-09-30",
@@ -696,20 +700,20 @@
    "detail": "U.S. consumer price index for tenants' and household insurance."
   },
   "hpSJ": {
-   "iso": "2026-04-01",
-   "date": "Q2 2026",
-   "detail": "FHFA index for the San Jose–Sunnyvale–Santa Clara area: down 1.0% from a year ago."
+   "iso": "2026-07-01",
+   "date": "Q3 2026",
+   "detail": "FHFA index for the San Jose–Sunnyvale–Santa Clara area: down 2.1% from a year ago."
   },
   "valueSJ": {
-   "iso": "2026-04-01",
-   "date": "Q2 2026 prices · October 2026 rents",
-   "detail": "San Jose-area home prices compared with rents: about 9% above normal."
+   "iso": "2026-07-01",
+   "date": "Q3 2026 prices · October 2026 rents",
+   "detail": "San Jose-area home prices compared with rents: about 6% above normal."
   }
  },
- "score": 55.0,
- "mfScore": 46.1,
- "pubScore": 53.0,
- "pubMf": 36.6,
+ "score": 54.7,
+ "mfScore": 45.8,
+ "pubScore": 54.1,
+ "pubMf": 36.0,
  "warn": {
   "workers": 2877,
   "notices": 57,
