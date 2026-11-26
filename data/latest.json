@@ -1,16 +1,16 @@
 {
  "asOf": "2026-11-25",
- "updatedAt": "2026-11-25T11:32:30Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 26.4. Mortgage rates are 7.28% and the 10-year Treasury yield closed at 4.91%, so borrowing remains expensive. The single-family homes & condos score is 55 (Elevated, unchanged) and the apartment buildings (5+ units) score is 46 (Elevated, unchanged).",
+ "updatedAt": "2026-11-26T04:59:35Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 28.3. Mortgage rates are 7.21% and the 10-year Treasury yield closed at 4.85%, so borrowing remains expensive. The single-family homes & condos score is 54 (Elevated, down 0.5) and the apartment buildings (5+ units) score is 45 (Moderate, down 1.0).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
-  "vix": 26.36,
-  "mort": 7.28,
-  "mortChg": 1.02,
+  "vix": 28.29,
+  "mort": 7.21,
+  "mortChg": 0.98,
   "unemp": 4.14,
-  "t10": 4.91,
-  "vixAvg": 22.55,
+  "t10": 4.85,
+  "vixAvg": 23.12,
   "hpSJ": -2.15,
   "p2rSJ": 106.1,
   "techJobs": -2.73,
@@ -25,10 +25,10 @@
   "vacRel": -0.3,
   "vacRelChg": 0.0,
   "rentCPI": 2.65,
-  "permIdx": 83.4,
+  "permIdx": 84.3,
   "ins": 3.0,
-  "baa": 1.59,
-  "ndxDD": 16.0,
+  "baa": 1.61,
+  "ndxDD": 16.6,
   "mos": 1.8,
   "cs": 3.71,
   "p2r": 113.2,
@@ -39,14 +39,10 @@
  },
  "signals": {
   "vix": {
-   "iso": "2026-11-24",
-   "date": "Nov 24 close",
-   "detail": "Down from 26.62 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (22.6), so a one-day jump moves it less.",
+   "iso": "2026-11-25",
+   "date": "Nov 25 close",
+   "detail": "Up from 26.36 the day before. The long-term average is about 19.5. The score uses the 20-market-day average (23.1), so a one-day jump moves it less.",
    "series": [
-    [
-     "Oct 14",
-     16.87
-    ],
     [
      "Oct 15",
      16.46
@@ -162,6 +158,10 @@
     [
      "Nov 24",
      26.36
+    ],
+    [
+     "Nov 25",
+     28.29
     ]
    ]
   },
@@ -171,14 +171,10 @@
    "detail": "High-grade company bonds paid 6.02%, or 0.89 percentage points more than the 10-year Treasury that month. That is near the low end of the past 20 years: lenders are comfortable."
   },
   "mort": {
-   "iso": "2026-11-19",
-   "date": "Week of Nov 19",
-   "detail": "A year ago it was 6.26%. Down from 7.40% in October.",
+   "iso": "2026-11-25",
+   "date": "Week of Nov 25",
+   "detail": "A year ago it was 6.23%. Down from 7.40% in October.",
    "series": [
-    [
-     "May 28",
-     6.53
-    ],
     [
      "Jun 4",
      6.48
@@ -278,6 +274,10 @@
     [
      "Nov 19",
      7.28
+    ],
+    [
+     "Nov 25",
+     7.21
     ]
    ]
   },
@@ -426,14 +426,10 @@
    "detail": "Home prices compared with San Francisco-area rents are close to their 2005–2025 average."
   },
   "t10": {
-   "iso": "2026-11-24",
-   "date": "Nov 24 close",
-   "detail": "Down from 4.92% the day before.",
+   "iso": "2026-11-25",
+   "date": "Nov 25 close",
+   "detail": "Down from 4.91% the day before.",
    "series": [
-    [
-     "Oct 13",
-     5.21
-    ],
     [
      "Oct 14",
      5.19
@@ -549,6 +545,10 @@
     [
      "Nov 24",
      4.91
+    ],
+    [
+     "Nov 25",
+     4.85
     ]
    ]
   },
@@ -568,19 +568,19 @@
    "detail": "Rent paid by tenants in the San Francisco–Oakland area (consumer price index for rent). It covers all leases, so it moves more slowly than asking rents."
   },
   "pipe": {
-   "iso": "2026-09-01",
-   "date": "September 2026",
-   "detail": "27,609 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 17% below the 2005–2025 average pace."
+   "iso": "2026-10-01",
+   "date": "October 2026",
+   "detail": "27,894 homes were permitted in the San Francisco and San Jose metro areas over the past 24 months, about 16% below the 2005–2025 average pace."
   },
   "baa": {
-   "iso": "2026-11-23",
-   "date": "Nov 23 close",
-   "detail": "Baa-rated company bonds paid 1.59 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
-  },
-  "ndx": {
    "iso": "2026-11-24",
    "date": "Nov 24 close",
-   "detail": "The Nasdaq-100 closed at 26,214.17, 16.0% below its 12-month high of 31,224.69 on Oct 6."
+   "detail": "Baa-rated company bonds paid 1.61 percentage points more than the 10-year Treasury (Moody's, via FRED). That is near the low end of the past 20 years: lenders are comfortable."
+  },
+  "ndx": {
+   "iso": "2026-11-25",
+   "date": "Nov 25 close",
+   "detail": "The Nasdaq-100 closed at 26,046.90, 16.6% below its 12-month high of 31,224.69 on Oct 6."
   },
   "supplyP": {
    "iso": "2026-10-01",
@@ -593,11 +593,7 @@
    "detail": "S&P Cotality Case-Shiller San Francisco home price index (seasonally adjusted). Prices are higher than a year ago.",
    "series": [
     [
-     "Feb 25",
-     3.0
-    ],
-    [
-     "",
+     "Mar 25",
      1.6
     ],
     [
@@ -710,10 +706,10 @@
    "detail": "San Jose-area home prices compared with rents: about 6% above normal."
   }
  },
- "score": 54.7,
- "mfScore": 45.8,
- "pubScore": 54.1,
- "pubMf": 36.0,
+ "score": 54.2,
+ "mfScore": 44.8,
+ "pubScore": 53.6,
+ "pubMf": 35.5,
  "warn": {
   "workers": 2877,
   "notices": 57,
