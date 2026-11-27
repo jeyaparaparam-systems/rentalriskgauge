@@ -1,7 +1,7 @@
 {
- "asOf": "2026-11-25",
- "updatedAt": "2026-11-26T04:59:35Z",
- "note": "Stock markets were fairly steady today, with the VIX fear index at 28.3. Mortgage rates are 7.21% and the 10-year Treasury yield closed at 4.85%, so borrowing remains expensive. The single-family homes & condos score is 54 (Elevated, down 0.5) and the apartment buildings (5+ units) score is 45 (Moderate, down 1.0).",
+ "asOf": "2026-11-27",
+ "updatedAt": "2026-11-27T11:08:22Z",
+ "note": "Stock markets were fairly steady today, with the VIX fear index at 28.3. Mortgage rates are 7.21% and the 10-year Treasury yield closed at 4.85%, so borrowing remains expensive. The single-family homes & condos score is 54 (Elevated, unchanged) and the apartment buildings (5+ units) score is 45 (Moderate, unchanged).",
  "model": "v5.3",
  "licensedData": true,
  "inputs": {
@@ -711,19 +711,15 @@
  "pubScore": 53.6,
  "pubMf": 35.5,
  "warn": {
-  "workers": 2877,
-  "notices": 57,
+  "workers": 2535,
+  "notices": 53,
   "period": "Last 30 days",
-  "date": "Nov 25, 2026",
-  "iso": "2026-11-25",
+  "date": "Nov 27, 2026",
+  "iso": "2026-11-27",
   "top": [
    {
     "company": "AEG Management Oakland LLC",
     "workers": 1605
-   },
-   {
-    "company": "Levy",
-    "workers": 181
    },
    {
     "company": "Weil, Gotshal & Manges LLP",
@@ -732,8 +728,12 @@
    {
     "company": "Comcast",
     "workers": 82
+   },
+   {
+    "company": "Pacific Gas and Electric Company - Oakland",
+    "workers": 73
    }
   ],
-  "detail": "2,877 workers are covered by layoff notices filed in the last 30 days."
+  "detail": "2,535 workers are covered by layoff notices filed in the last 30 days."
  }
 }
